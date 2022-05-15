@@ -1,1 +1,1 @@
-# Click: [xuaikun.github.io](https://xuaikun.github.io/)
+Click [here](https://xuaikun.github.io/) to visit my homepage.
