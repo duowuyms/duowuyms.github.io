@@ -1,5 +1,3 @@
-/* Default css file for jemdoc. */
-
 
 
 table#tlayout {
@@ -19,12 +17,13 @@ body {
 
 
 #layout-menu {
-  background: #EBF1CF; /*#EEEAF2 #EBF1DF #DBEEF3 #229AD5;/* #f6f6f6; #f6f2a2*/
+  background: #EBF1CF; /*#229AD5;/* #f6f6f6; #f6f2a2*/
   border: 1px solid #dddddd;
   padding-top: 0.5em;
   padding-left: 8px;
   padding-right: 8px;
   font-size: 110%;
+  font-weight:normal;
   font-family: "Segoe UI";
   width: auto;
   white-space: nowrap;
@@ -72,11 +71,11 @@ a:hover {
 }
 
 #layout-menu a.current:link, #layout-menu a.current:visited {
-  color: #022b6d; /*022b6d*/
+  color: #022b6d;
   border-bottom: 1px gray solid;
 }
 #layout-menu a:link, #layout-menu a:visited, #layout-menu a:hover {
-  color: #0062AC; /*527bbd*/
+  color: #0062AC;
   text-decoration: none;
 }
 #layout-menu a:hover {
@@ -372,5 +371,10 @@ img {
 
 table.imgtable, table.imgtable td {
     border: none;
+    text-align: left;
+}
+
+table.imgtable td img{
+    border: 0.0px solid gray;
     text-align: left;
 }
