@@ -6,6 +6,19 @@ table#tlayout {
     background: white;
 }
 
+table#tab_intern_img {
+    border: none;
+    border-collapse: separate;
+    background: white;
+}
+
+td.image_grid {
+    border: none;
+    background: white;
+    text-align: left;
+    vertical-align: top;
+}
+
 body {
   background: white;
   font-family: Georgia, serif;
