@@ -226,6 +226,30 @@
                             <p><sup>4</sup>Department of Computer Science and Technology, Tsinghua University</p>
                             <p><em>*Corresponding Author</em></p>
                         </div>
+
+                        <!-- Navigation Pills in Header -->
+                        <div style="margin-top: 25px;">
+                            <ul class="nav nav-pills nav-justified" style="margin: 0;">
+                                <li>
+                                    <a href="https://github.com/duowuyms/Trailblazer" target="_blank" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white;">
+                                        <i class="fa fa-file-pdf-o fa-2x"></i>
+                                        <h4 style="color: white; margin: 10px 0 0 0;"><strong>Paper</strong></h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/duowuyms/Trailblazer" target="_blank" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white;">
+                                        <i class="fa fa-github fa-2x"></i>
+                                        <h4 style="color: white; margin: 10px 0 0 0;"><strong>Code</strong></h4>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#citation" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white;">
+                                        <i class="fa fa-copy fa-2x"></i>
+                                        <h4 style="color: white; margin: 10px 0 0 0;"><strong>Citation</strong></h4>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -233,33 +257,6 @@
     </div>
 
     <div class="container" id="main">
-        
-
-        <!-- Navigation Pills -->
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center">
-                <ul class="nav nav-pills nav-justified" style="margin: 30px 0;">
-                    <li>
-                        <a href="https://github.com/duowuyms/Trailblazer" target="_blank">
-                            <i class="fa fa-file-pdf-o fa-2x"></i>
-                            <h4><strong>Paper</strong></h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/duowuyms/Trailblazer" target="_blank">
-                            <i class="fa fa-github fa-2x"></i>
-                            <h4><strong>Code</strong></h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#citation">
-                            <i class="fa fa-copy fa-2x"></i>
-                            <h4><strong>Citation</strong></h4>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
 
         <!-- Key Visual -->
         <div class="row">
@@ -506,6 +503,32 @@
 
     </div>
 
+    <style>
+        /* Header navigation hover effects */
+        .academic-header .nav-pills > li > a {
+            background: rgba(255,255,255,0.15) !important;
+            border: 1px solid rgba(255,255,255,0.3) !important;
+            color: white !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .academic-header .nav-pills > li > a:hover {
+            background: rgba(255,255,255,0.25) !important;
+            border: 1px solid rgba(255,255,255,0.5) !important;
+            color: white !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        }
+
+        .academic-header .nav-pills > li > a i {
+            color: white !important;
+        }
+
+        .academic-header .nav-pills > li > a h4 {
+            color: white !important;
+        }
+    </style>
+
     <!-- JavaScript Functions -->
     <script>
         function copyBibtex() {
@@ -525,6 +548,23 @@
                 console.error('Could not copy text: ', err);
             });
         }
+
+        // Smooth scroll for citation link
+        document.addEventListener('DOMContentLoaded', function() {
+            const citationLink = document.querySelector('a[href="#citation"]');
+            if (citationLink) {
+                citationLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector('#citation');
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
