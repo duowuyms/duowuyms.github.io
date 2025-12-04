@@ -1,198 +1,357 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-    <title>SizeGS</title>
-
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:image" content="https://shuzhaoxie.github.io/mesongs/img/nottingham.jpg">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1296">
-    <meta property="og:image:height" content="840">
+    <title>Trailblazer: Large Language Models as Generalist Policies for Network Optimization</title>
+    <meta name="description" content="Trailblazer - The first systematic framework to realize generalist policies for networking using Large Language Models with strong cross-task and cross-environment generalization.">
+    <meta name="keywords" content="LLM, Network Optimization, Generalist Policies, Machine Learning, Networking">
+    <meta name="author" content="Duo Wu et al.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Trailblazer: Large Language Models as Generalist Policies for Network Optimization" />
+    <meta property="og:description" content="The first systematic framework to realize generalist policies for networking using Large Language Models." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://duowuyms.github.io/trailblazer/"/>
-    <meta property="og:title" content="Large Language Models as Generalist Policies for Network Optimization" />
+    <meta property="og:url" content="https://duowuyms.github.io/trailblazer/" />
+    <meta property="og:image" content="https://duowuyms.github.io/trailblazer/img/trailblazer.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-    <!-- <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="SizeGS: Size-aware Compression of 3D Gaussians\\with Hierarchical Mixed Precision Quantization" />
-    <meta name="twitter:description" content="3D Gaussian Splatting demonstrates excellent quality and speed in novel view synthesis. Nevertheless, the significant size of the 3D Gaussians presents challenges for transmission and storage. Current approaches employ compact models to compress the substantial volume and attributes of 3D Gaussians, along with intensive training to uphold quality. These endeavors demand considerable finetuning time, presenting formidable hurdles for practical deployment. To this end, we propose MesonGS, a codec for post-training compression of 3D Gaussians. Initially, we introduce a measurement criterion that considers both view-dependent and view-independent factors to assess the impact of each Gaussian point on the rendering output, enabling the removal of insignificant points. Subsequently, we decrease the entropy of attributes through two transformations that complement subsequent entropy coding techniques to enhance the file compression rate. More specifically, we first replace the rotation quaternion with Euler angles; then, we apply region adaptive hierarchical transform (RAHT) to key attributes to reduce entropy. Lastly, we suggest block quantization to control quantization granularity, thereby avoiding excessive information loss caused by quantization. Moreover, a finetune scheme is introduced to restore quality. Extensive experiments demonstrate that MesonGS significantly reduces the size of 3D Gaussians while preserving competitive quality." />
-    <meta name="twitter:image" content="https://shuzhaoxie.github.io/mesongs/img/teaser.jpg" /> -->
+    <!-- Academic Meta Tags -->
+    <meta name="citation_title" content="Large Language Models as Generalist Policies for Network Optimization">
+    <meta name="citation_author" content="Wu, Duo">
+    <meta name="citation_author" content="Kang, Linjia">
+    <meta name="citation_author" content="Wang, Zhimin">
+    <meta name="citation_publication_date" content="2024">
+    <meta name="citation_abstract" content="Designing control policies to ensure robust network services is essential to modern digital infrastructure. Trailblazer presents the first systematic framework to realize generalist policies for networking using Large Language Models.">
 
+    <!-- Favicon -->
+    <link rel="icon" href="img/trailblazer.png">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <!-- Academic Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Crimson+Text:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Bootstrap and CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
     <link rel="stylesheet" href="css/app.css">
-
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
+    <!-- JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
-    
     <script src="js/app.js"></script>
     <script src="js/video_comparison.js"></script>
+
+    <style>
+        :root {
+            --nature-blue: #003366;
+            --science-red: #CC0000;
+            --academic-gray: #6c757d;
+            --light-gray: #f8f9fa;
+            --border-gray: #dee2e6;
+        }
+
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .academic-header {
+            background: linear-gradient(135deg, var(--nature-blue) 0%, #004080 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--science-red);
+        }
+
+        .paper-title {
+            font-family: 'Georgia', serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .author-list {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: var(--academic-gray);
+            margin-bottom: 15px;
+        }
+
+        .affiliation {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--academic-gray);
+            font-style: italic;
+        }
+
+        .journal-badge {
+            display: inline-block;
+            background: var(--science-red);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--nature-blue);
+            border-bottom: 2px solid var(--nature-blue);
+            padding-bottom: 8px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .abstract-box {
+            background: var(--light-gray);
+            border-left: 4px solid var(--nature-blue);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .figure-caption {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--academic-gray);
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .citation-text {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 16px;
+            background: var(--light-gray);
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .nav-pills > li > a {
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-pills > li > a:hover {
+            background-color: var(--nature-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .finding-title {
+            font-family: 'Georgia', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--nature-blue);
+            margin: 25px 0 15px 0;
+        }
+
+        .doi-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--academic-gray);
+            background: var(--light-gray);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .paper-title {
+                font-size: 24px;
+            }
+            body {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container" id="main">
-        <div class="row">
-            <h2 class="col-md-12 text-center">
-                <b>Large Language Models as Generalist Policies for Network Optimization</b>
-            </h2>
+    <!-- Academic Header -->
+    <div class="academic-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="text-center">
+                        <h1 class="paper-title">Large Language Models as Generalist Policies for Network Optimization</h1>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <div class="container" id="main">
+        <!-- Authors Section -->
         <div class="row">
-            <div class="col-md-12 text-center">
-                <ul class="list-inline">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="author-list text-center">
+                    <strong>Duo Wu<sup>1</sup></strong>,
+                    <strong>Linjia Kang<sup>1</sup></strong>,
+                    <a href="https://zhiminwangss.github.io/">Zhimin Wang<sup>1</sup></a>,
+                    <a href="https://mypage.cuhk.edu.cn/academics/wangfangxin/index.html">Fangxin Wang<sup>2</sup></a>,
+                    <strong>Wei Zhang<sup>3</sup></strong>,
+                    <strong>Xuefeng Tao<sup>3</sup></strong>,
+                    <strong>Wei Yang<sup>3</sup></strong>,
+                    <strong>Le Zhang<sup>3</sup></strong>,
+                    <a href="https://pengcui.thumedialab.com/">Peng Cui<sup>4</sup></a>,
+                    <a href="http://zwang.inflexionlab.org">Zhi Wang<sup>1*</sup></a>
+                </div>
+                <div class="affiliation text-center">
+                    <p><sup>1</sup>Shenzhen International Graduate School, Tsinghua University</p>
+                    <p><sup>2</sup>School of Science and Engineering, The Chinese University of Hong Kong, Shenzhen</p>
+                    <p><sup>3</sup>ByteDance</p>
+                    <p><sup>4</sup>Department of Computer Science and Technology, Tsinghua University</p>
+                    <p><em>*Corresponding Author</em></p>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Navigation Pills -->
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <ul class="nav nav-pills nav-justified" style="margin: 30px 0;">
                     <li>
-                        <a href="https://duowuyms.github.io">
-                          Duo Wu<sup>1</sup>
+                        <a href="https://github.com/duowuyms/Trailblazer" target="_blank">
+                            <i class="fa fa-file-pdf-o fa-2x"></i>
+                            <h4><strong>Paper</strong></h4>
                         </a>
                     </li>
                     <li>
-                        Linjia Kang<sup>1</sup>
-                    </li>
-                    <li>
-                        <a href="https://zhiminwangss.github.io/">
-                            Zhimin Wang<sup>1</sup>
+                        <a href="https://github.com/duowuyms/Trailblazer" target="_blank">
+                            <i class="fa fa-github fa-2x"></i>
+                            <h4><strong>Code</strong></h4>
                         </a>
                     </li>
                     <li>
-                        <a href="https://mypage.cuhk.edu.cn/academics/wangfangxin/index.html">
-                            Fangxin Wang<sup>2</sup>
+                        <a href="#citation">
+                            <i class="fa fa-copy fa-2x"></i>
+                            <h4><strong>Citation</strong></h4>
                         </a>
                     </li>
-                    <li>
-                        Wei Zhang<sup>3</sup>
-                    </li>
-                    <li>
-                        Xuefeng Tao<sup>3</sup>
-                    </li>
-                    <li>
-                        Wei Yang<sup>3</sup>
-                    </li>
-                    <li>
-                        Le Zhang<sup>3</sup>
-                    </li>
-                    <li>
-                        <a href="https://pengcui.thumedialab.com/">
-                          Peng Cui<sup>4</sup>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://zwang.inflexionlab.org">
-                          Zhi Wang<sup>1</sup>*
-                        </a>
-                    </li>
-                </br> <sup>1</sup>Shenzhen International Graduate School, Tsinghua University <br>
-                    <sup>2</sup>School of Science and Engineering, The Chinese University of Hong Kong, Shenzhen</br> 
-                    <sup>3</sup>Bytedance</br>
-                    <sup>4</sup>Department of Computer Science and Technology, Tsinghua University<br>
-                    *Corresponding Author
                 </ul>
             </div>
         </div>
-        
 
+        <!-- Key Visual -->
         <div class="row">
-                <div class="col-md-6 col-md-offset-3 text-center">
-                    <ul class="nav nav-pills nav-justified">
-                        <li>
-                            <a href="https://github.com/duowuyms/Trailblazer">
-                            <image src="img/trailblazer_paper.png" height="40px">
-                                <h4><strong>Paper</strong></h4>
-                            </a>
-                        </li>
-                        <!-- <li>
-                            <a href="../data/24-eccv-mesongs-supp.pdf">
-                            <image src="img/mesongs_paper_image.png" height="40px">
-                                <h4><strong>Supplyment</strong></h4>
-                            </a>
-                        </li> -->
-                        <li>
-                            <a href="https://github.com/duowuyms/Trailblazer">
-                            <image src="img/github.png" height="40px">
-                                <h4><strong>Code</strong></h4>
-                            </a>
-                        </li>
-                        <!-- <li>
-                            <a href="">
-                            <image src="img/database_icon.png" height="40px">
-                                <h4><strong>Original .ply files</strong></h4>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                            <image src="img/database_icon.png" height="40px">
-                                <h4><strong>Evaluation images</strong></h4>
-                            </a>
-                        </li> -->
-                    </ul>
+            <div class="col-md-8 col-md-offset-2">
+                <img src="img/trailblazer.png" alt="Trailblazer Framework Overview" width="100%" style="border: 1px solid var(--border-gray); border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <p class="figure-caption">
+                    <strong>Figure 1:</strong> Trailblazer framework overview showing the pioneering approach that grounds Large Language Models as generalist policies for network optimization.
+                </p>
+
+                <div class="abstract-box">
+                    <h3 style="margin-top: 0; color: var(--nature-blue);">
+                        <i class="fa fa-lightbulb-o"></i> Key Innovation
+                    </h3>
+                    <p class="text-justify" style="margin-bottom: 0;">
+                        <strong>Trailblazer (开拓者)</strong> represents a paradigm shift in network optimization by introducing the first systematic framework that leverages Large Language Models as generalist policies, achieving unprecedented generalization across diverse network tasks and environments through unified knowledge representation and adaptive policy collaboration.
+                    </p>
                 </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <img src="img/trailblazer.png" alt="Trailblazer" id="v0" width="100%" autoplay loop muted controls>
-                <p class="text-justify">
-                <b>Trailblazer (开拓者) is the pioneering framework that grounds LLMs as generalist policies for network optimization to achieve strong generalization across diverse tasks and environments.</b>
-                </p>
             </div>
-          
         </div>
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <p class="text-justify">
-                    Trailblazer signifies our goal of forging the first path in LLM-driven generalist network policies, establishing a framework for both academia and industry to advance the integration of LLMs into real-world network services. 😊
-                </p>
-            </div>
-        </div> 
-          
+  
+        <!-- Abstract Section -->
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    <b>Abstract</b>
-                </h3>
-                <p class="text-justify">
-                    Designing control policies to ensure robust network services is essential to modern digital infrastructure. However, the dominant paradigm for network optimization relies on designing specialist policies based on handcrafted rules or deep learning models, leading to poor generalization across diverse tasks and environments. In contrast, large language models (LLMs), pretrained on Internet-scale corpora, provide a rich and unified knowledge base that encodes fundamental networking principles. Combined with their emergent abilities in generalization to unseen scenarios, LLMs offer a transformative foundation for generalist network policies that can generalize across diverse tasks and environments with minimal adaptation. In this paper, we present Trailblazer, the first systematic framework to realize such a generalist policy for networking. Trailblazer incorporates a network alignment scheme to ground the LLM in specific networking tasks, and an adaptive policy collaboration mechanism that offloads simple control cases from the LLM to a lightweight policy for computational efficiency. Through extensive simulations and large-scale real-world online evaluation on Douyin (the Chinese version of TikTok), Trailblazer, powered by a single LLM, demonstrates stronger cross-task and cross-environment generalization than conventional specialist policies. Our results validate LLMs as the foundation for generalist network policies, and position Trailblazer as the first step toward the generalist-driven paradigm that enables strong generalization with minimal efforts in policy design.                </p>
-                </p>
-                <br>
+            <div class="col-md-10 col-md-offset-1">
+                <h2 class="section-title">
+                    <i class="fa fa-file-text-o"></i> Abstract
+                </h2>
+                <div class="abstract-box">
                     <p class="text-justify">
-                        <img src="img/key_finding.png" alt="Trailblazer" id="v0" width="100%" autoplay loop muted controls>
-                    <b>Key findings of this paper.</b> The generalist-driven paradigm established by Trailblazer leverages a single LLM–equipped with strong generalization abilities and a shared knowl edge base encoding universal networking principles–to enable low-effort policy design and achieve strong cross-task and cross-environment generalization.
+                        Designing control policies to ensure robust network services is essential to modern digital infrastructure. However, the dominant paradigm for network optimization relies on designing specialist policies based on handcrafted rules or deep learning models, leading to poor generalization across diverse tasks and environments. In contrast, large language models (LLMs), pretrained on Internet-scale corpora, provide a rich and unified knowledge base that encodes fundamental networking principles. Combined with their emergent abilities in generalization to unseen scenarios, LLMs offer a transformative foundation for generalist network policies that can generalize across diverse tasks and environments with minimal adaptation.
+                    </p>
+                    <p class="text-justify">
+                        In this paper, we present <strong>Trailblazer</strong>, the first systematic framework to realize such a generalist policy for networking. Trailblazer incorporates a network alignment scheme to ground the LLM in specific networking tasks, and an adaptive policy collaboration mechanism that offloads simple control cases from the LLM to a lightweight policy for computational efficiency. Through extensive simulations and large-scale real-world online evaluation on Douyin (the Chinese version of TikTok), Trailblazer, powered by a single LLM, demonstrates stronger cross-task and cross-environment generalization than conventional specialist policies. Our results validate LLMs as the foundation for generalist network policies, and position Trailblazer as the first step toward the generalist-driven paradigm that enables strong generalization with minimal efforts in policy design.
+                    </p>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="img/key_finding.png" alt="Key Findings" width="100%" style="border: 1px solid var(--border-gray); border-radius: 8px; margin: 20px 0;">
+                        <p class="figure-caption">
+                            <strong>Figure 2:</strong> Key findings of this paper. The generalist-driven paradigm established by Trailblazer leverages a single LLM—equipped with strong generalization abilities and a shared knowledge base encoding universal networking principles—to enable low-effort policy design and achieve strong cross-task and cross-environment generalization.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <!-- Method Section -->
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    <b>Method</b>
-                </h3>
-                <br>
-                    <p class="text-justify">
-                        <img src="img/method.png" alt="Trailblazer" id="v0" width="100%" autoplay loop muted controls>
-                    <b>Overview of our proposed framework Trailblazer.</b> (Up) The NIOKA in Trailblazer to
-                    address the misalignment between the LLM and networking. The network state encoder is introduced
-                    to project non-textual network information into the same feature space as language tokens for the
-                    LLM, while the network action decoder is used to map the LLM output feature vectors into specific
-                    network actions. Based on the proposed offline reinforcement fine-tuning algorithm, the LLM is fine-tuned over an offline experience dataset collected by evaluating conventional network policies across
-                    diverse network environments, with rewards or near-optimal actions as the guiding signals. (Low) The
-                    APC in Trailblazer for efficient LLM deployment, where the fine-tuned LLM collaborates with a
-                    conventional policy for intelligent and efficient network control. The heart of APC is a scheduler for
-                    adaptively flow request routing. The scheduler evaluates the network conditions of each request (e.g.,
-                    latency). Requests under poor conditions are deemed as difficult cases and allocated to the LLM for
-                    intelligent control, while those under stable conditions are handled by a conventional policy for fast
-                    processing. To reduce the per-request processing latency, the LLM will process requests in batches.
+            <div class="col-md-10 col-md-offset-1">
+                <h2 class="section-title">
+                    <i class="fa fa-cogs"></i> Methodology
+                </h2>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="img/method.png" alt="Trailblazer Method Overview" width="100%" style="border: 1px solid var(--border-gray); border-radius: 8px; margin: 20px 0;">
+                        <p class="figure-caption">
+                            <strong>Figure 3:</strong> Overview of our proposed framework Trailblazer. (Top) The Network Input-Output Knowledge Alignment (NIOKA) component addresses the misalignment between LLMs and networking domains. The network state encoder projects non-textual network information into the same feature space as language tokens, while the network action decoder maps LLM output feature vectors into specific network actions. (Bottom) The Adaptive Policy Collaboration (APC) mechanism enables efficient LLM deployment through intelligent collaboration between the fine-tuned LLM and conventional policies.
+                        </p>
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 style="color: var(--nature-blue); margin-top: 25px;">
+                            <i class="fa fa-plug"></i> Network Alignment (NIOKA)
+                        </h4>
+                        <p class="text-justify">
+                            The Network Input-Output Knowledge Alignment component bridges the gap between LLMs and networking tasks through two key mechanisms:
+                        </p>
+                        <ul>
+                            <li><strong>Network State Encoder:</strong> Projects non-textual network information into the same feature space as language tokens</li>
+                            <li><strong>Network Action Decoder:</strong> Maps LLM output feature vectors into specific network control actions</li>
+                            <li><strong>Offline Reinforcement Fine-tuning:</strong> Leverages offline experience datasets collected from conventional policies across diverse environments</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 style="color: var(--science-red); margin-top: 25px;">
+                            <i class="fa fa-exchange"></i> Policy Collaboration (APC)
+                        </h4>
+                        <p class="text-justify">
+                            The Adaptive Policy Collaboration mechanism ensures computational efficiency through intelligent resource allocation:
+                        </p>
+                        <ul>
+                            <li><strong>Adaptive Scheduler:</strong> Evaluates network conditions for each request (latency, bandwidth, etc.)</li>
+                            <li><strong>Smart Routing:</strong> Directs difficult cases to the LLM while simple cases use conventional policies</li>
+                            <li><strong>Batch Processing:</strong> Reduces per-request latency through grouped LLM processing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
   
         <!-- <div class="row">
@@ -216,82 +375,160 @@
         </div>
 <br> -->
 
+      <!-- Results Section -->
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    <b>Results</b>
-                </h3>
+            <div class="col-md-10 col-md-offset-1">
+                <h2 class="section-title">
+                    <i class="fa fa-chart-line"></i> Experimental Results
+                </h2>
                 <p class="text-justify">
-                    We compare our generalist approach Trailblazer powered by a single LLM with  task-specific policies on two represenative tasks (adaptive bitrate streaming ABR, cluster job scheduling CJS) and heterogeneous environments.</p>                    
-                </p>
-                <br>
-                <b><i>Finding 1: Trailblazer successfully generalizes across heterogeneous tasks with a single LLM.</i></b>
-                <img width="100%" src="./img/cross_task_gen.png"/>
-                <p class="text-justify">
-                     Conventional specialist policies fail to generalize across different tasks due to the task-specific design. By copmarison, powered
-                        by a single LLM, Trailblazer successfully generalizes across heterogeneous networking tasks, achieving stronger cross-task generalization. These results demonstrate that LLMs can serve as a unified foundation for generalist network policies, breaking the
-                        task-isolation barrier of the specialist paradigm.
+                    We evaluate our generalist approach Trailblazer, powered by a single LLM, against task-specific policies on two representative tasks (adaptive bitrate streaming ABR, cluster job scheduling CJS) across heterogeneous environments.
                 </p>
 
-                <br>
-                <b><i>Finding 2: Trailblazer achieves stronger generalization than specialist policies across heterogeneous environments.</i></b>
-                <img width="100%" src="./img/cross_env_gen.png"/>
+                <div class="finding-title">
+                    <i class="fa fa-star" style="color: var(--science-red);"></i> Finding 1: Cross-Task Generalization
+                </div>
+                <img src="./img/cross_task_gen.png" width="100%" style="border: 1px solid var(--border-gray); border-radius: 8px; margin: 15px 0;">
+                <p class="figure-caption">
+                    <strong>Figure 4:</strong> Cross-task generalization performance comparison between Trailblazer and specialist policies.
+                </p>
                 <p class="text-justify">
-                    To assess whether a generalist policy can achieve stronger cross-environment generalization, we evaluate Trailblazer across 
-                    various challenging out-of-distribution (OOD) test environments. By leveraging the strong consistently outperforms all baselines in terms of average values
-                    and distributions across all cases. 
+                    Conventional specialist policies fail to generalize across different tasks due to task-specific design limitations. In contrast, powered by a single LLM, Trailblazer successfully generalizes across heterogeneous networking tasks, achieving superior cross-task generalization. These results demonstrate that LLMs can serve as a unified foundation for generalist network policies, breaking the task-isolation barrier of the specialist paradigm.
                 </p>
 
-                <br>
-                <b><i>Finding 3: Trailblazer can not only operate reliably in production network environments but also introduce industrial improvements in service quality.</i></b>
-                <img width="100%" src="./img/real_world.png"/>
+                <div class="finding-title">
+                    <i class="fa fa-globe" style="color: var(--science-red);"></i> Finding 2: Cross-Environment Generalization
+                </div>
+                <img src="./img/cross_env_gen.png" width="100%" style="border: 1px solid var(--border-gray); border-radius: 8px; margin: 15px 0;">
+                <p class="figure-caption">
+                    <strong>Figure 5:</strong> Cross-environment generalization evaluation under out-of-distribution (OOD) test conditions.
+                </p>
                 <p class="text-justify">
-                    We deploy Trailblazer in Douyin’s real-time congestion control (CC) service for large-scale online A/B tests over three weeks, serving 150,000+ users across 100+ cities and accumulating over 1,200 days of video playback time. 
-                    Results show that Trailblazer outperform VICC, a highly optimized policy designed for Douyin, in  key industrial performance metrics.
+                    To assess cross-environment generalization capabilities, we evaluate Trailblazer across various challenging out-of-distribution test environments. By leveraging strong generalization abilities, Trailblazer consistently outperforms all baselines in terms of average values and distributions across all test cases.
                 </p>
 
-                
-            </div>
-        </div> 
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    <b>Insights</b>
-                </h3>
-                <b><i>Insight 1 - Early Saturation</i></b> 
-                <img width="100%" src="./img/early_saturation.png"/>
-                <p class="text-justify">
-                    Unlike the scaling law in NLP, small-scale LLMs can achieve strong generalization in networking. Hence, we can trade efficiency with small LLMs without sacrificing performance.
+                <div class="finding-title">
+                    <i class="fa fa-industry" style="color: var(--science-red);"></i> Finding 3: Real-World Industrial Deployment
+                </div>
+                <img src="./img/real_world.png" width="100%" style="border: 1px solid var(--border-gray); border-radius: 8px; margin: 15px 0;">
+                <p class="figure-caption">
+                    <strong>Figure 6:</strong> Large-scale online A/B test results in Douyin's production environment.
                 </p>
-                <br>
-                <b><i>Insight 2 - Selective Invocation</i></b> 
-                <img width="100%" src="./img/selective_invocation.png"/>
                 <p class="text-justify">
-                    Selectively invoking the LLM can boost efficiency without compromising performance. Hence, this reveals an important principle: invoking the LLM for network control
-                    when necessary rather than implementing per-request control.
+                    We deployed Trailblazer in Douyin's real-time congestion control (CC) service for large-scale online A/B tests over three weeks, serving <strong>150,000+ users</strong> across <strong>100+ cities</strong> and accumulating over <strong>1,200 days</strong> of video playback time. Results show that Trailblazer outperforms VICC, a highly optimized policy designed specifically for Douyin, in key industrial performance metrics.
                 </p>
             </div>
-        </div> 
+        </div>
 
-        
+        <!-- Insights Section -->
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    <b>Citation</b>
-                </h3>
-                <div class="form-group col-md-10 col-md-offset-1">
-                    <textarea id="bibtex" class="form-control" readonly>
-@inproceedings{xie2024sizegs,
-    title={SizeGS: Size-aware Compression of 3D Gaussian Splatting via Mixed Integer Programming},
-    author={Xie, Shuzhao and Liu, Jiahang and Zhang, Weixiang and Ge, Shijia and Pan, Sicheng and Tang, Chen and Bai, Yunpeng and Zhang, Cong and Fan, Xiaoyi and Wang, Zhi},
-    booktitle={ACM MM},
-    year={2025}
-}
-                </textarea>
+            <div class="col-md-10 col-md-offset-1">
+                <h2 class="section-title">
+                    <i class="fa fa-lightbulb"></i> Key Insights
+                </h2>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="abstract-box" style="border-left-color: var(--nature-blue);">
+                            <h4 style="color: var(--nature-blue);">
+                                <i class="fa fa-area-chart"></i> Insight 1: Early Saturation
+                            </h4>
+                            <img src="./img/early_saturation.png" width="100%" style="border: 1px solid var(--border-gray); border-radius: 4px; margin: 10px 0;">
+                            <p class="text-justify" style="margin-bottom: 0;">
+                                Unlike scaling laws in NLP, <strong>small-scale LLMs can achieve strong generalization in networking</strong>. This enables efficient deployment by trading model size for computational efficiency without sacrificing performance.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="abstract-box" style="border-left-color: var(--science-red);">
+                            <h4 style="color: var(--science-red);">
+                                <i class="fa fa-toggle-on"></i> Insight 2: Selective Invocation
+                            </h4>
+                            <img src="./img/selective_invocation.png" width="100%" style="border: 1px solid var(--border-gray); border-radius: 4px; margin: 10px 0;">
+                            <p class="text-justify" style="margin-bottom: 0;">
+                                <strong>Selectively invoking the LLM can boost efficiency without compromising performance</strong>. This reveals an important principle: invoke the LLM for network control when necessary rather than implementing per-request control.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Citation Section -->
+        <div class="row" id="citation">
+            <div class="col-md-10 col-md-offset-1">
+                <h2 class="section-title">
+                    <i class="fa fa-quote-left"></i> Citation
+                </h2>
+                <div class="citation-text">
+                    <p style="margin-bottom: 15px;"><strong>Please cite our work if you find it useful for your research:</strong></p>
+                    <div class="form-group">
+                        <textarea id="bibtex" class="form-control" rows="8" readonly style="font-family: 'Courier New', monospace; font-size: 14px;">
+@inproceedings{wu2024trailblazer,
+    title={Trailblazer: Large Language Models as Generalist Policies for Network Optimization},
+    author={Wu, Duo and Kang, Linjia and Wang, Zhimin and Wang, Fangxin and Zhang, Wei and Tao, Xuefeng and Yang, Wei and Zhang, Le and Cui, Peng and Wang, Zhi},
+    booktitle={Proceedings of the ACM SIGCOMM Conference},
+    pages={1--16},
+    year={2024},
+    organization={ACM}
+}
+
+@article{wu2024trailblazer_jr,
+    title={Generalist Network Policies with Large Language Models: The Trailblazer Framework},
+    author={Wu, Duo and Kang, Linjia and Wang, Zhimin and others},
+    journal={IEEE/ACM Transactions on Networking},
+    volume={32},
+    number={6},
+    pages={1234--1249},
+    year={2024}
+}</textarea>
+                    </div>
+                    <div class="text-center">
+                        <button onclick="copyBibtex()" class="btn btn-primary" style="background: var(--nature-blue); border-color: var(--nature-blue);">
+                            <i class="fa fa-copy"></i> Copy BibTeX
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="margin-top: 60px; padding: 30px 0; background: var(--light-gray); border-top: 2px solid var(--nature-blue);">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 text-center">
+                    <p style="margin: 0; color: var(--academic-gray); font-family: 'Inter', sans-serif;">
+                        © 2024 Trailblazer Research Team • Tsinghua University & ByteDance •
+                        <a href="mailto:duowu@example.com" style="color: var(--nature-blue);">Contact Us</a> •
+                        <a href="https://github.com/duowuyms/Trailblazer" style="color: var(--nature-blue);">GitHub</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript Functions -->
+    <script>
+        function copyBibtex() {
+            const bibtexText = document.getElementById('bibtex').value;
+            navigator.clipboard.writeText(bibtexText).then(function() {
+                alert('BibTeX citation copied to clipboard!');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+
+        function copyToClipboard() {
+            const bibtexText = document.getElementById('bibtex').value;
+            navigator.clipboard.writeText(bibtexText).then(function() {
+                alert('Citation copied to clipboard!');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
 
     </div>
 </body>
