@@ -86,9 +86,9 @@
             right: 0;
             bottom: 0;
             background:
-                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 60%, rgba(255,255,255,0.08) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.06) 0%, transparent 50%);
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 60%, rgba(255,255,255,0.06) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.04) 0%, transparent 50%);
             animation: floatAnimation 20s ease-in-out infinite;
         }
 
@@ -100,11 +100,21 @@
             right: 0;
             bottom: 0;
             background-image:
-                linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.03) 49%, rgba(255,255,255,0.03) 51%, transparent 52%),
-                linear-gradient(-45deg, transparent 48%, rgba(255,255,255,0.02) 49%, rgba(255,255,255,0.02) 51%, transparent 52%);
+                linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.02) 49%, rgba(255,255,255,0.02) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(255,255,255,0.015) 49%, rgba(255,255,255,0.015) 51%, transparent 52%);
             background-size: 60px 60px, 60px 60px;
             animation: patternMove 30s linear infinite;
-            opacity: 0.5;
+            opacity: 0.3;
+        }
+
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
 
         @keyframes floatAnimation {
@@ -446,6 +456,7 @@
 <body>
     <!-- Academic Header -->
     <div class="academic-header">
+        <canvas id="particles-canvas"></canvas>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -796,6 +807,171 @@
                         });
                     }
                 });
+            }
+        });
+
+        // Particle System
+        class ParticleSystem {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.particles = [];
+                this.particleCount = 80;
+                this.mouse = { x: 0, y: 0 };
+                this.init();
+                this.animate();
+                this.setupEventListeners();
+            }
+
+            init() {
+                this.resize();
+                this.createParticles();
+            }
+
+            resize() {
+                this.canvas.width = this.canvas.offsetWidth;
+                this.canvas.height = this.canvas.offsetHeight;
+            }
+
+            createParticles() {
+                this.particles = [];
+                for (let i = 0; i < this.particleCount; i++) {
+                    this.particles.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        size: Math.random() * 2 + 0.5,
+                        speedX: (Math.random() - 0.5) * 0.8,
+                        speedY: (Math.random() - 0.5) * 0.8,
+                        opacity: Math.random() * 0.6 + 0.2,
+                        connections: []
+                    });
+                }
+            }
+
+            setupEventListeners() {
+                window.addEventListener('resize', () => this.resize());
+
+                // Mouse interaction
+                this.canvas.addEventListener('mousemove', (e) => {
+                    const rect = this.canvas.getBoundingClientRect();
+                    this.mouse.x = e.clientX - rect.left;
+                    this.mouse.y = e.clientY - rect.top;
+                });
+
+                this.canvas.addEventListener('mouseleave', () => {
+                    this.mouse.x = undefined;
+                    this.mouse.y = undefined;
+                });
+            }
+
+            updateParticle(particle) {
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+
+                // Bounce off edges
+                if (particle.x < 0 || particle.x > this.canvas.width) {
+                    particle.speedX = -particle.speedX;
+                }
+                if (particle.y < 0 || particle.y > this.canvas.height) {
+                    particle.speedY = -particle.speedY;
+                }
+
+                // Keep particles within bounds
+                particle.x = Math.max(0, Math.min(this.canvas.width, particle.x));
+                particle.y = Math.max(0, Math.min(this.canvas.height, particle.y));
+
+                // Mouse interaction
+                if (this.mouse.x !== undefined && this.mouse.y !== undefined) {
+                    const dx = this.mouse.x - particle.x;
+                    const dy = this.mouse.y - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        const force = (100 - distance) / 100;
+                        particle.x -= (dx / distance) * force * 2;
+                        particle.y -= (dy / distance) * force * 2;
+                    }
+                }
+            }
+
+            findConnections() {
+                for (let i = 0; i < this.particles.length; i++) {
+                    this.particles[i].connections = [];
+                    for (let j = i + 1; j < this.particles.length; j++) {
+                        const dx = this.particles[i].x - this.particles[j].x;
+                        const dy = this.particles[i].y - this.particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 120) {
+                            this.particles[i].connections.push({
+                                particle: this.particles[j],
+                                opacity: (1 - distance / 120) * 0.3
+                            });
+                        }
+                    }
+                }
+            }
+
+            drawParticle(particle) {
+                this.ctx.beginPath();
+                this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                this.ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+                this.ctx.fill();
+
+                // Add glow effect for larger particles
+                if (particle.size > 1.5) {
+                    this.ctx.beginPath();
+                    this.ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity * 0.1})`;
+                    this.ctx.fill();
+                }
+            }
+
+            drawConnections() {
+                for (let particle of this.particles) {
+                    for (let connection of particle.connections) {
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(particle.x, particle.y);
+                        this.ctx.lineTo(connection.particle.x, connection.particle.y);
+                        this.ctx.strokeStyle = `rgba(255, 255, 255, ${connection.opacity})`;
+                        this.ctx.lineWidth = 0.5;
+                        this.ctx.stroke();
+                    }
+                }
+            }
+
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                this.findConnections();
+
+                for (let particle of this.particles) {
+                    this.updateParticle(particle);
+                }
+
+                this.drawConnections();
+
+                for (let particle of this.particles) {
+                    this.drawParticle(particle);
+                }
+
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        // Initialize particle system when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('particles-canvas');
+            if (canvas) {
+                // Check if device is mobile
+                const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+                if (!isMobile) {
+                    new ParticleSystem(canvas);
+                } else {
+                    // Hide canvas on mobile devices
+                    canvas.style.display = 'none';
+                }
             }
         });
     </script>
