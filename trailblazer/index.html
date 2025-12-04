@@ -69,11 +69,80 @@
         }
 
         .academic-header {
-            background: linear-gradient(135deg, var(--nature-blue) 0%, #004080 100%);
+            background: linear-gradient(135deg, #001f3f 0%, #003366 25%, #004080 50%, #003366 75%, #001f3f 100%);
             color: white;
-            padding: 40px 0;
+            padding: 50px 0;
             margin-bottom: 30px;
             border-bottom: 3px solid var(--science-red);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .academic-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 60%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.06) 0%, transparent 50%);
+            animation: floatAnimation 20s ease-in-out infinite;
+        }
+
+        .academic-header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.03) 49%, rgba(255,255,255,0.03) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(255,255,255,0.02) 49%, rgba(255,255,255,0.02) 51%, transparent 52%);
+            background-size: 60px 60px, 60px 60px;
+            animation: patternMove 30s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes floatAnimation {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(20px, -20px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 60px 60px, -60px 60px; }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .academic-header .paper-title {
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .academic-header .paper-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--science-red), transparent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; width: 80px; }
+            50% { opacity: 1; width: 120px; }
         }
 
         .paper-title {
@@ -125,11 +194,35 @@
         }
 
         .abstract-box {
-            background: var(--light-gray);
+            background: linear-gradient(135deg, var(--light-gray), #ffffff);
             border-left: 4px solid var(--nature-blue);
-            padding: 20px;
+            padding: 25px;
             margin: 20px 0;
-            border-radius: 4px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abstract-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, transparent 50%, rgba(0,51,102,0.05) 50%);
+            border-radius: 0 0 0 100%;
+        }
+
+        .abstract-box h3 {
+            position: relative;
+            z-index: 2;
+        }
+
+        .abstract-box p {
+            position: relative;
+            z-index: 2;
         }
 
         .figure-caption {
@@ -278,11 +371,36 @@
         .academic-header .nav-pills > li > a h4 {
             font-size: 18px !important;
             margin-bottom: 5px !important;
+            transition: all 0.3s ease !important;
         }
 
         .academic-header .nav-pills > li > a i.fa-2x {
             font-size: 2.5em !important;
             margin-bottom: 10px;
+            transition: all 0.3s ease !important;
+        }
+
+        .academic-header .nav-pills > li > a {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
+            border: 1px solid rgba(255,255,255,0.2) !important;
+            backdrop-filter: blur(10px) !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .academic-header .nav-pills > li > a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .academic-header .nav-pills > li > a:hover::before {
+            left: 100%;
         }
 
         /* Enhanced abstract and content text */
@@ -331,7 +449,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="text-center">
+                    <div class="text-center header-content">
                         <h1 class="paper-title">Large Language Models as Generalist Policies for Network Optimization</h1>
 
                         <!-- Authors in Header -->
