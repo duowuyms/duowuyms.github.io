@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Agent & Embodied VLA | 智能体与具身大模型小组</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.92) 0%, rgba(118, 75, 162, 0.92) 100%),
+                        url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1600') center/cover;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+        }
+
+        nav li {
+            margin: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #764ba2;
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 0;
+        }
+
+        section:nth-child(even) {
+            background: white;
+        }
+
+        section h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #667eea;
+            text-align: center;
+        }
+
+        /* Introduction */
+        .intro {
+            font-size: 1.1em;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: justify;
+        }
+
+        /* Research Areas */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .research-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .research-card h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .research-card ul {
+            list-style-position: inside;
+            color: #555;
+        }
+
+        .research-card li {
+            margin: 8px 0;
+        }
+
+        /* Publications */
+        .pub-section {
+            margin-bottom: 50px;
+        }
+
+        .pub-section h3 {
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            color: #764ba2;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .pub-card {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            transition: box-shadow 0.3s;
+        }
+
+        .pub-card:hover {
+            box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+        }
+
+        .pub-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .pub-meta {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .pub-abstract {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .pub-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9em;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pub-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .pub-card {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            transition: box-shadow 0.3s;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .pub-card:hover {
+            box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+        }
+
+        .pub-content {
+            flex: 1;
+        }
+
+        .pub-image {
+            width: 400px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .contact-card h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .contact-card p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .contact-card a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+            }
+
+            nav li {
+                margin: 5px 15px;
+            }
+
+            .research-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pub-card {
+                flex-direction: column;
+            }
+
+            .pub-image {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>LLM Agent & Embodied VLA</h1>
+            <p>智能体与具身大模型小组</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#intro">简介</a></li>
+            <li><a href="#research">研究方向</a></li>
+            <li><a href="#publications">近期工作</a></li>
+            <li><a href="#contact">加入我们</a></li>
+        </ul>
+    </nav>
+
+    <!-- Introduction -->
+    <section id="intro">
+        <div class="container">
+            <h2>关于我们</h2>
+            <div class="intro">
+                <p>
+                    近年来，大语言模型（Large Language Models, LLMs）通过在海量跨领域语料上进行大规模预训练，逐步演化出一个可迁移的通用知识库，并展现出强大的语义理解、上下文推理、任务分解与多步规划能力。这些能力使其在处理开放世界问题时表现出显著的潜力，尤其适用于需要灵活应变、动态调整的场景。
+                </p>
+                <br>
+                <p>
+                    为充分发挥大模型在真实开放环境中的决策潜力，我们聚焦于以下研究方向：
+                </p>
+                <br>
+                <p>
+                    <strong>1. 大模型智能体（LLM Agent）：</strong>以大模型为"大脑"，赋予其目标理解、任务分解、工具调用与经验记忆的能力，使其能在复杂任务中主动决策与动态调整。
+                </p>
+                <br>
+                <p>
+                    <strong>2. 具身大模型（Embodied VLA）：</strong>将大模型嵌入物理环境中，通过融合视觉-语言-动作（VLA）模型与机器人控制系统，使其具备环境感知与物理交互能力。大模型不仅"知道该做什么"，更能"看见环境变化"、"走到指定位置"、"抓取目标物体"，并通过与环境的实时交互不断优化行为策略。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Areas -->
+    <section id="research">
+        <div class="container">
+            <h2>研究方向</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <h3>大模型智能体（LLM Agent）</h3>
+                    <ul>
+                        <li>大模型工具调用（LLM Tool Use）</li>
+                        <li>GUI 智能体（GUI Agent）</li>
+                        <li>多智能体协作（Multi-Agent Collaboration）</li>
+                    </ul>
+                </div>
+                <div class="research-card">
+                    <h3>具身大模型（Embodied VLA）</h3>
+                    <ul>
+                        <li>强化学习训练（RL for VLA）</li>
+                        <li>空间理解与感知（Spatial Understanding and Perception）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+        <div class="container">
+            <h2>近期工作</h2>
+
+            <div class="pub-section">
+                <h3>智能体</h3>
+
+                <div class="pub-card">
+                    <img src="images/cobel_world.png" alt="CoBel-World Framework" class="pub-image">
+                    <div class="pub-content">
+                        <div class="pub-title">CoBel-World: Harnessing LLM Reasoning to Build a Collaborative Belief World for Optimizing Embodied Multi-Agent Collaboration</div>
+                        <div class="pub-meta">Under Review [CCF-A]  
+                            <a href="https://arxiv.org/abs/2509.21981" class="pub-link" target="_blank">Paper</a></div>
+                        <div class="pub-abstract">
+                            Effective real-world multi-agent collaboration requires not only accurate planning but also the ability to reason about collaborators' intents -- a crucial capability for avoiding miscoordination and redundant communication under partial observable environments. Due to their strong planning and reasoning capabilities, large language models (LLMs) have emerged as promising autonomous agents for collaborative task solving. However, existing collaboration frameworks for LLMs overlook their reasoning potential for dynamic intent inference, and thus produce inconsistent plans and redundant communication, reducing collaboration efficiency. To bridge this gap, we propose CoBel-World, a novel framework that equips LLM agents with a collaborative belief world -- an internal representation jointly modeling the physical environment and collaborators' mental states. CoBel-World enables agents to parse open-world task knowledge into structured beliefs via a symbolic belief language, and perform zero-shot Bayesian-style belief updates through LLM reasoning. This allows agents to proactively detect potential miscoordination (e.g., conflicting plans) and communicate adaptively. Evaluated on challenging embodied benchmarks (i.e., TDW-MAT and C-WAH), CoBel-World significantly reduces communication costs by 22-60% and improves task completion efficiency by 4-28% compared to the strongest baseline. Our results show that explicit, intent-aware belief modeling is essential for efficient and human-like collaboration in LLM-based multi-agent systems.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <img src="images/catp_llm.png" alt="CATP-LLM Framework" class="pub-image">
+                    <div class="pub-content">
+                        <div class="pub-title">CATP-LLM: Empowering Large Language Models for Cost-Aware Tool Planning</div>
+                        <div class="pub-meta">ICCV 2025 [CCF-A]
+                            <a href="https://arxiv.org/abs/2411.16313" class="pub-link" target="_blank">Paper</a>
+                            <a href="https://github.com/duowuyms/OpenCATP-LLM" class="pub-link" target="_blank">Code</a></div>
+                        <div class="pub-abstract">
+                            Utilizing large language models (LLMs) for tool planning has emerged as a promising avenue for developing general AI systems, where LLMs automatically schedule external tools (e.g., vision models) to tackle complex tasks based on task descriptions. To push this paradigm toward practical applications, it is crucial for LLMs to consider tool execution costs (e.g., execution time) for tool planning. Unfortunately, prior studies overlook the tool execution costs, leading to the generation of expensive plans whose costs outweigh their benefits in terms of task performance. To fill this gap, we propose the Cost-Aware Tool Planning with LLMs (CATP-LLM) framework, which for the first time provides a coherent design to empower LLMs for cost-aware tool planning. Specifically, To facilitate efficient concurrent tool execution and cost reduction, we design a tool planning language to enhance the LLM for creating multi-branch non-sequential plans. Moreover, we propose a cost-aware offline reinforcement learning algorithm to fine-tune the LLM to optimize the performance-cost trade-off in tool planning. In the lack of public cost-related datasets, we further present OpenCATP, the first dataset for cost-aware planning, which comprises 11,100 evaluation samples from diverse tasks. Extensive experiments show that CATP-LLM outperforms GPT-4 even when using Llama2-7B as its backbone, with the average improvement of 1.5%-93.9% in terms of plan quality.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-section">
+                <h3>大模型端到端决策控制</h3>
+
+                <div class="pub-card">
+                    <img src="images/trailblazer.png" alt="Trailblazer Framework" class="pub-image">
+                    <div class="pub-content">
+                        <div class="pub-title">Large Language Models as Generalist Policies for Network Optimization</div>
+                        <div class="pub-meta">In Submission
+                            <a href="https://arxiv.org/abs/2512.11839" class="pub-link" target="_blank">Paper</a></div>
+                        <div class="pub-abstract">
+                            Designing control policies to ensure robust network services is essential to modern digital infrastructure. However, the dominant paradigm for network optimization relies on designing specialist policies based on handcrafted rules or deep learning models, leading to poor generalization across diverse tasks and environments. In contrast, large language models (LLMs), pretrained on Internet-scale corpora, provide a rich and unified knowledge base that encodes fundamental networking principles. Combined with their emergent abilities in generalization to unseen scenarios, LLMs offer a transformative foundation for generalist network policies that can generalize across diverse tasks and environments with minimal adaptation. In this paper, we present Trailblazer, the first systematic framework to realize such a generalist policy for networking. Trailblazer incorporates a network alignment scheme to ground the LLM in specific networking tasks, and an adaptive policy collaboration mechanism that offloads simple control cases from the LLM to a lightweight policy for computational efficiency. Through extensive simulations and large-scale real-world online evaluation on Douyin (the Chinese version of TikTok), Trailblazer, powered by a single LLM, demonstrates stronger cross-task and cross-environment generalization than conventional specialist policies. Our results validate LLMs as the foundation for generalist network policies, and position Trailblazer as the first step toward the generalist-driven paradigm that enables strong generalization with minimal efforts in policy design.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <img src="images/netllm.png" alt="NetLLM Framework" class="pub-image">
+                    <div class="pub-content">
+                        <div class="pub-title">NetLLM: Adapting Large Language Models for Networking</div>
+                        <div class="pub-meta">SIGCOMM 2024 [CCF-A] (140+ Citations, 180+ Github Stars)
+                            <a href="https://dl.acm.org/doi/abs/10.1145/3651890.3672268" class="pub-link" target="_blank">Paper</a>
+                            <a href="https://github.com/duowuyms/NetLLM" class="pub-link" target="_blank">Code</a></div>
+                        <div class="pub-abstract">
+                            Many networking tasks now employ deep learning (DL) to solve complex prediction and optimization problems. However, current design philosophy of DL-based algorithms entails intensive engineering overhead due to the manual design of deep neural networks (DNNs) for different networking tasks. Besides, DNNs tend to achieve poor generalization performance on unseen data distributions/environments. Motivated by the recent success of large language models (LLMs), this work studies the LLM adaptation for networking to explore a more sustainable design philosophy. With the powerful pre-trained knowledge, the LLM is promising to serve as the foundation model to achieve "one model for all tasks" with even better performance and stronger generalization. In pursuit of this vision, we present NetLLM, the first framework that provides a coherent design to harness the powerful capabilities of LLMs with low efforts to solve networking problems. Specifically, NetLLM empowers the LLM to effectively process multimodal data in networking and efficiently generate task-specific answers. Besides, NetLLM drastically reduces the costs of fine-tuning the LLM to acquire domain knowledge for networking. Across three networking-related use cases - viewport prediction, adaptive bitrate streaming and cluster job scheduling, we showcase that the NetLLM-adapted LLM significantly outperforms state-of-the-art algorithms.
+                             <!-- <ul>
+                                <li><b>首个网络决策大模型框架:</b> 首个系统性框架将LLM的能力迁移到网络领域，实现"一个模型解决所有任务"，打破传统DL算法需要为不同任务手动设计DNN的高工程开销范式</li>
+                                <li>设计多模态数据处理模块，使大语言模型能够高效理解和处理网络中的多模态数据。</li>
+                                <li>开发低成本微调技术，显著降低了将大语言模型应用于网络任务的成本。</li>
+                                <li>在视图预测、自适应码率流媒体和集群作业调度等多个网络任务中，展示了NetLLM显著优于现有最先进算法的性能。</li>
+                             </ul> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <h2>加入我们</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>王智 教授</h3>
+                    <p><strong>清华大学深圳国际研究生院</strong></p>
+                    <p>个人主页: <a href="https://www.mmlab.top/" target="_blank">https://www.mmlab.top</a></p>
+                    <p>邮箱: <a href="mailto:wangzhi@sz.tsinghua.edu.cn">wangzhi@sz.tsinghua.edu.cn</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3>吴铎</h3>
+                    <p><strong>在读博士生</strong></p>
+                    <p>个人主页: <a href="https://duowuyms.github.io/" target="_blank">https://duowuyms.github.io</a></p>
+                    <p>邮箱: <a href="mailto:wu-d24@mails.tsinghua.edu.cn">wu-d24@mails.tsinghua.edu.cn</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 LLM Agent & Embodied VLA Research Group. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
