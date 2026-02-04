@@ -378,6 +378,18 @@
 
             <div class="pub-section">
                 <h3>智能体</h3>
+                
+                <div class="pub-card">
+                    <img src="images/mobilegen.png" alt="MobileGen Framework" class="pub-image">
+                    <div class="pub-content">
+                        <div class="pub-title">Learning with Challenges: Adaptive Difficulty-Aware Data Generation for Mobile GUI Agent Training</div>
+                        <div class="pub-meta">Under Review [CCF-A]  
+                            <a href="" class="pub-link" target="_blank">Paper[to be released]</a></div>
+                        <div class="pub-abstract">
+                            Large-scale, high-quality interaction trajectories are essential for advancing mobile Graphical User Interface (GUI) agents. While existing methods typically rely on labor-intensive human demonstrations or automated model exploration to generate GUI trajectories, they lack fine-grained control over task difficulty. This fundamentally restricts learning effectiveness due to the mismatch between the training difficulty and the agent's capabilities. Inspired by how humans acquire skills through progressively challenging tasks, we propose MobileGen, a novel data generation framework that adaptively aligns training difficulty with the GUI agent's capability frontier. Specifically, MobileGen explicitly decouples task difficulty into structural (e.g., trajectory length) and semantic (e.g., task goal) dimensions. It then iteratively evaluates the agent on a curated prior dataset to construct a systematic profile of its capability frontier across these two dimensions. With this profile, the probability distribution of task difficulty is adaptively computed, from which the target difficulty for the next round of training can be sampled. Guided by the sampled difficulty, a multi-agent controllable generator is finally used to synthesize high-quality interaction trajectories along with corresponding task instructions. Extensive experiments show that MobileGen consistently outperforms existing data generation methods by improving the average performance of GUI agents by 1.57× across multiple challenging benchmarks. This highlights the importance of capability-aligned data generation for effective mobile GUI agent training.
+                        </div>
+                    </div>
+                </div>
 
                 <div class="pub-card">
                     <img src="images/cobel_world.png" alt="CoBel-World Framework" class="pub-image">
