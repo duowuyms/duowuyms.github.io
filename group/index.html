@@ -386,6 +386,82 @@
             text-decoration: underline;
         }
 
+        /* Team Members */
+        .team-section {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .team-category {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 86, 179, 0.08);
+            border: 1px solid #e8f4ff;
+            transition: box-shadow 0.3s;
+        }
+
+        .team-category:hover {
+            box-shadow: 0 6px 22px rgba(0, 86, 179, 0.15);
+            border-color: #cce7ff;
+        }
+
+        .team-category h3 {
+            color: #0056b3;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f4ff;
+        }
+
+        .team-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .team-member {
+            padding: 12px 18px;
+            background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+            border-left: 3px solid #007bff;
+            border-radius: 6px;
+            color: #2c3e50;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .team-member:hover {
+            background: linear-gradient(135deg, #e8f4ff 0%, #f8fbff 100%);
+            border-left-color: #0056b3;
+            transform: translateX(5px);
+        }
+
+        .team-member a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .team-member a:hover {
+            color: #0056b3;
+        }
+
+        .team-member a::after {
+            content: '↗';
+            font-size: 0.8em;
+            margin-left: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: inline-block;
+        }
+
+        .team-member a:hover::after {
+            opacity: 1;
+        }
+
         /* Footer */
         footer {
             background: linear-gradient(135deg, #004085 0%, #0056b3 100%);
@@ -443,6 +519,7 @@
             <li><a href="#intro">关于我们</a></li>
             <li><a href="#research">研究方向</a></li>
             <li><a href="#publications">近期工作</a></li>
+            <li><a href="#team">小组成员</a></li>
             <li><a href="#contact">联系我们</a></li>
         </ul>
     </nav>
@@ -520,7 +597,8 @@
                     <img src="images/mobilegen.png" alt="MobileGen Framework" class="pub-image">
                     <div class="pub-content">
                         <div class="pub-title">Learning with Challenges: Adaptive Difficulty-Aware Data Generation for Mobile GUI Agent Training</div>
-                        <div class="pub-meta">Under Review [CCF-A]
+                        <div class="pub-meta">Linjia Kang*, Zhimin Wang*, Yongkang Zhang*, Duo Wu, Jinghe Wang, Ming Ma, Haopeng Yan, Zhi Wang.
+                            Under Review [CCF-A]
                             <a href="https://arxiv.org/pdf/2601.22781" class="pub-link" target="_blank">Paper</a>
                             <a href="https://xiaogou1234.github.io/papers/mobilegen/" class="pub-link" target="_blank">Webpage</a>
                         </div>
@@ -536,7 +614,8 @@
                     <img src="images/cobel_world.png" alt="CoBel-World Framework" class="pub-image">
                     <div class="pub-content">
                         <div class="pub-title">Collaborative Belief Reasoning with LLMs for Efficient Multi-Agent Collaboration</div>
-                        <div class="pub-meta">Under Review [CCF-A]
+                        <div class="pub-meta">Zhimin Wang*, Duo Wu*, Shaokang He*, Linjia Kang, Jinghe Wang, Jing Yu, Kai Zhu, Jiawei Li, Zhi Wang.
+                            Under Review [CCF-A]
                             <a href="https://arxiv.org/abs/2509.21981" class="pub-link" target="_blank">Paper</a></div>
                         <div class="pub-tldr"> <i>CoBel-World enables LLM agents to infer the environment states and collaborators' intents by belief modeling, so that they can "talk less and do more".</i></div>
                         <button class="pub-abstract-toggle" onclick="toggleAbstract(this)">Show Abstract</button>
@@ -550,10 +629,11 @@
                     <img src="images/catp_llm.png" alt="CATP-LLM Framework" class="pub-image">
                     <div class="pub-content">
                         <div class="pub-title">CATP-LLM: Empowering Large Language Models for Cost-Aware Tool Planning</div>
-                        <div class="pub-tldr"> <i>CATP-LLM uses RL to reduce costs of LLM tool use without sacrificing performance, and establish the first platform OpenCATP for the evaluation of cost-aware tool use.</i></div>
-                        <div class="pub-meta">ICCV 2025 [CCF-A]
+                        <div class="pub-meta">Duo Wu*, Jinghe Wang*, Yuan Meng*, Yanning Zhang, Le Sun, Zhi Wang.
+                            ICCV 2025 [CCF-A]
                             <a href="https://arxiv.org/abs/2411.16313" class="pub-link" target="_blank">Paper</a>
                             <a href="https://github.com/duowuyms/OpenCATP-LLM" class="pub-link" target="_blank">Code</a></div>
+                        <div class="pub-tldr"> <i>CATP-LLM uses RL to reduce costs of LLM tool use without sacrificing performance, and establish the first platform OpenCATP for the evaluation of cost-aware tool use.</i></div>
                         <button class="pub-abstract-toggle" onclick="toggleAbstract(this)">Show Abstract</button>
                         <div class="pub-abstract">
                             Utilizing large language models (LLMs) for tool planning has emerged as a promising avenue for developing general AI systems, where LLMs automatically schedule external tools (e.g., vision models) to tackle complex tasks based on task descriptions. To push this paradigm toward practical applications, it is crucial for LLMs to consider tool execution costs (e.g., execution time) for tool planning. Unfortunately, prior studies overlook the tool execution costs, leading to the generation of expensive plans whose costs outweigh their benefits in terms of task performance. To fill this gap, we propose the Cost-Aware Tool Planning with LLMs (CATP-LLM) framework, which for the first time provides a coherent design to empower LLMs for cost-aware tool planning. Specifically, To facilitate efficient concurrent tool execution and cost reduction, we design a tool planning language to enhance the LLM for creating multi-branch non-sequential plans. Moreover, we propose a cost-aware offline reinforcement learning algorithm to fine-tune the LLM to optimize the performance-cost trade-off in tool planning. In the lack of public cost-related datasets, we further present OpenCATP, the first dataset for cost-aware planning, which comprises 11,100 evaluation samples from diverse tasks. Extensive experiments show that CATP-LLM outperforms GPT-4 even when using Llama2-7B as its backbone, with the average improvement of 1.5%-93.9% in terms of plan quality.
@@ -569,7 +649,8 @@
                     <img src="images/trailblazer.png" alt="Trailblazer Framework" class="pub-image">
                     <div class="pub-content">
                         <div class="pub-title">Large Language Models as Generalist Policies for Network Optimization</div>
-                        <div class="pub-meta">In Submission
+                        <div class="pub-meta">Duo Wu, Linjia Kang, Zhimin Wang, Fangxin Wang, Wei Zhang, Xuefeng Tao, Wei Yang, Le Zhang, Peng Cui, Zhi Wang.
+                            In Submission
                             <a href="https://arxiv.org/abs/2512.11839" class="pub-link" target="_blank">Paper</a></div>
                         <div class="pub-tldr"> <i>Trailblazer (开拓者) establishes a generalist-driven paradigm that leverages LLMs as generalist policies to achieve unprecedented generalization across diverse network control tasks and environments.</i></div>
                         <button class="pub-abstract-toggle" onclick="toggleAbstract(this)">Show Abstract</button>
@@ -583,7 +664,8 @@
                     <img src="images/netllm.png" alt="NetLLM Framework" class="pub-image">
                     <div class="pub-content">
                         <div class="pub-title">NetLLM: Adapting Large Language Models for Networking</div>
-                        <div class="pub-meta">SIGCOMM 2024 [CCF-A] (160+ Citations, 190+ Github Stars)
+                        <div class="pub-meta">Duo Wu, Xianda Wang, Yaqi Qiao, Zhi Wang, Junchen Jiang, Shuguang Cui, Fangxin Wang.
+                            SIGCOMM 2024 [CCF-A] (160+ Citations, 190+ Github Stars)
                             <a href="https://dl.acm.org/doi/abs/10.1145/3651890.3672268" class="pub-link" target="_blank">Paper</a>
                             <a href="https://github.com/duowuyms/NetLLM" class="pub-link" target="_blank">Code</a></div>
                         <div class="pub-tldr"> <i>NetLLM is the first systematic transfer learning framework that adapts LLMs to solve decision making problems in networking. It provides valuable insights on LLM domain adaptation for the broad research communities.</i></div>
@@ -608,7 +690,7 @@
                     <img src="images/deco.png" alt="Deco Framework" class="pub-image">
                     <div class="pub-content">
                         <div class="pub-title">Taming Latency and Bandwidth: A Theoretical Framework and Adaptive Algorithm for Communication-Constrained Training</div>
-                        <div class="pub-meta">Under Review [CCF-A]
+                        <div class="pub-meta">Rongwei Lu, Jingyan Jiang, Chunyang Li, Xingguang Wei, Zhi Wang. Under Review [CCF-A]
                             <a href="https://arxiv.org/abs/2507.17346" class="pub-link" target="_blank">Paper</a></div>
                         <div class="pub-tldr"> <i>DeCo-SGD addresses the three-way trade-off among compression ratio, staleness, and convergence rate in cross-datacenter training, achieving up to 5.07× speedup through adaptive compression and staleness selection.</i></div>
                         <button class="pub-abstract-toggle" onclick="toggleAbstract(this)">Show Abstract</button>
@@ -622,7 +704,8 @@
                     <img src="images/survey.png" alt="Survey" class="pub-image">
                     <div class="pub-content">
                         <div class="pub-title">Beyond A Single AI Cluster: A Survey of Decentralized LLM Training</div>
-                        <div class="pub-meta">EMNLP 2025 [CCF-A]
+                        <div class="pub-meta">Haotian Dong, Jingyan Jiang, Rongwei Lu, Jiajun Luo, Jiajun Song, Bowen Li, Ying Shen, Zhi Wang.
+                            EMNLP 2025 [CCF-A]
                             <a href="https://arxiv.org/abs/2503.11023" class="pub-link" target="_blank">Paper</a></div>
                         <div class="pub-tldr"> <i>This survey presents the first comprehensive exploration of decentralized LLM training as a resource-driven paradigm, categorizing existing efforts into community-driven and organizational approaches to democratize LLM development.</i></div>
                         <button class="pub-abstract-toggle" onclick="toggleAbstract(this)">Show Abstract</button>
@@ -631,26 +714,77 @@
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Members -->
+    <section id="team">
+        <div class="container">
+            <h2>小组成员</h2>
+            <div class="team-section">
+                <div class="team-category">
+                    <h3>指导教师</h3>
+                    <div class="team-list">
+                        <div class="team-member"><a href="http://zwang.inflexionlab.org/">王智教授 (Prof. Zhi Wang)</a></div>
+                    </div>
+                </div>
+
+                <div class="team-category">
+                    <h3>博士生</h3>
+                    <div class="team-list">
+                        <div class="team-member"><a href="https://rongweilu.cc/">路荣伟 (Rongwei Lu)</a></div>
+                        <div class="team-member"><a href="https://duowuyms.github.io/">吴铎 (Duo Wu)</a></div>
+                        <div class="team-member">李博文 (Bowen Li)</div>
+                        <div class="team-member"><a href="https://zhiminwangss.github.io/">王智民 (Zhiming Wang)</a></div>
+                    </div>
+                </div>
+
+                <div class="team-category">
+                    <h3>硕士生</h3>
+                    <div class="team-list">
+                        <div class="team-member">宋佳俊 (Jiajun Song)</div>
+                        <div class="team-member">孙乐 (Le Sun)</div>
+                        <div class="team-member"><a href="https://cobalt-27.github.io/">罗嘉俊 (Jiajun Luo)</a></div>
+                        <div class="team-member"><a href="https://scholar.google.com/citations?user=uZcizG0AAAAJ&hl=en">董昊天 (Haotian Dong)</a></div>
+                        <div class="team-member">王瀞禾 (Jinghe Wang)</div>
+                        <div class="team-member">张晏宁 (Yanning Zhang)</div>
+                        <div class="team-member">文欣婉 (Xinwan Wen)</div>
+                        <div class="team-member">江雨桐 (Yutong Jiang)</div>
+                        <div class="team-member"><a href="https://xiaogou1234.github.io/">康林佳 (Linjia Kang)</a></div>
+                        <div class="team-member">熊天毅 (Tianyi Xiong)</div>
+                        <div class="team-member">朱炳坤 (Bingkun Zhu)</div>
+                        <div class="team-member">王航 (Vahagn Ghazaryan)</div>
+                        <div class="team-member">曹歆蕤 (Xinrui Cao)</div>
+                        <div class="team-member">李春阳 (Chunyang Li)</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Contact -->
     <section id="contact">
         <div class="container">
-            <h2>加入我们</h2>
+            <h2>联系我们</h2>
             <div class="contact-grid">
-                <div class="contact-card">
+                <!-- <div class="contact-card">
                     <h3>王智 教授</h3>
                     <p><strong>清华大学深圳国际研究生院</strong></p>
                     <p>个人主页: <a href="https://www.mmlab.top/" target="_blank">https://www.mmlab.top</a></p>
                     <p>邮箱: <a href="mailto:wangzhi@sz.tsinghua.edu.cn">wangzhi@sz.tsinghua.edu.cn</a></p>
-                </div>
-                <div class="contact-card">
+                </div> -->
+                <!-- <div class="contact-card">
                     <h3>吴铎</h3>
                     <p><strong>在读博士生</strong></p>
                     <p>个人主页: <a href="https://duowuyms.github.io/" target="_blank">https://duowuyms.github.io</a></p>
                     <p>邮箱: <a href="mailto:wu-d24@mails.tsinghua.edu.cn">wu-d24@mails.tsinghua.edu.cn</a></p>
+                </div> -->
+                <div class="contact-card">
+                    <p>如果您对我们小组的研究方向感兴趣，有意向申请我们小组的日常实习、考研、保研或博士，请访问我们的<a href="https://www.notion.so/mmlabsigs/14302b1c9db140c6b0842a2537b8bbbb">实验室招生主页</a>，填写申请表，并在申请表中将我们小组的意向列为第一。</p>
+                    
+                    <p>如果您对招生、科研方向方面有疑问，或想咨询更多关于我们小组的信息，欢迎邮件联系吴铎 <a href="mailto:wu-d24@mails.tsinghua.edu.cn">wu-d24@mails.tsinghua.edu.cn</a> (智能体与具身智能方向)，或路荣伟 <a href="mailto:lurw24@mails.tsinghua.edu.cn">lurw24@mails.tsinghua.edu.cn</a> (大模型分布式训练方向)。
+                    </p>
                 </div>
             </div>
         </div>
