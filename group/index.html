@@ -116,8 +116,14 @@
         }
 
         header .container {
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 10;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
         }
 
         /* Remove old ::after */
@@ -130,7 +136,7 @@
             letter-spacing: 1px;
         }
 
-        header p {
+        header h2 {
             font-size: 1.3em;
             opacity: 0.95;
             font-weight: 500;
@@ -400,6 +406,7 @@
 
         .contact-card p {
             margin: 10px 0;
+            font-size: 1.2em;
             color: #555;
         }
 
@@ -544,7 +551,7 @@
         <div class="header-overlay"></div>
         <div class="container">
             <h1>Agentic and Embodied Large Model Training</h1>
-            <h2>智能体 · 具身大模型 · 分布式训练</h2>
+            <h2 style="font-size: 200%;">智能体 · 具身大模型 · 分布式训练</h2>
         </div>
     </header>
 
