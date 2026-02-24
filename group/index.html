@@ -16,6 +16,7 @@
             line-height: 1.6;
             color: #2c3e50;
             background: #ffffff;
+            scroll-behavior: smooth;
         }
 
         .container {
@@ -169,9 +170,10 @@
             color: #0056b3;
             font-weight: 600;
             font-size: 1.3em;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
             padding: 8px 16px;
             border-radius: 6px;
+            display: inline-block;
         }
 
         nav a:hover {
@@ -182,6 +184,7 @@
         /* Sections */
         section {
             padding: 60px 0;
+            scroll-margin-top: 80px;
         }
 
         section:nth-child(even) {
@@ -873,6 +876,25 @@
 
             // Start the slideshow
             setInterval(nextSlide, slideInterval);
+
+            // Smooth scroll for navigation links
+            document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        const navHeight = document.querySelector('nav').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
