@@ -451,6 +451,34 @@
                     </div>
                 </div>
             </div>
+
+            <div class="pub-section">
+                <h3>大模型分布式训练</h3>
+
+                <div class="pub-card">
+                    <img src="images/survey.png" alt="Survey" class="pub-image">
+                    <div class="pub-content">
+                        <div class="pub-title">Beyond A Single AI Cluster: A Survey of Decentralized LLM Training</div>
+                        <div class="pub-meta">EMNLP 2025 [CCF-A]
+                            <a href="https://arxiv.org/abs/2503.11023" class="pub-link" target="_blank">Paper</a></div>
+                        <div class="pub-abstract">
+                            The emergence of large language models (LLMs) has revolutionized AI development, yet the resource demands beyond a single cluster or even datacenter, limiting accessibility to well-resourced organizations. Decentralized training has emerged as a promising paradigm to leverage dispersed resources across clusters, datacenters and regions, offering the potential to democratize LLM development for broader communities. As the first comprehensive exploration of this emerging field, we present decentralized LLM training as a resource-driven paradigm and categorize existing efforts into community-driven and organizational approaches. We further clarify this through: (1) a comparison with related paradigms, (2) a characterization of decentralized resources, and (3) a taxonomy of recent advancements. We also provide up-to-date case studies and outline future directions to advance research in decentralized LLM training.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <img src="images/deco.png" alt="Deco Framework" class="pub-image">
+                    <div class="pub-content">
+                        <div class="pub-title">Taming Latency and Bandwidth: A Theoretical Framework and Adaptive Algorithm for Communication-Constrained Training</div>
+                        <div class="pub-meta">Under Review [CCF-A]
+                            <a href="https://arxiv.org/abs/2507.17346" class="pub-link" target="_blank">Paper</a></div>
+                        <div class="pub-abstract">
+                            Regional energy caps limit the growth of any single data center used for large-scale model training. This single-center training paradigm works when model size remains manageable, but exponential growth in the model size and computational demand challenges it. A natural alternative is to distribute training across multiple data centers over wide-area networks. This pools distributed resources, but suffers from high latency and low, time-varying bandwidth, sharply reducing throughout. Employing jointly gradient compression and delayed aggregation can alleviate communication problems, but introduces a complex three-way trade-off among compression ratio, staleness (delayed synchronization steps), and convergence rate. Existing work lacks theoretical guidance and can only propose fixed strategies, insensitive to computation and communication conditions. We address this with a new theoretical tool, decomposing the joint optimization problem into a traditional process plus multiple analyzable noise terms. Our analysis yields the first convergence rate for this setting and shows that increasing staleness exponentially amplifies the detrimental effect of compression. Leveraging these insights, we propose DeCo-SGD, which dynamically selects the compression ratio and staleness based on the real-time communication and computation conditions. DeCo-SGD achieves up to 5.07× and 1.37× speed-ups over distributed SGD and static strategy in high-latency and low, varying bandwidth networks, respectively.
+                        </div>
+                    </div>
+                </div>
+            </div>    
         </div>
     </section>
 
