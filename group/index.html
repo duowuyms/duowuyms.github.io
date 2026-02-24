@@ -26,19 +26,70 @@
 
         /* Header */
         header {
-            background:
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 40% 20%, rgba(0, 123, 255, 0.25) 0%, transparent 50%),
-                linear-gradient(135deg, #004085 0%, #0056b3 25%, #0069d9 50%, #007bff 75%, #0056b3 100%);
+            position: relative;
             color: white;
             padding: 80px 0 60px;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0, 86, 179, 0.15);
-            position: relative;
             overflow: hidden;
+            min-height: 400px;
         }
 
+        /* Background slideshow */
+        .header-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .header-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .header-slide.active {
+            opacity: 1;
+        }
+
+        /* Overlay for better text readability */
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 64, 133, 0.75) 0%,
+                rgba(0, 86, 179, 0.65) 25%,
+                rgba(0, 105, 217, 0.55) 50%,
+                rgba(0, 123, 255, 0.65) 75%,
+                rgba(0, 86, 179, 0.75) 100%
+            );
+            z-index: 1;
+            animation: overlayPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes overlayPulse {
+            0%, 100% {
+                opacity: 0.75;
+            }
+            50% {
+                opacity: 0.85;
+            }
+        }
+
+        /* Subtle animated pattern */
         header::before {
             content: '';
             position: absolute;
@@ -47,44 +98,20 @@
             right: 0;
             bottom: 0;
             background-image:
-                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: gridMove 30s linear infinite;
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 40% 20%, rgba(0, 123, 255, 0.15) 0%, transparent 50%);
+            z-index: 2;
+            animation: gentleMove 20s ease-in-out infinite;
             pointer-events: none;
         }
 
-        @keyframes gridMove {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(60px, 60px);
-            }
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(0, 123, 255, 0.2) 0%, transparent 40%);
-            animation: pulse 6s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes pulse {
+        @keyframes gentleMove {
             0%, 100% {
-                opacity: 0.5;
-                transform: scale(1);
+                transform: scale(1) translate(0, 0);
             }
             50% {
-                opacity: 1;
-                transform: scale(1.05);
+                transform: scale(1.1) translate(10px, 10px);
             }
         }
 
@@ -92,6 +119,8 @@
             position: relative;
             z-index: 10;
         }
+
+        /* Remove old ::after */
 
         header h1 {
             font-size: 2.8em;
@@ -507,6 +536,12 @@
 <body>
     <!-- Header -->
     <header>
+        <div class="header-slideshow">
+            <div class="header-slide active" style="background-image: url('images/tb1.png');"></div>
+            <div class="header-slide" style="background-image: url('images/tb2.png');"></div>
+            <div class="header-slide" style="background-image: url('images/tb3.png');"></div>
+        </div>
+        <div class="header-overlay"></div>
         <div class="container">
             <h1>Agentic and Embodied Large Model Training</h1>
             <h2>智能体 · 具身大模型 · 分布式训练</h2>
@@ -810,6 +845,27 @@
                 button.textContent = 'Hide Abstract';
             }
         }
+
+        // Header slideshow functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.header-slide');
+            let currentSlide = 0;
+            const slideInterval = 5000; // 5 seconds per slide
+
+            function nextSlide() {
+                // Remove active class from current slide
+                slides[currentSlide].classList.remove('active');
+
+                // Move to next slide
+                currentSlide = (currentSlide + 1) % slides.length;
+
+                // Add active class to next slide
+                slides[currentSlide].classList.add('active');
+            }
+
+            // Start the slideshow
+            setInterval(nextSlide, slideInterval);
+        });
     </script>
 </body>
 </html>
