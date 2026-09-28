@@ -83,6 +83,17 @@ body * {
   .w3-ul li {
     padding: 8px 0px;
   }
+
+  .news-scroll {
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .news-scroll ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
   
   /*Utilities*/
   
