@@ -142,6 +142,7 @@ a { color: inherit; }
 .button.primary { background: var(--ink); border-color: var(--ink); color: #fff; }
 .button.primary:hover { background: #000; }
 .button svg { width: 15px; height: 15px; fill: currentColor; }
+.button svg.hf-logo { width: 17px; height: 17px; }
 .button.unavailable { color: var(--faint); cursor: default; }
 .button.unavailable:hover { transform: none; box-shadow: none; border-color: var(--line); }
 .button.unavailable small { font-weight: 400; opacity: .75; }
