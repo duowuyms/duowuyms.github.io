@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="670" viewBox="0 0 1200 670" role="img" aria-labelledby="title desc">
+  <title id="title">Reward signals for real-world robot learning</title>
+  <desc id="desc">An editorial three-column comparison. Sparse-reward learning uses terminal task outcomes. Demonstration-trained reward models learn a progress proxy from expert trajectories. eVTA0 learns stepwise success probabilities from mixed-quality policy rollouts and terminal outcomes, while RLER updates the model with new rollouts.</desc>
+  <defs>
+    <style>
+      .display { font-family: Georgia, "Times New Roman", serif; fill: #1a1d21; }
+      .ui { font-family: Arial, Helvetica, sans-serif; fill: #1a1d21; }
+      .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 2px; }
+      .heading { font-size: 29px; font-weight: 500; }
+      .step-label { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; fill: #7b8794; }
+      .step { font-size: 18px; font-weight: 500; }
+      .note { font-size: 15px; fill: #5a6470; }
+      .blue { fill: #1d4ed8; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 9 5 1 9" fill="none" stroke="#8896a0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 9 5 1 9" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+
+  <rect width="1200" height="670" fill="#ffffff"/>
+  <path d="M32 24H1168" stroke="#e3e7ea" stroke-width="1.5"/>
+  <text x="32" y="57" class="ui eyebrow blue">PARADIGM COMPARISON</text>
+  <text x="32" y="107" class="display" font-size="39">Where does real-world reward feedback come from?</text>
+
+  <rect x="32" y="145" width="354" height="490" rx="12" fill="#ffffff" stroke="#dfe5e9" stroke-width="1.5"/>
+  <rect x="423" y="145" width="354" height="490" rx="12" fill="#ffffff" stroke="#dfe5e9" stroke-width="1.5"/>
+  <rect x="814" y="145" width="354" height="490" rx="12" fill="#eef3fe" stroke="#cbd9fa" stroke-width="1.5"/>
+  <path d="M833 145H1149" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round"/>
+
+  <text x="56" y="177" class="ui eyebrow" fill="#8b95a1">01 / SPARSE</text>
+  <text x="56" y="214" class="display heading">Terminal reward</text>
+  <text x="447" y="177" class="ui eyebrow" fill="#8b95a1">02 / DEMONSTRATIONS</text>
+  <text x="447" y="214" class="display heading">Progress model</text>
+  <text x="838" y="177" class="ui eyebrow blue">03 / EVTA₀ + RLER</text>
+  <text x="838" y="214" class="display heading">Experience-based reward</text>
+
+  <!-- Only the final step of a rollout has an observed task outcome. -->
+  <rect x="56" y="234" width="306" height="86" rx="8" fill="#f4f7f9"/>
+  <path d="M82 272H337" stroke="#aeb9c3" stroke-width="2"/>
+  <circle cx="91" cy="272" r="8" fill="#ffffff" stroke="#9ba8b2" stroke-width="2"/>
+  <circle cx="165" cy="272" r="8" fill="#ffffff" stroke="#9ba8b2" stroke-width="2"/>
+  <circle cx="239" cy="272" r="8" fill="#ffffff" stroke="#9ba8b2" stroke-width="2"/>
+  <rect x="304" y="257" width="31" height="31" rx="6" fill="#ffffff" stroke="#71818d" stroke-width="2"/>
+  <text x="319.5" y="278" class="ui" font-size="14" font-weight="700" text-anchor="middle">0/1</text>
+  <path d="M91 298v5M165 298v5M239 298v5" stroke="#aeb9c3" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Expert examples train a reward model that later scores policy rollouts. -->
+  <rect x="447" y="234" width="306" height="86" rx="8" fill="#f4f7f9"/>
+  <rect x="469" y="256" width="30" height="38" rx="3" fill="#ffffff" stroke="#8796a1" stroke-width="1.5"/>
+  <rect x="474" y="251" width="30" height="38" rx="3" fill="#ffffff" stroke="#8796a1" stroke-width="1.5"/>
+  <path d="M480 261H498M480 269H498M480 277H493" stroke="#a1adb6" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M515 273H548" stroke="#8796a1" stroke-width="2" marker-end="url(#arrow)"/>
+  <circle cx="587" cy="273" r="27" fill="#ffffff" stroke="#8796a1" stroke-width="1.8"/>
+  <text x="587" y="280" class="ui" font-size="18" font-weight="700" text-anchor="middle">RM</text>
+  <path d="M622 273H647" stroke="#8796a1" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M660 261Q694 248 732 259" fill="none" stroke="#8796a1" stroke-width="2" stroke-linecap="round"/>
+  <path d="M660 284Q694 268 732 294" fill="none" stroke="#aab6be" stroke-width="2" stroke-dasharray="5 5" stroke-linecap="round"/>
+  <circle cx="660" cy="261" r="3.5" fill="#8796a1"/>
+  <circle cx="731" cy="259" r="3.5" fill="#8796a1"/>
+  <circle cx="731" cy="294" r="3.5" fill="#aab6be"/>
+
+  <!-- Mixed-quality experience feeds TD learning and a signal at each step. -->
+  <rect x="838" y="234" width="306" height="86" rx="8" fill="#e2ebfc"/>
+  <path d="M858 260Q883 245 913 258" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/>
+  <path d="M858 290Q883 302 913 287" fill="none" stroke="#8daaf0" stroke-width="2" stroke-dasharray="5 4" stroke-linecap="round"/>
+  <circle cx="860" cy="260" r="4" fill="#1d4ed8"/>
+  <circle cx="860" cy="290" r="4" fill="#8daaf0"/>
+  <path d="M919 273H945" stroke="#1d4ed8" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <rect x="954" y="250" width="48" height="46" rx="8" fill="#ffffff" stroke="#7699ea" stroke-width="1.8"/>
+  <text x="978" y="279" class="ui blue" font-size="17" font-weight="700" text-anchor="middle">TD</text>
+  <path d="M1009 273H1032" stroke="#1d4ed8" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <path d="M1045 298H1125" stroke="#a9bff2" stroke-width="1.5"/>
+  <rect x="1051" y="279" width="10" height="19" rx="2" fill="#7e9deb"/>
+  <rect x="1072" y="263" width="10" height="35" rx="2" fill="#527ee7"/>
+  <rect x="1093" y="272" width="10" height="26" rx="2" fill="#6c90e9"/>
+  <rect x="1114" y="253" width="10" height="45" rx="2" fill="#1d4ed8"/>
+
+  <path d="M65 358V527" stroke="#cbd3d9" stroke-width="2"/>
+  <circle cx="65" cy="367" r="5" fill="#ffffff" stroke="#8896a0" stroke-width="2"/>
+  <circle cx="65" cy="448" r="5" fill="#ffffff" stroke="#8896a0" stroke-width="2"/>
+  <circle cx="65" cy="529" r="5" fill="#ffffff" stroke="#8896a0" stroke-width="2"/>
+  <text x="88" y="356" class="ui step-label">EXPERIENCE</text>
+  <text x="88" y="380" class="ui step">Policy rollouts</text>
+  <text x="88" y="437" class="ui step-label">SUPERVISION</text>
+  <text x="88" y="461" class="ui step">Terminal outcome (0 / 1)</text>
+  <text x="88" y="518" class="ui step-label">POLICY FEEDBACK</text>
+  <text x="88" y="542" class="ui step">Sparse task reward</text>
+  <path d="M56 574H362" stroke="#e3e7ea"/>
+  <text x="56" y="604" class="ui note">Feedback appears only at task end.</text>
+
+  <path d="M456 358V527" stroke="#cbd3d9" stroke-width="2"/>
+  <circle cx="456" cy="367" r="5" fill="#ffffff" stroke="#8896a0" stroke-width="2"/>
+  <circle cx="456" cy="448" r="5" fill="#ffffff" stroke="#8896a0" stroke-width="2"/>
+  <circle cx="456" cy="529" r="5" fill="#ffffff" stroke="#8896a0" stroke-width="2"/>
+  <text x="479" y="356" class="ui step-label">EXPERIENCE</text>
+  <text x="479" y="380" class="ui step">Expert demonstrations</text>
+  <text x="479" y="437" class="ui step-label">SUPERVISION</text>
+  <text x="479" y="461" class="ui step">Learn a progress proxy</text>
+  <text x="479" y="518" class="ui step-label">POLICY FEEDBACK</text>
+  <text x="479" y="542" class="ui step">Score policy rollouts</text>
+  <path d="M447 574H753" stroke="#e3e7ea"/>
+  <text x="447" y="604" class="ui note">Failures may be out of distribution.</text>
+
+  <path d="M847 358V527" stroke="#a8bff3" stroke-width="2"/>
+  <circle cx="847" cy="367" r="5" fill="#1d4ed8" stroke="#1d4ed8" stroke-width="2"/>
+  <circle cx="847" cy="448" r="5" fill="#1d4ed8" stroke="#1d4ed8" stroke-width="2"/>
+  <circle cx="847" cy="529" r="5" fill="#1d4ed8" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="870" y="356" class="ui step-label blue">EXPERIENCE</text>
+  <text x="870" y="380" class="ui step">Policy rollouts + outcomes</text>
+  <text x="870" y="437" class="ui step-label blue">SUPERVISION</text>
+  <text x="870" y="461" class="ui step">TD-style bootstrapping</text>
+  <text x="870" y="518" class="ui step-label blue">POLICY FEEDBACK</text>
+  <text x="870" y="542" class="ui step">Stepwise success probability</text>
+  <path d="M838 574H1144" stroke="#cbd9fa"/>
+  <text x="838" y="604" class="ui note">RLER updates eVTA₀ with new rollouts.</text>
+</svg>
