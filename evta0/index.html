@@ -26,7 +26,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=23">
+  <link rel="preload" href="assets/fonts/oxanium-variable.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=24">
   <script src="script.js?v=16" defer></script>
   <title>eVTA₀ | Demonstration-Free Success-Probability Reward Learning for Generalist Robot Policies</title>
 </head>
@@ -42,7 +43,7 @@
   </aside>
 
   <header class="site-header wrap">
-    <a class="wordmark" href="#" aria-label="eVTA0 home"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M5 26h4l4-11 5 17 4-9 3 4h6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="26" r="2.6" fill="currentColor"/></svg><span>eVTA<sub>0</sub></span></a>
+    <a class="wordmark" href="#" aria-label="eVTA0 home"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M5 26h4l4-11 5 17 4-9 3 4h6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="26" r="2.6" fill="currentColor"/></svg><span class="brand-name" aria-hidden="true"><span class="brand-e">e</span><span class="brand-v">V</span><span class="brand-t">T</span><span class="brand-a">A</span><sub>0</sub></span></a>
     <nav aria-label="Main navigation">
       <a href="#highlights">Highlights</a>
       <a href="#reward-quality">Reward quality</a>
@@ -64,6 +65,7 @@
         </div>
         <div class="paper-heading">
           <p class="paper-kicker">Demonstration-free reward learning</p>
+          <div class="hero-brand brand-name" aria-label="eVTA0"><span class="brand-e">e</span><span class="brand-v">V</span><span class="brand-t">T</span><span class="brand-a">A</span><sub>0</sub></div>
           <h1 id="hero-title">Demonstration-Free Success-Probability Reward Learning<br class="title-break"> for Generalist Robot Policies</h1>
           <div class="author-list" aria-label="Paper authors">
             <span class="author"><a href="https://duowuyms.github.io/" target="_blank" rel="noopener">Duo Wu</a><sup>1</sup></span>
@@ -89,6 +91,10 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="paradigm-diagram wrap" aria-label="Comparison of reward signals in real-world robot learning">
+      <a href="assets/figures/reward-paradigms.svg" target="_blank" rel="noopener" aria-label="Open the reward paradigm comparison at full size"><img src="assets/figures/reward-paradigms.svg" width="1200" height="670" alt="Three approaches to reward feedback for real-world robot learning. Sparse task outcomes give feedback only at the end. Demonstration-trained reward models score policy rollouts from expert examples but can face a mismatch on imperfect behavior. eVTA0 learns per-step success probabilities from mixed-quality policy rollouts and terminal outcomes, and RLER updates it with new experience."></a>
     </section>
 
     <!-- ============ Highlights ============ -->
