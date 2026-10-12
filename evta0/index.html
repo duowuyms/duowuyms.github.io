@@ -26,8 +26,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/oxanium-variable.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=24">
+  <link rel="stylesheet" href="styles.css?v=25">
   <script src="script.js?v=16" defer></script>
   <title>eVTA₀ | Demonstration-Free Success-Probability Reward Learning for Generalist Robot Policies</title>
 </head>
@@ -319,7 +318,7 @@
     <!-- ============ 04 Method ============ -->
     <section class="section wrap" id="method" aria-labelledby="method-title">
       <div class="section-topline"><span class="eyebrow">04 / Method</span><span class="source-tag">eVTA<sub>0</sub> · RLER</span></div>
-      <div class="section-heading"><h2 id="method-title">Experience provides sufficient supervision.</h2></div>
+      <!-- <div class="section-heading"><h2 id="method-title">Experience provides sufficient supervision.</h2></div>
       <p class="section-intro">During RL, a robot naturally generates successful, imperfect, and failed trajectories. eVTA<sub>0</sub> transforms these experiences into dense supervision for reward learning.</p>
 
       <div class="paradigm-cards">
@@ -335,7 +334,7 @@
           <p>eVTA<sub>0</sub> learns from the policy’s own mixed-quality rollouts. With only terminal outcomes as supervision, TD-style bootstrapping propagates success signals backward through time, assigning each intermediate state a  probability of eventual task success.</p>
           <p class="data-path"><span>Policy rollouts + outcomes</span><span aria-hidden="true">→</span><span>success probability</span></p>
         </article>
-      </div>
+      </div> -->
 
       <h3 class="subhead">Theoretical Foundation</h3>
       <div class="equation-block">
@@ -376,17 +375,6 @@
       <!-- <p class="scope-note"><strong>Scope of “demonstration-free.”</strong> eVTA<sub>0</sub> reward learning requires no expert demonstrations and no intermediate reward annotations. The policies in all experiments start from SFT checkpoints initialized with demonstrations, as is standard.</p> -->
     </section>
 
-    <!-- ============ Vision ============ -->
-    <section class="vision-band" aria-label="Research vision">
-      <div class="wrap">
-        <p class="eyebrow">Toward general embodied reward system</p>
-        <p class="vision-line">Let the robot’s own experience<br><span>discover what success looks like.</span></p>
-        <!-- <p class="vision-note">eVTA stands for <em>embodied ventral tegmental area</em>, after the brain region central to reward processing and learning. eVTA<sub>0</sub> is the first step toward reward systems that keep improving alongside generalist robot policies.</p> -->
-        <p class="vision-note">Inspired by the brain’s reward system, eVTA (embodied ventral tegmental area) aims to build a general reward mechanism for embodied intelligence — one that learns from experience, adapts with policy evolution, and scales across tasks. eVTA<sub>0</sub>  takes the first step toward this vision by learning success-probability signals directly from the robot’s own experience.</p>
-        
-      </div>
-    </section>
-
     <!-- ============ Video talk ============ -->
     <section class="talk-section" id="video-talk" aria-labelledby="talk-title">
       <div class="wrap">
@@ -405,6 +393,17 @@
             <span class="talk-cta">Watch the video<span aria-hidden="true">→</span></span>
           </span>
         </a>
+      </div>
+    </section>
+
+    <!-- ============ Vision ============ -->
+    <section class="vision-band" aria-label="Research vision">
+      <div class="wrap">
+        <p class="eyebrow">Toward general embodied reward system</p>
+        <p class="vision-line">Let the robot’s own experience<br><span>discover what success looks like.</span></p>
+        <!-- <p class="vision-note">eVTA stands for <em>embodied ventral tegmental area</em>, after the brain region central to reward processing and learning. eVTA<sub>0</sub> is the first step toward reward systems that keep improving alongside generalist robot policies.</p> -->
+        <p class="vision-note">Inspired by the brain’s reward system, eVTA (embodied ventral tegmental area) aims to build a general reward mechanism for embodied intelligence — one that learns from experience, adapts with policy evolution, and scales across tasks. eVTA<sub>0</sub>  takes the first step toward this vision by learning success-probability signals directly from the robot’s own experience.</p>
+        
       </div>
     </section>
 

@@ -31,12 +31,6 @@
   font-weight: 300 700;
   font-display: swap;
 }
-@font-face {
-  font-family: "Oxanium";
-  src: url("assets/fonts/oxanium-variable.ttf") format("truetype");
-  font-weight: 200 800;
-  font-display: swap;
-}
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -126,17 +120,16 @@ a { color: inherit; }
 .hero-brand {
   margin: 0 auto 14px;
   width: max-content;
-  font-family: "Oxanium", var(--sans);
-  font-size: clamp(4rem, 9vw, 7.25rem);
-  font-weight: 700;
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: -0.035em;
+  letter-spacing: 0.01em;
 }
 .hero-brand sub {
   position: relative;
   bottom: -0.03em;
-  font-size: 0.5em;
-  letter-spacing: -0.04em;
+  font-size: 0.62em;
 }
 .hero h1 {
   font-family: var(--serif); font-weight: 500;
