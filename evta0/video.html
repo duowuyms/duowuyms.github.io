@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Recorded English talk introducing eVTA0 — demonstration-free success-probability reward learning for generalist robot policies.">
+  <meta property="og:type" content="video.other">
+  <meta property="og:title" content="eVTA0 — English Talk">
+  <meta property="og:url" content="https://duowuyms.github.io/evta0/video.html">
+  <meta property="og:image" content="https://duowuyms.github.io/evta0/assets/posters/english-talk.png">
+  <link rel="canonical" href="https://duowuyms.github.io/evta0/video.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Video Talk | eVTA₀</title>
+  <style>
+    :root {
+      --ink: #1a1d21;
+      --muted: #5a6470;
+      --faint: #8b95a1;
+      --line: #e3e7ea;
+      --accent: #1d4ed8;
+      --accent-soft: #eef3fe;
+      --serif: "Newsreader", Georgia, "Times New Roman", serif;
+      --sans: "DM Sans", "Segoe UI", Arial, sans-serif;
+    }
+    @font-face {
+      font-family: "Newsreader";
+      src: url("assets/fonts/newsreader-latin.woff2") format("woff2");
+      font-weight: 300 700; font-display: swap;
+    }
+    @font-face {
+      font-family: "DM Sans";
+      src: url("assets/fonts/dm-sans-latin.woff2") format("woff2");
+      font-weight: 300 700; font-display: swap;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: #fff; color: var(--ink);
+      font-family: var(--sans); font-size: 17px; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      display: flex; flex-direction: column; min-height: 100vh;
+    }
+    .wrap { max-width: 1020px; width: 100%; margin: 0 auto; padding: 0 28px; }
+
+    .talk-header {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+    .wordmark {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: var(--serif); font-size: 23px; font-weight: 600;
+      text-decoration: none; color: inherit;
+    }
+    .wordmark svg { width: 25px; height: 25px; }
+    .wordmark sub { font-size: 0.62em; }
+    .back-link {
+      font-size: 14.5px; font-weight: 500; color: var(--muted); text-decoration: none;
+    }
+    .back-link:hover { color: var(--ink); }
+
+    main { flex: 1; padding: 46px 0 40px; }
+    .eyebrow {
+      text-transform: uppercase; letter-spacing: 0.13em;
+      font-size: 12px; font-weight: 600; color: var(--accent); margin: 0 0 10px;
+    }
+    h1 {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem); line-height: 1.18;
+      margin: 0 0 12px; letter-spacing: -0.005em;
+    }
+    h1 sub { font-size: 0.66em; }
+    .talk-desc { color: var(--muted); max-width: 44em; margin: 0 0 30px; }
+
+    .player { margin: 0 0 24px; }
+    .player video {
+      display: block; width: 100%; aspect-ratio: 16 / 9;
+      background: #000; border: 1px solid var(--line); border-radius: 12px;
+      box-shadow: 0 6px 28px rgba(20,32,48,.09);
+    }
+
+    .talk-row {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .talk-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .button {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 17px; border-radius: 999px;
+      border: 1px solid var(--line); background: #fff;
+      font-size: 14px; font-weight: 500; text-decoration: none; color: inherit;
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+    }
+    .button:hover {
+      border-color: #c9d2dc; box-shadow: 0 2px 10px rgba(20,32,48,.07); transform: translateY(-1px);
+    }
+    .button.primary { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .button.primary:hover { background: #000; }
+    .view-count { margin: 0; font-size: 13.5px; color: var(--faint); }
+
+    .talk-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      padding-top: 24px; padding-bottom: 34px;
+      font-size: 14px; color: var(--muted);
+    }
+    .talk-footer a { color: var(--muted); text-decoration: none; }
+    .talk-footer a:hover { color: var(--ink); }
+
+    @media (max-width: 640px) {
+      .talk-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+      main { padding-top: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="talk-header wrap">
+    <a class="wordmark" href="index.html" aria-label="eVTA0 project page">
+      <svg viewBox="0 0 36 36" aria-hidden="true"><path d="M5 26h4l4-11 5 17 4-9 3 4h6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="26" r="2.6" fill="currentColor"/></svg>
+      <span>eVTA<sub>0</sub></span>
+    </a>
+    <a class="back-link" href="index.html">← Back to project page</a>
+  </header>
+
+  <main class="wrap">
+    <p class="eyebrow">Recorded talk · English</p>
+    <h1>eVTA<sub>0</sub> English Talk</h1>
+    <p class="talk-desc">A recorded walk-through of eVTA<sub>0</sub> and RLER — the success-probability view of reward, the demonstration-free learning recipe, and the real-world results. Presented by <a href="https://duowuyms.github.io/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)">Duo Wu</a>.</p>
+
+    <figure class="player">
+      <video controls preload="metadata" poster="assets/posters/english-talk.png">
+        <source src="assets/videos/eVTA0_English_Talk.mp4" type="video/mp4">
+        Your browser does not support embedded video. <a href="assets/videos/eVTA0_English_Talk.mp4">Download the video</a>.
+      </video>
+    </figure>
+
+    <div class="talk-row">
+      <div class="talk-links">
+        <a class="button primary" href="https://arxiv.org/abs/2609.33653" target="_blank" rel="noopener">Paper ↗</a>
+        <a class="button" href="https://github.com/duowuyms/eVTA0/" target="_blank" rel="noopener">Code ↗</a>
+        <a class="button" href="assets/videos/eVTA0_English_Talk.mp4" download>Download video ↓</a>
+      </div>
+      <p class="view-count" id="busuanzi_container_page_pv" style="display:none">Watched <span id="busuanzi_value_page_pv"></span> times</p>
+    </div>
+  </main>
+
+  <footer class="talk-footer wrap">
+    <span>eVTA<sub>0</sub> · Demonstration-Free Reward Learning</span>
+    <a href="index.html">Back to project page ↑</a>
+  </footer>
+
+  <script async src="counter.js?v=1"></script>
+</body>
+</html>

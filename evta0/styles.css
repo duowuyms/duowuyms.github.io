@@ -582,6 +582,61 @@ a { color: inherit; }
 }
 .copy-status { min-height: 1.4em; font-size: 13.5px; color: var(--good); margin: 10px 0 0; }
 
+/* ---------- Video talk ---------- */
+.talk-section { padding: 58px 0 64px; border-top: 1px solid var(--line); }
+.talk-heading {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.talk-heading h2 {
+  font-family: var(--serif); font-weight: 600; font-size: 26px; margin: 0;
+}
+.talk-hint { font-size: 13px; color: var(--muted); }
+.talk-card {
+  display: grid; grid-template-columns: minmax(280px, 420px) 1fr; gap: 28px;
+  text-decoration: none; color: inherit;
+  border: 1px solid var(--line); border-radius: 12px; padding: 22px;
+  background: #fff;
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.talk-card:hover {
+  border-color: #c9d2dc; transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(20,32,48,.08);
+}
+.talk-thumb {
+  position: relative; display: block; border-radius: 8px; overflow: hidden;
+  aspect-ratio: 16 / 9; background: #000;
+}
+.talk-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.talk-thumb::after {
+  content: ""; position: absolute; inset: 0;
+  background: rgba(12,18,26,.18); transition: background .15s;
+}
+.talk-card:hover .talk-thumb::after { background: rgba(12,18,26,.06); }
+.talk-play {
+  position: absolute; top: 50%; left: 50%; z-index: 1;
+  width: 66px; height: 66px; transform: translate(-50%, -50%);
+  border-radius: 50%; background: rgba(255,255,255,.94);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 14px rgba(12,18,26,.35);
+  transition: transform .15s;
+}
+.talk-play svg { width: 30px; height: 30px; fill: var(--ink); margin-left: 3px; }
+.talk-card:hover .talk-play { transform: translate(-50%, -50%) scale(1.07); }
+.talk-info { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.talk-info h3 {
+  font-family: var(--serif); font-weight: 600; font-size: 25px;
+  line-height: 1.25; margin: 0;
+}
+.talk-info h3 sub { font-size: 0.68em; }
+.talk-info p { margin: 0; font-size: 15.5px; color: #3a414b; max-width: 34em; }
+.talk-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 10px; padding: 9px 18px; border-radius: 999px;
+  background: var(--ink); color: #fff;
+  font-size: 14px; font-weight: 600;
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
   display: flex; align-items: center; justify-content: space-between;
@@ -624,6 +679,7 @@ dialog#figure-dialog::backdrop { background: rgba(12, 18, 26, 0.78); }
   .breakthrough-track { grid-template-columns: repeat(2, 1fr); }
   .paradigm-cards { grid-template-columns: 1fr; }
   .expanded-tables { grid-template-columns: 1fr; }
+  .talk-card { grid-template-columns: 1fr; gap: 18px; }
 }
 @media (max-width: 760px) {
   body { font-size: 16.5px; }
