@@ -1,0 +1,67 @@
+---
+import { site } from '../data/site';
+import { url } from '../lib/urls';
+---
+
+<section
+  class="about-intro page-gutter"
+  id="about"
+  aria-labelledby="about-title"
+>
+  <h2 id="about-title" class="section-label">
+    About us
+  </h2>
+  <div class="about-grid">
+    <div class="about-content">
+      <p class="mission">{site.mission}</p>
+      <p class="about-copy">
+        We are a research group at <strong>MMLab@SIGS</strong>,{' '}
+        {site.affiliation}, advised by{' '}
+        <a href={site.advisor.url} target="_blank" rel="noopener noreferrer">
+          {site.advisor.name}
+        </a>
+        .
+      </p>
+      <p class="about-copy">
+        Large-scale pretraining gives models transferable knowledge and
+        capabilities in semantic understanding, contextual reasoning, task
+        decomposition, and multi-step planning. Our research connects these
+        capabilities with tools, physical interaction, and efficient training
+        systems.
+      </p>
+      <p class="about-copy">
+        We bring together <a href={url('research/#agents')}>AI agents</a> for
+        tool use, GUI interaction, and collaboration;{' '}
+        <a href={url('research/#embodied')}>embodied intelligence</a> that
+        connects vision, language, and action; and{' '}
+        <a href={url('research/#training')}>distributed large-model training</a>{' '}
+        across heterogeneous clusters and datacenters. Together, these
+        directions support our goal of building agents that learn and adapt as
+        tasks and environments change.
+      </p>
+      <a class="about-team-link" href={url('team/')}>
+        Meet the team <span aria-hidden="true">›</span>
+      </a>
+    </div>
+    <figure class="about-photo">
+      <img
+        src={url('media/about/sigs-information-building.jpg')}
+        width="799"
+        height="533"
+        alt="The Information Building at Tsinghua SIGS, with the Tsinghua name on its facade, blue sky, and green trees"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>
+        <span>Tsinghua SIGS · Shenzhen</span>
+        <a
+          href="https://www.sigs.tsinghua.edu.cn/7669/list.htm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Photo: Tsinghua SIGS <span aria-hidden="true">↗</span>
+        </a>
+      </figcaption>
+    </figure>
+  </div>
+</section>

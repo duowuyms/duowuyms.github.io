@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import SelectedWork from '../components/SelectedWork.astro';
+import AboutUs from '../components/AboutUs.astro';
 import DirectionArt from '../components/DirectionArt.astro';
 import { site } from '../data/site';
 import { directions } from '../data/research';
@@ -28,32 +29,7 @@ import { url } from '../lib/urls';
     </div>
   </section>
   <SelectedWork />
-  <section
-    class="about-intro page-gutter"
-    id="about"
-    aria-labelledby="about-title"
-  >
-    <h2 id="about-title" class="section-label">
-      About us
-    </h2>
-    <div>
-      <p class="mission">{site.mission}</p>
-      <p class="about-copy">
-        Large models bring together knowledge from diverse domains with powerful
-        capabilities in understanding, reasoning, and planning. We study how to
-        turn these capabilities into effective decisions in dynamic
-        environments.
-      </p>
-      <p class="about-copy">
-        Based at {site.affiliation} and advised by{' '}
-        <a href={site.advisor.url} target="_blank" rel="noopener noreferrer">
-          {site.advisor.name}
-        </a>
-        , our group connects AI agents, embodied intelligence, and distributed
-        training.
-      </p>
-    </div>
-  </section>
+  <AboutUs />
   <div class="section-divider page-gutter" id="directions">
     <h2 class="eyebrow">Three connected research directions</h2>
     <span>Reason · Interact · Scale</span>
