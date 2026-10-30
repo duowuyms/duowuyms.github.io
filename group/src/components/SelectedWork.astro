@@ -9,7 +9,7 @@ import { url } from '../lib/urls';
   role="region"
 >
   <div class="work-heading page-gutter">
-    <h2 id="selected-work-title">Selected work</h2>
+    <h2 id="selected-work-title">Research work</h2>
     <a href={url('publications/')}>
       View all publications <span aria-hidden="true">›</span>
     </a>
@@ -17,7 +17,7 @@ import { url } from '../lib/urls';
   <div
     class="work-viewport page-gutter"
     role="group"
-    aria-label="Selected work carousel"
+    aria-label="Research work carousel"
     aria-roledescription="carousel"
   >
     <div class="work-track">
@@ -35,16 +35,25 @@ import { url } from '../lib/urls';
             rel={work.href ? 'noopener noreferrer' : undefined}
             draggable="false"
           >
-            <div class:list={['work-media', `work-media-${work.crop}`]}>
-              <img
-                src={url(work.image)}
-                alt={work.alt}
-                width="410"
-                height="280"
-                loading={index < 2 ? 'eager' : 'lazy'}
-                decoding="async"
-                draggable="false"
-              />
+            <div
+              class:list={['work-media', { 'work-media-text': !work.image }]}
+            >
+              {work.image ? (
+                <img
+                  src={url(work.image)}
+                  alt={work.alt}
+                  width="410"
+                  height="280"
+                  loading={index < 2 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  draggable="false"
+                />
+              ) : (
+                <div class="work-text-cover">
+                  <span>{work.name}</span>
+                  <p>{work.title.replace(`${work.name}: `, '')}</p>
+                </div>
+              )}
             </div>
             <div class="work-copy">
               <div class="work-title">

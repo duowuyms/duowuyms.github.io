@@ -30,7 +30,7 @@ npm run preview
 - `src/data/research.ts`: the three research directions and their related publication IDs.
 - `src/data/publications.ts`: title, authors, year, venue/status, topic, summary, image, and resource links for each paper.
 - `src/data/abstracts.json`: abstracts preserved from the original group page.
-- `src/data/selected-work.ts`: the homepage's five curated covers, crop classes, alt text, and captions. Paper names, venues, and links are derived from `publications.ts`.
+- `src/data/selected-work.ts`: the homepage's complete work gallery, complete paper first figures, alt text, and captions. Every record and its metadata are derived from `publications.ts`. Add the matching image here; a missing image uses a text cover.
 - `src/components/SelectedWork.astro` and `src/scripts/selected-work.ts`: progressively enhanced moving work gallery.
 - `src/styles/global.css`: canonical design tokens and shared styles; see `DESIGN.md` for intent.
 - `public/`: research media and figures, copied into the generated website.
@@ -55,14 +55,16 @@ No workflow is enabled here because the production URL belongs to a separate MML
 
 ## Media provenance
 
-- IGen scene input images and generated clips: [official IGen project](https://chenghaogu.github.io/IGen/), from `ChenghaoGu/ChenghaoGu.github.io/IGen/img/scenes/` and `IGen/video/scenes/`. The homepage uses the tea-set input image and links to the original project. Files retain their original names under `public/media/igen/`; generated videos are retained but no longer loaded by the homepage.
-- SeekVLN robot cover: [official SeekVLN project](https://zhiminwangss.github.io/seekvln-project/), `ZhiminWangSS/seekvln-project/assets/robot-seek.webp`, copied as `public/media/selected-work/seek-robot.webp`.
-- Gallery CoBel-World, NetLLM, and DeCo-SGD covers: resized versions of the existing group figures, cropped with CSS. See `public/media/selected-work/README.md`.
+- IGen scene input images and generated clips: [official IGen project](https://chenghaogu.github.io/IGen/), from `ChenghaoGu/ChenghaoGu.github.io/IGen/img/scenes/` and `IGen/video/scenes/`. The research-direction band uses the tea-set input image; the scrolling gallery now uses Figure 1 extracted from the paper PDF, saved as `public/media/selected-work/igen-first-figure.webp`. Files retain their original names under `public/media/igen/`; generated videos are retained but no longer loaded by the homepage.
+- SeekVLN first figure: extracted from page 2 of the official project PDF, saved as `public/media/selected-work/seekvln-first-figure.webp`. The previous robot photo is retained as a source asset for the archive. Robot photo source: [official SeekVLN project](https://zhiminwangss.github.io/seekvln-project/), `ZhiminWangSS/seekvln-project/assets/robot-seek.webp`, copied as `public/media/selected-work/seek-robot.webp`.
+- Gallery: all ten supplied covers are verified Figure 1 artwork rendered from their respective paper PDFs, fitted without cropping. PDF sources and page numbers are listed in `public/media/selected-work/README.md`. GeoMIND uses a text cover until the owner supplies its figure.
 - MobileGen, CoBel-World, CATP-LLM, Trailblazer, NetLLM, DeCo-SGD, survey figures: existing group website's `images/`.
 - eVTA₀ overview: existing `evta0/assets/figures/model.webp`.
 - Standard Inter: self-hosted from `@fontsource-variable/inter` (OFL), matching the font used by [HKU MMLab](https://mmlab.hk/). Homepage title uses 600, secondary display headings 700, navigation 500, and body 400.
 - The original DM Sans asset and license remain in `src/assets/fonts/` for reference; the new typography does not load them.
 
 The homepage gallery moves slowly, with dragging and horizontal wheel navigation, without previous/next or Play/Pause buttons. Hover/focus, active dragging, or a hidden/offscreen document suspends movement; reduced motion disables automatic movement. Without JavaScript it becomes a native horizontal list. No video autoplay or remote font requests are required. Research images are not labeled as measured results.
+
+Version control: all work stays on `meiyuanGroup`. The reviewed starting point is commit `2d03930`; commit each completed and checked iteration separately. Do not merge or deploy without user approval.
 
 See `HANDOFF.md` for the conversation decisions, current state, verification, and remaining review/deployment work.

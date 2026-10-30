@@ -49,7 +49,7 @@ components:
 
 An English research group website for prospective students, researchers, and collaborators. Readers should understand the group and its three directions, then find publications, people, or application information.
 
-The user's reference is HKU MMLab, especially its Inter typography and broad introductory bands. The latest approved homepage replaces the earlier purple, two-column slogan and oversized IGen image pair with a compact centered group name and a narrow moving research gallery. The visual reference is Apple's restrained white, black, gray, and occasional blue links. Purple is no longer required. This is a content site with five document routes, not application-style tabs.
+The user's reference is HKU MMLab, especially its Inter typography and broad introductory bands. The latest approved homepage replaces the earlier purple, two-column slogan and oversized IGen image pair with a compact centered group name and a compact moving research gallery. The visual reference is Apple's restrained white, black, gray, and occasional blue links. Purple is no longer required. This is a content site with five document routes, not application-style tabs.
 
 Avoid dark landscape heroes, toy-like illustrations, large decorative backgrounds, heavy gradients, invented impact statistics, and a single-paper homepage. The moving gallery is the signature element; everything around it stays quiet.
 
@@ -67,9 +67,9 @@ The centered homepage group name uses weight 600, tight tracking (-0.045em), and
 
 ## Layout
 
-The shell is at most 1680px wide; gutters grow from 22px to 90px. Homepage order: centered group introduction → Selected work → About us → three full-width research direction bands → recruitment invitation. Preserve the original group information. The research bands are analogous to HKU MMLab's campus introduction rows and link to the matching direction detail anchors.
+The shell is at most 1680px wide; gutters grow from 22px to 90px. Homepage order: centered group introduction → Research work → About us → three full-width research direction bands → recruitment invitation. Preserve the original group information. The research bands are analogous to HKU MMLab's campus introduction rows and link to the matching direction detail anchors.
 
-The work gallery has five curated covers: SeekVLN, IGen, CoBel-World, NetLLM, and DeCo-SGD. Images are 167px high on desktop and 155px on phones, with copy below, without card chrome or shadows. Crops show real research imagery; label IGen input images accurately. Image dimensions and containers reserve geometry.
+The work gallery includes every publication (currently eleven). Use the verified Figure 1 artwork extracted from each available paper with object-fit: contain, not photos or enlarged diagram crops. Frames are 200px high on desktop and 180px on phones, with copy below, quiet rules, and no shadows. All original figure content remains visible. GeoMIND currently has an explicit typographic cover because a verified figure is not available; the user is asking a colleague and has deferred this asset. Replace it when supplied. Do not invent a research figure. Image dimensions and containers reserve geometry.
 
 Breakpoints: 1100px adapts columns, 800px activates the mobile menu, and 540px stacks research bands and paper records. At 320px the page has no horizontal overflow. The document owns vertical scrolling. Only the unenhanced gallery uses a native, visible horizontal scrollbar; its enhanced version is a transformed carousel without a separate control row. Do not hide the page's scrollbar. Global scrollbar tokens and forced-colors behavior apply to all native scrolling surfaces.
 
@@ -84,8 +84,8 @@ Rectangular reading sections with gently rounded gallery images. Rounded media d
 ## Components
 
 - `SiteLayout.astro`: shared metadata, navigation, mobile menu, footer, and self-hosted font.
-- `SelectedWork.astro`: semantic work markup; `src/data/selected-work.ts` owns curation/crops and derives paper names, venues, and links from `publications.ts`.
-- `src/scripts/selected-work.ts`: carousel enhancement, about 19px/second movement, pointer drag, and horizontal wheel input. The user explicitly requested no previous/next or Play/Pause buttons; there is no control/status row. Hover/focus, active dragging, hidden document, and out-of-view media suspend movement; it resumes when those conditions clear. Reduced motion disables automatic movement. All originals remain keyboard accessible; loop copies are excluded from the tab order and accessibility tree. Without JavaScript all five originals remain available with native horizontal scrolling.
+- `SelectedWork.astro`: semantic work markup; `src/data/selected-work.ts` maps complete paper first figures and derives every record, paper name, venue, and link from `publications.ts`; new publications automatically appear with an honest text cover until an image is supplied.
+- `src/scripts/selected-work.ts`: carousel enhancement, about 19px/second movement, pointer drag, and horizontal wheel input. The user explicitly requested no previous/next or Play/Pause buttons; there is no control/status row. Hover/focus, active dragging, hidden document, and out-of-view media suspend movement; it resumes when those conditions clear. Reduced motion disables automatic movement. All originals remain keyboard accessible; loop copies are excluded from the tab order and accessibility tree. Without JavaScript all originals remain available with native horizontal scrolling.
 - `PageIntro.astro`, `PublicationRow.astro`, and `DirectionArt.astro`: shared secondary headings, complete paper records, and direction-band media.
 
 The archive renders all eleven papers without JavaScript; native year/topic selects preserve URL filters and provide count/no-results/reset states. Native details/summary exposes original abstracts. The operating system owns select popups. Missing paper links are omitted, not fabricated. Navigation is visible without JavaScript; the enhanced mobile menu supports Escape and focus return.
@@ -97,4 +97,4 @@ The archive renders all eleven papers without JavaScript; native year/topic sele
 - Keep all internal URLs and media base-path aware.
 - Keep NetLLM and Trailblazer visible as related large-model decision-making research.
 - Do not add members solely from author lists.
-- Work on `meiyuanGroup`; merge to main and deploy only after user approval.
+- Work on `meiyuanGroup`; commit each completed and checked iteration as explicitly requested. Merge to main and deploy only after user approval.

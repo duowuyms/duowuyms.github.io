@@ -354,8 +354,8 @@ select {
   will-change: transform;
 }
 .work-card {
-  width: clamp(246px, 27.5vw, 298px);
-  flex: 0 0 clamp(246px, 27.5vw, 298px);
+  width: clamp(290px, 30vw, 380px);
+  flex: 0 0 clamp(290px, 30vw, 380px);
   min-width: 0;
 }
 .work-card > a {
@@ -372,52 +372,49 @@ select {
 }
 .work-media {
   position: relative;
-  height: 167px;
-  background: var(--surface);
+  height: 200px;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 14px;
   border-radius: 14px;
   overflow: hidden;
   isolation: isolate;
 }
 .work-media img {
-  position: absolute;
-  max-width: none;
-  height: auto;
-}
-.work-media-seek img,
-.work-media-igen img {
   width: 100%;
   height: 100%;
-  inset: 0;
-  object-fit: cover;
+  object-fit: contain;
 }
-.work-media-seek img {
-  object-position: 55% 76%;
+.work-media-text {
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  padding: 28px;
 }
-.work-media-cobel img {
-  width: 440%;
-  left: -10%;
-  top: -73%;
+.work-text-cover > span {
+  display: block;
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
 }
-.work-media-netllm img {
-  width: 205%;
-  left: -31%;
-  top: -26%;
-}
-.work-media-deco img {
-  width: 240%;
-  left: -7%;
-  top: -8%;
+.work-text-cover > p {
+  max-width: 240px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
 }
 .work-copy {
   padding: 13px 2px 0;
 }
 .work-title {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   gap: 14px;
 }
 .work-title h3 {
+  min-width: 0;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -1214,18 +1211,16 @@ select {
     font-size: 11px;
   }
   .work-card {
-    width: 245px;
-    flex-basis: 245px;
+    width: 280px;
+    flex-basis: 280px;
   }
   .work-track {
     gap: 14px;
   }
   .work-media {
-    height: 155px;
+    height: 180px;
     border-radius: 12px;
-  }
-  .work-media-cobel img {
-    top: -70%;
+    padding: 12px;
   }
   .page-gutter {
     padding-inline: 22px;

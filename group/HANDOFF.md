@@ -2,10 +2,10 @@
 
 ## 给接手 agent 的起点
 
-用户已批准最新的浅色、居中标题、滚动作品展示带草案，并要求“实现一下这个，实现结束之后整理当前对话，准备交接给另一个 agent”。**该草案现已接入正式 Astro 源码，不再只是外部 mockup。** 最新补充要求：去掉滚动带的左右切换与 Pause/Play 按钮，已移除整个控制/状态栏。 后续应在当前实现上继续精修，先听取用户反馈，不要重新启动框架选择或恢复早期方案。
+用户已批准最新的浅色、居中标题、滚动作品展示带草案，并要求“实现一下这个，实现结束之后整理当前对话，准备交接给另一个 agent”。**该草案现已接入正式 Astro 源码，不再只是外部 mockup。** 最新补充要求：去掉滚动带的左右切换与 Pause/Play 按钮，已移除整个控制/状态栏。之后用户要求扩充到所有研究工作，并换用论文首图/总览图，已更新为 11 项完整图展示。 后续应在当前实现上继续精修，先听取用户反馈，不要重新启动框架选择或恢复早期方案。
 
 仓库：`/Users/zhumeiyuan/Desktop/THUSIGS/duowuyms.github.io`。
-当前分支：`meiyuanGroup`。用户要求只在此分支修改，只有用户觉得 OK 后才能合并 main。尚未 commit、push、merge 或部署；新 Astro 项目文件目前仍是 Git untracked。切换分支、清理文件前必须先保护这些改动。原 `group/index.html`、`group/images/` 保留；不要以为直接打开旧 HTML 就能看到新版。
+当前分支：`meiyuanGroup`。用户要求只在此分支修改，只有用户觉得 OK 后才能合并 main。当前起始实现已提交为 **`2d03930`**（包含无按钮版本），尚未 push、merge 或部署。用户新增要求：**每轮修改完成并检查后都做一次 commit，便于版本管理**。切换分支、清理文件前先检查并保护工作区。原 `group/index.html`、`group/images/` 保留；不要以为直接打开旧 HTML 就能看到新版。
 
 当前预览地址：`http://127.0.0.1:4321/group/`。本轮已启动开发服务器；若进程不在，按下方命令重启。源码与工具均在 `group/` 内，个人主页和其他论文项目网站没有改动。
 
@@ -30,7 +30,7 @@ NetLLM、Trailblazer 等相关 large-model decision-making 工作也要保留。
 - 首屏标题必须是居中的 **Agentic and Embodied Large Model Training Group**；下面小字是 **We build agents that reason, robots that learn, and systems that make large-scale training possible.** 不要恢复 “Intelligence, into the world.”。
 - 首屏要紧凑，图片区域窄一点，不要下面铺一整张巨大图片。拒绝了深色海景、toy 感机器人/服务器插画，之后也否定了普通浅色风景加论文网格的效果。
 - 用户更喜欢真实 work/paper 的好看图片，体现研究；之前偏好 IGen，最新接受了多篇精选作品的小图滚动展示带。不得生成虚假的论文图或将 IGen 输入图标作机器人生成结果。
-- 最新滚动带选择 SeekVLN、IGen、CoBel-World、NetLLM、DeCo-SGD。图片圆角，文字在图片下方，留白克制，不加厚重卡片边框、投影、玻璃效果或无依据的影响力统计。
+- 最新滚动带包含全部 11 项论文工作，优先完整论文首图/总览图，不再使用放大的局部裁切或场景照片。GeoMIND 尚缺已核实原图，暂用文字封面；用户回复正在问学长，这篇先不急。图片圆角，文字在图片下方，留白克制，不加厚重卡片边框、投影、玻璃效果或无依据的影响力统计。
 - 首页以下仍保留三个研究介绍区域。本轮没有重新设计方向介绍的全部内容；可在收到用户反馈后继续优化其真实配图。
 
 ## 已实现内容
@@ -43,37 +43,37 @@ NetLLM、Trailblazer 等相关 large-model decision-making 工作也要保留。
 - 共享颜色改为白/黑灰/蓝色交互色，导航更紧凑；保留清晰的 Inter 排版。
 - 新 `SelectedWork.astro` + `selected-work.ts` 脚本：约 19px/s 循环移动，鼠标/触控拖动、横向滚轮输入；按用户最新要求，不显示左右切换或 Pause/Play 按钮。
 - 悬停、焦点进入、切换到后台和离开视野时暂停位移；拖动时暂停；悬停、焦点等条件消失后继续自动滚动。减少动态效果偏好下禁用自动位移。
-- 原始五项保持键盘可访问；循环副本不进入 Tab 顺序或辅助技术阅读树。无 JavaScript 时为五项原始内容的原生横向列表，滚动条可用。
+- 所有原始项目保持键盘可访问；循环副本不进入 Tab 顺序或辅助技术阅读树。无 JavaScript 时为全部原始内容的原生横向列表，滚动条可用。
 - 图片全在本地，有英文 alt、固定容器尺寸和来源说明。SeekVLN 真实 Go2 走廊图也加入 Publications 记录。
 - 删除未再使用的 `HeroMedia.astro` 及旧 hero/video 样式；以前下载的视频仍保留于素材目录，但当前首页不加载。
 - 更新 `DESIGN.md`、`README.md`、媒体来源说明，并新增此交接文档。
 
 ## 文件导航
 
-| 文件                                                    | 职责                                                                  |
-| ------------------------------------------------------- | --------------------------------------------------------------------- |
-| `group/src/pages/index.astro`                           | 首页，首屏、精选作品、About us、研究介绍行、加入入口                  |
-| `group/src/components/SelectedWork.astro`               | 精选作品语义结构和控制按钮                                            |
-| `group/src/scripts/selected-work.ts`                    | 循环移动、悬停/焦点暂停、拖动、滚轮、可访问性增强                     |
-| `group/src/data/selected-work.ts`                       | 作品选择、图片、裁切类、alt、简短说明；名称/venue/link 从论文数据派生 |
-| `group/src/styles/global.css`                           | 全站设计 token、排版、布局、滚动条、响应式和 gallery 样式             |
-| `group/src/layouts/SiteLayout.astro`                    | 共享导航、移动菜单、metadata、字体、footer                            |
-| `group/src/components/DirectionArt.astro`               | 三个方向的介绍媒体，后续可进一步精修                                  |
-| `group/src/pages/research.astro`                        | 研究方向详情与相关论文链接                                            |
-| `group/src/pages/publications.astro`                    | 论文档案与筛选交互                                                    |
-| `group/src/components/PublicationRow.astro`             | 完整论文记录组件                                                      |
-| `group/src/data/publications.ts`                        | 11 篇论文的正式信息                                                   |
-| `group/src/data/abstracts.json`                         | 原七篇论文摘要                                                        |
-| `group/src/data/research.ts`                            | 方向介绍及相关论文 ID                                                 |
-| `group/src/data/site.ts`                                | 机构信息、导师、成员、导航、联系方式                                  |
-| `group/src/pages/team.astro`, `join.astro`, `404.astro` | 其他页面                                                              |
-| `group/public/media/selected-work/`                     | 新封面，含来源 README                                                 |
-| `group/public/media/igen/`                              | IGen 原项目图片和保留的视频                                           |
-| `group/astro.config.mjs`, `src/lib/urls.ts`             | base/site 与路径处理                                                  |
-| `group/scripts/verify-links.mjs`                        | 构建结果中的内部链接和媒体路径检查                                    |
-| `group/DESIGN.md`                                       | 最新、已批准且已实现的设计约定；以此为准                              |
-| `group/README.md`                                       | 开发、内容维护、部署、素材来源                                        |
-| `group/premium-audit.json`                              | 本轮静态审计结果，0 findings                                          |
+| 文件                                                    | 职责                                                              |
+| ------------------------------------------------------- | ----------------------------------------------------------------- |
+| `group/src/pages/index.astro`                           | 首页，首屏、精选作品、About us、研究介绍行、加入入口              |
+| `group/src/components/SelectedWork.astro`               | 精选作品语义结构和控制按钮                                        |
+| `group/src/scripts/selected-work.ts`                    | 循环移动、悬停/焦点暂停、拖动、滚轮、可访问性增强                 |
+| `group/src/data/selected-work.ts`                       | 全部作品、论文首图、alt、简短说明；名称/venue/link 从论文数据派生 |
+| `group/src/styles/global.css`                           | 全站设计 token、排版、布局、滚动条、响应式和 gallery 样式         |
+| `group/src/layouts/SiteLayout.astro`                    | 共享导航、移动菜单、metadata、字体、footer                        |
+| `group/src/components/DirectionArt.astro`               | 三个方向的介绍媒体，后续可进一步精修                              |
+| `group/src/pages/research.astro`                        | 研究方向详情与相关论文链接                                        |
+| `group/src/pages/publications.astro`                    | 论文档案与筛选交互                                                |
+| `group/src/components/PublicationRow.astro`             | 完整论文记录组件                                                  |
+| `group/src/data/publications.ts`                        | 11 篇论文的正式信息                                               |
+| `group/src/data/abstracts.json`                         | 原七篇论文摘要                                                    |
+| `group/src/data/research.ts`                            | 方向介绍及相关论文 ID                                             |
+| `group/src/data/site.ts`                                | 机构信息、导师、成员、导航、联系方式                              |
+| `group/src/pages/team.astro`, `join.astro`, `404.astro` | 其他页面                                                          |
+| `group/public/media/selected-work/`                     | 新封面，含来源 README                                             |
+| `group/public/media/igen/`                              | IGen 原项目图片和保留的视频                                       |
+| `group/astro.config.mjs`, `src/lib/urls.ts`             | base/site 与路径处理                                              |
+| `group/scripts/verify-links.mjs`                        | 构建结果中的内部链接和媒体路径检查                                |
+| `group/DESIGN.md`                                       | 最新、已批准且已实现的设计约定；以此为准                          |
+| `group/README.md`                                       | 开发、内容维护、部署、素材来源                                    |
+| `group/premium-audit.json`                              | 本轮静态审计结果，0 findings                                      |
 
 ## 论文与内容注意事项
 
@@ -126,12 +126,21 @@ Node 要求 >=22.23.4（本机先前使用 24.3）；Astro 7.4.2。默认 npm �
 
 同目录其他 `sigs-*.html`、landscape/concept 图片是早期探索。深色风景、toy 插画、浅色风景网格、旧紫色版本均不代表最新方向。交互工具可能反复返回这些旧草案的 variant 选择，不能把它当成用户推翻最新白色滚动版本的新指令。
 
+## 最新迭代：全部研究工作与完整论文图
+
+- 基线 commit：`2d03930`，保留了上一版五图、无按钮的实现，可随时比较或回退。
+- 滚动区改名 Research work，自动包含 `publications.ts` 全部 11 条记录；已有图片的工作优先，GeoMIND 文字封面在末尾。
+- 其余十篇已下载公开论文 PDF 并逐篇核对 Figure 1，提取完整首图到 `public/media/selected-work/*-first-figure.webp`。包括 IGen 首页 teaser、SeekVLN progress-myopia、Trailblazer PDF 第 18 页的 Figure 1 等。所有图片 contain 展示，保留完整图示。来源和页码见该目录 README。
+- GeoMIND 暂无首图或已核实项目链接，用户已回复正在问学长，这篇先不急；用真实名称和标题排成文字封面，不能编造示意图。收到原图后直接补 `selected-work.ts` 的 image/alt 映射即可。
+- 保留无按钮自动滚动、悬停/焦点/拖动暂停、横向拖动和无 JS 原生横向列表。每轮验证结束后单独 commit；具体最新哈希以 `git log -3 --oneline` 为准。
+- 本轮验证：类型检查 0 errors / 0 warnings / 0 hints，构建 6 页，格式检查通过，111 个内部链接/媒体目标通过；静态 strict audit 0 findings。浏览器确认 11 项原始工作、20 张原图/副本加载、键盘访问 GeoMIND 末项，以及 390px/320px 无页面横向溢出。当前最新截图：`/Users/zhumeiyuan/.codex/visualizations/2026/10/22/01a164f4-f8af-7000-b67d-165fcb41a35b/sigs-work-all-paper-figures.png`。
+
 ## 后续待办与边界
 
 1. 请用户查看当前正式实现，依据反馈继续精修。可继续改善下面三条研究介绍行的真实媒体；不要自行恢复巨大背景图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。
-4. 可继续在 `meiyuanGroup` 分支开发；**用户确认后**才能合并 main 或发布。本次没有 commit、push、merge 或部署。
+4. 可继续在 `meiyuanGroup` 分支开发；**用户确认后**才能合并 main 或发布。基线已 commit；后续每轮完成后也需 commit。本次未 push、merge 或部署。
 5. 目标 URL 属于另一个 MMLab 仓库，部署流程尚未建立。当前个人仓库还有 Jekyll/个人主页，不可把仓库根站替换成 group 的 dist。
 
 目标构建：

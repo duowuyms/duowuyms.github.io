@@ -1,58 +1,83 @@
 import { publications } from './publications';
 
-// Curated homepage presentation; titles, venues, and links belong to publications.ts.
-const covers = [
-  {
-    id: 'seekvln',
-    image: 'media/selected-work/seek-robot.webp',
-    crop: 'seek',
-    alt: 'A Unitree Go2 robot seeking navigation evidence in a hallway, from the SeekVLN project',
-    caption: 'Seeking evidence before the next move.',
+// Use complete Figure 1 artwork from the linked papers, never decorative crops.
+// Every publication participates; missing media gets an honest text cover.
+const paperFigures: Record<string, { image: string; alt: string }> = {
+  igen: {
+    image: 'media/selected-work/igen-first-figure.webp',
+    alt: 'Figure 1 from IGen, showing open-world images and generated robot observations and actions',
   },
-  {
-    id: 'igen',
-    image: 'media/igen/scene_1_tea.jpg',
-    crop: 'igen',
-    alt: 'An open-world tea-set input image used by IGen to generate robot learning environments',
-    caption: 'Robot learning from open-world images.',
+  seekvln: {
+    image: 'media/selected-work/seekvln-first-figure.webp',
+    alt: 'Figure 1 from SeekVLN, showing progress myopia and evidence-seeking navigation examples',
   },
-  {
-    id: 'cobel-world',
-    image: 'media/selected-work/cobel-cover.jpg',
-    crop: 'cobel',
-    alt: 'Detail of the overhead collaborative environment in the CoBel-World paper',
-    caption: 'Shared beliefs for better collaboration.',
+  evta0: {
+    image: 'media/selected-work/evta0-first-figure.webp',
+    alt: 'Complete eVTA0 architecture and success-probability reward training overview',
   },
-  {
-    id: 'netllm',
-    image: 'media/selected-work/netllm-cover.jpg',
-    crop: 'netllm',
-    alt: 'Detail of the multimodal adaptation architecture in the NetLLM paper',
-    caption: 'Large models for networking decisions.',
+  'deco-sgd': {
+    image: 'media/selected-work/deco-sgd-first-figure.webp',
+    alt: 'Figure 1 from DeCo-SGD, illustrating large-model training across wide-area networks',
   },
-  {
-    id: 'deco-sgd',
-    image: 'media/selected-work/deco-cover.jpg',
-    crop: 'deco',
-    alt: 'Detail of the cross-datacenter communication diagram in the DeCo-SGD paper',
-    caption: 'Efficient training across datacenters.',
+  mobilegen: {
+    image: 'media/selected-work/mobilegen-first-figure.webp',
+    alt: 'Complete MobileGen overview of capability profiling and difficulty-aware GUI trajectory generation',
   },
+  trailblazer: {
+    image: 'media/selected-work/trailblazer-first-figure.webp',
+    alt: 'Figure 1 from Trailblazer, introducing generalizable network policies and the evaluation scenarios',
+  },
+  'cobel-world': {
+    image: 'media/selected-work/cobel-world-first-figure.webp',
+    alt: 'Figure 1 from CoBel-World, comparing multi-agent communication protocols and collaborative belief reasoning',
+  },
+  'catp-llm': {
+    image: 'media/selected-work/catp-llm-first-figure.webp',
+    alt: 'Figure 1 from CATP-LLM, comparing tool plans and their performance-cost tradeoffs',
+  },
+  'decentralized-survey': {
+    image: 'media/selected-work/decentralized-survey-first-figure.webp',
+    alt: 'Overview figure from the survey Beyond a Single AI Cluster',
+  },
+  netllm: {
+    image: 'media/selected-work/netllm-first-figure.webp',
+    alt: 'Figure 1 from NetLLM, illustrating token-based answer generation in language models',
+  },
+};
+
+const captions: Record<string, string> = {
+  igen: 'Robot learning from open-world images.',
+  geomind: 'Spatial understanding for robotic manipulation.',
+  seekvln: 'Seeking evidence before the next move.',
+  evta0: 'Learning rewards from policy experience.',
+  'deco-sgd': 'Efficient training across datacenters.',
+  mobilegen: 'Training GUI agents at the right difficulty.',
+  trailblazer: 'Generalizable policies for network control.',
+  'cobel-world': 'Shared beliefs for better collaboration.',
+  'catp-llm': 'Better plans with lower tool costs.',
+  'decentralized-survey': 'Large-model training beyond one cluster.',
+  netllm: 'Large models for networking decisions.',
+};
+
+// Put works with supplied figures first; keep every record, including GeoMIND.
+const orderedPublications = [
+  ...publications.filter((paper) => paperFigures[paper.id]),
+  ...publications.filter((paper) => !paperFigures[paper.id]),
 ];
 
-export const selectedWork = covers.map((cover) => {
-  const publication = publications.find((paper) => paper.id === cover.id);
-  if (!publication)
-    throw new Error(`Unknown selected publication: ${cover.id}`);
-  return {
-    ...cover,
-    name: publication.name,
-    label:
-      publication.venue === 'Preprint'
-        ? String(publication.year)
-        : publication.venue,
-    href: (
-      publication.links.find((link) => link.label === 'Project') ||
-      publication.links[0]
-    )?.href,
-  };
-});
+export const selectedWork = orderedPublications.map((publication) => ({
+  id: publication.id,
+  name: publication.name,
+  title: publication.title,
+  image: paperFigures[publication.id]?.image,
+  alt: paperFigures[publication.id]?.alt,
+  caption: captions[publication.id] || publication.summary,
+  label:
+    publication.venue === 'Preprint'
+      ? String(publication.year)
+      : publication.venue,
+  href: (
+    publication.links.find((link) => link.label === 'Project') ||
+    publication.links[0]
+  )?.href,
+}));
