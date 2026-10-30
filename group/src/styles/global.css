@@ -18,6 +18,9 @@
   --scroll-thumb: #aaaab0;
   --scroll-hover: #85858b;
   --scroll-active: #0066cc;
+  --lattice: #a3abb8;
+  --horizon-blue: rgba(0, 102, 204, 0.11);
+  --horizon-violet: rgba(130, 49, 142, 0.06);
   --font-body: 'Inter Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-display: 'Inter Variable', 'Helvetica Neue', Arial, sans-serif;
 }
@@ -256,9 +259,73 @@ select {
 .menu-toggle {
   display: none;
 }
+/* Stage behind the hero and gallery: a horizon of light behind the title
+   and a dot lattice in perspective, a ground plane the work stands on. */
+.home-stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.home-stage::before,
+.home-stage::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+.home-stage::before {
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(
+      ellipse 62% 13% at 50% 47%,
+      var(--horizon-blue),
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 42% 24% at 50% 30%,
+      var(--horizon-violet),
+      transparent 72%
+    );
+}
+.home-stage::after {
+  left: -35%;
+  right: -35%;
+  top: 46%;
+  height: 90%;
+  z-index: -1;
+  background-image: radial-gradient(
+    circle,
+    var(--lattice) 1.7px,
+    transparent 2.3px
+  );
+  background-size: 28px 28px;
+  background-position: center top;
+  transform: perspective(900px) rotateX(55deg);
+  transform-origin: 50% 0;
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 10%, transparent 62%),
+    linear-gradient(
+      to right,
+      transparent 4%,
+      #000 30%,
+      #000 70%,
+      transparent 96%
+    );
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 10%, transparent 62%),
+    linear-gradient(
+      to right,
+      transparent 4%,
+      #000 30%,
+      #000 70%,
+      transparent 96%
+    );
+  mask-composite: intersect;
+}
 .home-hero {
   text-align: center;
-  padding-block: 48px 34px;
+  padding-block: 64px 56px;
 }
 .hero-affiliation {
   color: var(--muted);
@@ -521,7 +588,7 @@ select {
 }
 .direction-band {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
   min-height: clamp(390px, 37vw, 580px);
 }
 .direction-copy {
@@ -552,6 +619,9 @@ select {
 .direction-band.embodied {
   background: var(--soft-surface);
 }
+.direction-band.embodied {
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+}
 .embodied .direction-art {
   order: -1;
 }
@@ -571,7 +641,7 @@ select {
   justify-content: center;
   gap: 26px;
   min-width: 0;
-  padding: 55px 9%;
+  padding: 55px 7%;
 }
 .agents .direction-art {
   background: var(--night);
@@ -589,18 +659,10 @@ select {
   width: 100%;
   height: auto;
   border-radius: 14px;
-}
-.direction-art-figure img {
-  max-height: 380px;
+  max-height: 440px;
   padding: 14px;
   background: var(--white);
   object-fit: contain;
-}
-.direction-art-photo img {
-  aspect-ratio: 16 / 10;
-  max-height: 380px;
-  object-fit: cover;
-  object-position: 62% 72%;
 }
 .direction-art figcaption {
   margin-top: 12px;
@@ -1195,7 +1257,17 @@ select {
 }
 @media (max-width: 540px) {
   .home-hero {
-    padding-block: 36px 25px;
+    padding-block: 44px 40px;
+  }
+  .home-stage::after {
+    top: 52%;
+    background-image: radial-gradient(
+      circle,
+      var(--lattice) 1.1px,
+      transparent 1.6px
+    );
+    background-size: 18px 18px;
+    opacity: 0.7;
   }
   .hero-affiliation {
     font-size: 11px;
@@ -1270,7 +1342,8 @@ select {
   .section-divider .eyebrow {
     font-size: 10px;
   }
-  .direction-band {
+  .direction-band,
+  .direction-band.embodied {
     grid-template-columns: 1fr;
   }
   .direction-copy {
@@ -1404,6 +1477,10 @@ select {
   }
 }
 @media (forced-colors: active) {
+  .home-stage::before,
+  .home-stage::after {
+    display: none;
+  }
   :root,
   * {
     scrollbar-color: auto;

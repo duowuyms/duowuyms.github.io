@@ -145,7 +145,13 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 本轮验证：类型检查 0 errors / 0 warnings / 0 hints，格式检查通过，构建 6 页，`/group/` 与生产 base 各 127 个内部链接/媒体目标通过（注意：生产 base 验证时 `verify:links` 也需带 `GROUP_BASE_PATH`）。浏览器确认桌面三条行版式、375px 手机无横向溢出、三张图均加载、9 个论文锚点链接正确。
 
-1. 请用户查看当前正式实现，依据反馈继续精修。研究方向行已换成真实素材（见上），若用户偏好其他代表作图可在 `DirectionArt.astro` 的 media 映射中替换；不要自行恢复巨大背景图或概念插图。
+最新首页美化迭代（用户要求“加一点背景，更好看”，并换更好看的论文图）：
+
+- 首屏与 Research work 滚动带共用 `.home-stage` 背景：标题后方一道柔和的“地平线”光（蓝色为主，极淡清华紫），以及透视倾斜的点阵地面，滚动带的作品像站在这片地面上。静态无动画（滚动带仍是唯一动态），两侧和底部渐隐，手机端点更小更淡，forced-colors 下隐藏。没有使用大图、深色背景或浓重渐变。
+- 研究方向行换成从论文 PDF 提取的完整高清图（1800px WebP，`public/media/research-bands/`，来源与页码见其 README）：AI Agents = MobileGen Figure 1，Embodied = IGen Figure 6 真实机械臂实验，Distributed Training = Beyond a Single AI Cluster Figure 1。媒体列加宽到约 59%。SeekVLN 机器人照片、CoBel/DeCo 首图不再用于方向行，但文件保留。
+- 验证：类型检查 0 errors，构建 6 页，两种 base 各 127 个链接/媒体通过；浏览器检查桌面、320px 无横向溢出、三张图加载、手机端单列。
+
+1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 transform 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。
 4. 可继续在 `meiyuanGroup` 分支开发；**用户确认后**才能合并 main 或发布。基线已 commit；后续每轮完成后也需 commit。本次未 push、merge 或部署。

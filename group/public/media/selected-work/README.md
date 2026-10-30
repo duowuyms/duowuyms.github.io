@@ -17,7 +17,7 @@ All ten current gallery images are verified **Figure 1** artwork, rendered direc
 
 These page references describe the publicly available PDF versions inspected for this iteration; a future paper revision can move figures. Check the caption before replacing an asset.
 
-Homepage research bands reuse `cobel-world-first-figure.webp` (AI Agents), `seek-robot.webp` (Embodied Intelligence), and `deco-sgd-first-figure.webp` (Distributed Training).
+Homepage research bands use separate figures documented in `../research-bands/README.md`.
 
 The following previous covers are retained for reference; the current gallery no longer uses them:
 

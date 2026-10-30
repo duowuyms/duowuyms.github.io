@@ -9,26 +9,28 @@ import { url } from '../lib/urls';
 ---
 
 <SiteLayout>
-  <section class="home-hero page-gutter" aria-labelledby="group-title">
-    <p class="hero-affiliation">{site.affiliation}</p>
-    <h1 id="group-title">
-      <span>Agentic and Embodied</span>
-      <span>Large Model Training Group</span>
-    </h1>
-    <p class="hero-subtitle">
-      We build agents that reason, robots that learn, and systems that make
-      large-scale training possible.
-    </p>
-    <div class="hero-links">
-      <a href="#directions">
-        Explore our research <span aria-hidden="true">›</span>
-      </a>
-      <a href={url('publications/')}>
-        Publications <span aria-hidden="true">›</span>
-      </a>
-    </div>
-  </section>
-  <SelectedWork />
+  <div class="home-stage">
+    <section class="home-hero page-gutter" aria-labelledby="group-title">
+      <p class="hero-affiliation">{site.affiliation}</p>
+      <h1 id="group-title">
+        <span>Agentic and Embodied</span>
+        <span>Large Model Training Group</span>
+      </h1>
+      <p class="hero-subtitle">
+        We build agents that reason, robots that learn, and systems that make
+        large-scale training possible.
+      </p>
+      <div class="hero-links">
+        <a href="#directions">
+          Explore our research <span aria-hidden="true">›</span>
+        </a>
+        <a href={url('publications/')}>
+          Publications <span aria-hidden="true">›</span>
+        </a>
+      </div>
+    </section>
+    <SelectedWork />
+  </div>
   <AboutUs />
   <div class="section-divider page-gutter" id="directions">
     <h2 class="eyebrow">Three connected research directions</h2>

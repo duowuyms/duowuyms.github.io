@@ -22,6 +22,7 @@ colors:
   scroll-thumb: '#aaaab0'
   scroll-hover: '#85858b'
   scroll-active: '#0066cc'
+  lattice: '#a3abb8'
 typography:
   display:
     fontFamily: 'Inter Variable, Helvetica Neue, Arial, sans-serif'
@@ -57,7 +58,7 @@ Avoid dark landscape heroes, toy-like illustrations, large decorative background
 
 Fixed light appearance is intentional. White paper, near-black ink, gray secondary text, pale neutral surfaces, and blue links/focus are shared across all five pages. Research bands alternate pale neutral and charcoal surfaces. Dark sections use night-text/night-muted and light focus outlines.
 
-`src/styles/global.css` is the canonical runtime token source. Every frontmatter color except the `primary` alias maps directly to `--<key>` in `:root`; `primary` aliases `accent`. Font roles map to `--font-display` and `--font-body`. The document mirrors the runtime source; update both together. Component sizes map to their named selectors in that stylesheet. There is no generated token adapter.
+`src/styles/global.css` is the canonical runtime token source. The translucent `--horizon-blue` (`rgba(0, 102, 204, 0.11)`) and `--horizon-violet` (`rgba(130, 49, 142, 0.06)`) glow tokens live only in CSS. Every frontmatter color except the `primary` alias maps directly to `--<key>` in `:root`; `primary` aliases `accent`. Font roles map to `--font-display` and `--font-body`. The document mirrors the runtime source; update both together. Component sizes map to their named selectors in that stylesheet. There is no generated token adapter.
 
 ## Typography
 
@@ -67,7 +68,7 @@ The centered homepage group name uses weight 600, tight tracking (-0.045em), and
 
 ## Layout
 
-The shell is at most 1680px wide; gutters grow from 22px to 90px. Homepage order: centered group introduction → Research work → About us → three full-width research direction bands → recruitment invitation. Preserve the original group information. The research bands are analogous to HKU MMLab's campus introduction rows and link to the matching direction detail anchors. Each band's media column shows one real research image — CoBel-World Figure 1 (agents), the SeekVLN Unitree Go2 corridor photograph (embodied), and DeCo-SGD Figure 1 (training) — with a caption, followed by a ruled list of that direction's papers (name and venue) linking to their archive anchors. Paper figures sit on white with 14px rounding and are never cropped; the robot photograph is cropped to keep the robot in view. No conceptual diagrams or invented illustrations.
+The shell is at most 1680px wide; gutters grow from 22px to 90px. The centered introduction and the Research work gallery share one `.home-stage` background, the homepage's only decorative layer: a soft horizon of light behind the title (`--horizon-blue`, with a faint `--horizon-violet` nod to Tsinghua purple) and a `--lattice` dot grid tilted into perspective, a ground plane that recedes from the gallery toward the horizon. It is static (the gallery remains the only motion), masked to fade at the sides and bottom, quieter on phones, and hidden in forced-colors mode. Homepage order: centered group introduction → Research work → About us → three full-width research direction bands → recruitment invitation. Preserve the original group information. The research bands are analogous to HKU MMLab's campus introduction rows and link to the matching direction detail anchors. Each band's media column (the wider column, about 59%) shows one complete paper figure — MobileGen Figure 1 (agents), IGen Figure 6 real-world robot experiments (embodied), and Beyond a Single AI Cluster Figure 1 (training) — with a caption, followed by a ruled list of that direction's papers (name and venue) linking to their archive anchors. Figures sit on white with 14px rounding and are never cropped. No conceptual diagrams or invented illustrations.
 
 About us first identifies MMLab@SIGS, Tsinghua SIGS, and the faculty advisor, then connects pretrained-model capabilities with the group's three research directions. It preserves the old page's research scope rather than adopting the neighboring group's distinct research agenda. `AboutUs.astro` pairs the English introduction with an attributed, unaltered official photograph of the Information Building at the Shenzhen campus. The photograph sits beside the text, never behind it; on mobile it follows the introduction. The campus choice is the current design recommendation, pending user feedback. The old AI-stylized gathering pictures are candidates for a future team-life section, not the main About us identity image.
 

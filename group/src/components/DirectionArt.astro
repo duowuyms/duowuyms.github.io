@@ -7,43 +7,35 @@ interface Props {
 }
 const { direction } = Astro.props;
 
-// Real research media only: verified paper figures or the SeekVLN robot photo.
+// Complete figures extracted from the group's papers; see
+// public/media/research-bands/README.md for sources and pages.
 const media: Record<
   string,
-  {
-    image: string;
-    width: number;
-    height: number;
-    alt: string;
-    caption: string;
-    kind: 'figure' | 'photo';
-  }
+  { image: string; width: number; height: number; alt: string; caption: string }
 > = {
   agents: {
-    image: 'media/selected-work/cobel-world-first-figure.webp',
-    width: 1599,
-    height: 715,
-    alt: 'Figure 1 from CoBel-World, comparing multi-agent communication protocols with collaborative belief reasoning in a household task',
+    image: 'media/research-bands/mobilegen-overview-figure.webp',
+    width: 1800,
+    height: 987,
+    alt: 'MobileGen Figure 1: agent capability profiling on mobile apps, a target difficulty distribution, and difficulty-aware trajectory generation by explorer and supervisor agents',
     caption:
-      'CoBel-World, Figure 1 — agents collaborating through shared beliefs.',
-    kind: 'figure',
+      'MobileGen, Figure 1. Mobile GUI agents trained on tasks matched to their ability.',
   },
   embodied: {
-    image: 'media/selected-work/seek-robot.webp',
-    width: 1110,
-    height: 1024,
-    alt: 'A Unitree Go2 quadruped robot with onboard sensors navigating an indoor corridor',
-    caption: 'SeekVLN on a Unitree Go2 robot, navigating a real corridor.',
-    kind: 'photo',
+    image: 'media/research-bands/igen-real-world-figure.webp',
+    width: 1800,
+    height: 730,
+    alt: 'IGen Figure 6: captured images of a robot arm workspace, IGen-generated training episodes, and the trained policy watering flowers, hitting a box, and placing a toy in the real world',
+    caption:
+      'IGen, Figure 6. From one captured image to generated data to a real robot.',
   },
   training: {
-    image: 'media/selected-work/deco-sgd-first-figure.webp',
-    width: 732,
-    height: 336,
-    alt: 'Figure 1 from DeCo-SGD: large-model training across datacenters connected by wide-area networks',
+    image: 'media/research-bands/survey-paradigms-figure.webp',
+    width: 1800,
+    height: 674,
+    alt: 'Figure 1 from Beyond a Single AI Cluster: community-driven and organizational decentralized training across GPU servers and cloud clusters linked by LAN and WAN',
     caption:
-      'DeCo-SGD, Figure 1 — training across geographically distributed datacenters.',
-    kind: 'figure',
+      'Beyond a Single AI Cluster, Figure 1. Training across servers and clusters linked by LAN and WAN.',
   },
 };
 
@@ -56,7 +48,7 @@ const papers = ids
 ---
 
 {item && (
-  <div class:list={['direction-art', `direction-art-${item.kind}`]}>
+  <div class="direction-art">
     <figure>
       <img
         src={url(item.image)}
