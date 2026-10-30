@@ -1,0 +1,128 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import PublicationRow from '../components/PublicationRow.astro';
+import { publications, topics } from '../data/publications';
+const years = [...new Set(publications.map((p) => p.year))].sort(
+  (a, b) => b - a,
+);
+---
+
+<SiteLayout title="Publications" current="publications/">
+  <PageIntro
+    eyebrow="Research output"
+    title="Publications"
+    description="Our work on agents, embodied learning, large-model decision-making, and distributed training."
+  />
+  <div class="page-gutter publication-archive">
+    <form class="publication-filters" aria-label="Filter publications" hidden>
+      <div>
+        <label for="topic">Research area</label>
+        <select id="topic" name="topic">
+          <option value="all">All research areas</option>
+          {Object.entries(topics).map(([key, label]) => (
+            <option value={key}>{label}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label for="year">Year</label>
+        <select id="year" name="year">
+          <option value="all">All years</option>
+          {years.map((year) => (
+            <option value={year}>{year}</option>
+          ))}
+        </select>
+      </div>
+      <button class="filter-reset" type="reset">
+        Reset filters
+      </button>
+      <p class="results-count" role="status" aria-live="polite">
+        {publications.length} publications
+      </p>
+    </form>
+    <p class="publication-note">
+      * Equal contribution. Preprints are listed separately from accepted venue
+      labels.
+    </p>
+    <div class="publication-list">
+      {publications.map((publication) => (
+        <PublicationRow publication={publication} />
+      ))}
+    </div>
+    <div class="no-results" hidden>
+      <h2>No publications match these filters.</h2>
+      <p>Choose another year or research area, or reset the filters.</p>
+      <button class="text-link" type="button" data-reset-filters>
+        Reset filters <span aria-hidden="true">↗</span>
+      </button>
+    </div>
+  </div>
+  <script>
+    const form = document.querySelector<HTMLFormElement>(
+      '.publication-filters',
+    );
+    if (form) {
+      const topic = form.querySelector<HTMLSelectElement>('#topic')!;
+      const year = form.querySelector<HTMLSelectElement>('#year')!;
+      const rows = Array.from(
+        document.querySelectorAll<HTMLElement>('[data-publication]'),
+      );
+      const count = form.querySelector<HTMLElement>('.results-count')!;
+      const empty = document.querySelector<HTMLElement>('.no-results')!;
+      const valid = (select: HTMLSelectElement, value: string | null) =>
+        Array.from(select.options).some((o) => o.value === value)
+          ? value!
+          : 'all';
+      function apply(persist = false) {
+        let total = 0;
+        rows.forEach((row) => {
+          row.hidden =
+            (topic.value !== 'all' && row.dataset.topic !== topic.value) ||
+            (year.value !== 'all' && row.dataset.year !== year.value);
+          if (!row.hidden) total++;
+        });
+        count.textContent = `${total} ${total === 1 ? 'publication' : 'publications'}`;
+        empty.hidden = total !== 0;
+        if (persist) {
+          const state = new URL(window.location.href);
+          for (const select of [topic, year]) {
+            if (select.value === 'all') state.searchParams.delete(select.name);
+            else state.searchParams.set(select.name, select.value);
+          }
+          state.hash = '';
+          window.history.replaceState(null, '', state);
+        }
+      }
+      function restore() {
+        const state = new URL(window.location.href);
+        topic.value = valid(topic, state.searchParams.get('topic'));
+        year.value = valid(year, state.searchParams.get('year'));
+        // A link to a specific paper always makes that paper visible.
+        if (state.hash && rows.some((row) => `#${row.id}` === state.hash)) {
+          topic.value = 'all';
+          year.value = 'all';
+        }
+        apply();
+      }
+      function reset() {
+        topic.value = 'all';
+        year.value = 'all';
+        apply(true);
+      }
+      form.hidden = false;
+      form.addEventListener('submit', (event) => event.preventDefault());
+      form.addEventListener('change', () => apply(true));
+      form.addEventListener('reset', (event) => {
+        event.preventDefault();
+        reset();
+      });
+      document
+        .querySelector('[data-reset-filters]')
+        ?.addEventListener('click', reset);
+      window.addEventListener('popstate', restore);
+      window.addEventListener('hashchange', restore);
+      restore();
+    }
+  </script>
+</SiteLayout>

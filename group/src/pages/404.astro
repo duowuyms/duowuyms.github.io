@@ -1,0 +1,17 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { url } from '../lib/urls';
+---
+
+<SiteLayout title="Page not found" current="404">
+  <PageIntro
+    eyebrow="404"
+    title="Page not found."
+    description="This address does not point to a page in our group website."
+  >
+    <a class="text-link" href={url()}>
+      Return to About us <span aria-hidden="true">↗</span>
+    </a>
+  </PageIntro>
+</SiteLayout>

@@ -1,0 +1,74 @@
+---
+import { url } from '../lib/urls';
+interface Props {
+  direction: string;
+}
+const { direction } = Astro.props;
+---
+
+{direction === 'agents' && (
+  <div
+    class="direction-art agent-art"
+    role="img"
+    aria-label="Agent research themes: planning, tool use, and multi-agent collaboration"
+  >
+    <span class="art-label">From intent to action</span>
+    <div class="agent-steps">
+      <>
+        <div>
+          Plan.<small>Understand the goal</small>
+        </div>
+        <div>
+          Use tools.<small>Act on the world</small>
+        </div>
+        <div>
+          Collaborate.<small>Reason together</small>
+        </div>
+      </>
+    </div>
+    <span class="art-footnote">
+      Tool use · GUI interaction · Multi-agent systems
+    </span>
+  </div>
+)}
+{direction === 'embodied' && (
+  <figure class="direction-art embodied-art">
+    <img
+      src={url('media/igen/scene_1_tea.jpg')}
+      width="410"
+      height="280"
+      alt="A tea-set scene used by IGen to generate robot learning environments"
+      loading="lazy"
+    />
+    <figcaption>Open-world scene · IGen</figcaption>
+  </figure>
+)}
+{direction === 'training' && (
+  <div
+    class="direction-art system-art"
+    role="img"
+    aria-label="Conceptual illustration of three connected compute clusters, representing cross-datacenter training"
+  >
+    <span class="art-label">Compute, connected.</span>
+    <div class="clusters">
+      {['A', 'B', 'C'].map((label) => (
+        <>
+          <div class="cluster">
+            <div class="compute-grid">
+              {Array.from({ length: 6 }, () => (
+                <span />
+              ))}
+            </div>
+            <small>Cluster {label}</small>
+          </div>
+          {label !== 'C' && <span class="cluster-link" />}
+        </>
+      ))}
+    </div>
+    <span class="art-footnote">
+      Cross-datacenter training
+      <br />
+      Communication optimization & compression
+    </span>
+  </div>
+)}

@@ -1,0 +1,46 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { team, site } from '../data/site';
+import { url } from '../lib/urls';
+---
+
+<SiteLayout title="Team" current="team/">
+  <PageIntro
+    eyebrow="The people behind the research"
+    title="Our team."
+    description={`${site.name} Research Group at ${site.affiliation}.`}
+  />
+  <div class="team-directory page-gutter">
+    {team.map((group) => (
+      <section class="people-group">
+        <>
+          <h2 class="section-label">{group.label}</h2>
+          <ul>
+            {group.people.map((person) => (
+              <li>
+                {person.url ? (
+                  <a
+                    href={person.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {person.name} <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <span>{person.name}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </>
+      </section>
+    ))}
+  </div>
+  <section class="team-invitation page-gutter">
+    <h2 class="display">Your next chapter?</h2>
+    <a class="text-link" href={url('join/')}>
+      Join our group <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+</SiteLayout>

@@ -1,0 +1,69 @@
+---
+import type { Publication } from '../data/publications';
+import abstracts from '../data/abstracts.json';
+import { topics } from '../data/publications';
+import { url } from '../lib/urls';
+interface Props {
+  publication: Publication;
+}
+const { publication: p } = Astro.props;
+const abstract = p.abstract || abstracts[p.id as keyof typeof abstracts];
+---
+
+<article
+  class="publication-row"
+  id={p.id}
+  data-publication
+  data-topic={p.topic}
+  data-year={p.year}
+>
+  <div class="publication-meta">
+    <span class="eyebrow">{p.venue}</span>
+    <span>{topics[p.topic]}</span>
+  </div>
+  <div class="publication-content">
+    <h2>{p.title}</h2>
+    <p class="authors">{p.authors}</p>
+    <p class="publication-summary">{p.summary}</p>
+    <div class="publication-links">
+      {p.links.map((link) => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer">
+          {link.label}{' '}
+          <>
+            <span aria-hidden="true">↗</span>
+            <span class="sr-only">: {p.name}</span>
+          </>
+        </a>
+      ))}
+    </div>
+    {abstract && (
+      <details class="abstract">
+        <>
+          <summary>Abstract</summary>
+          <p>{abstract}</p>
+        </>
+      </details>
+    )}
+  </div>
+  {p.image ? (
+    <a
+      class="publication-image"
+      href={p.links[0]?.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`View ${p.name} paper`}
+    >
+      <img
+        src={url(p.image)}
+        alt={`${p.name} research overview`}
+        loading="lazy"
+        width="640"
+        height="400"
+      />
+    </a>
+  ) : (
+    <div class="publication-monogram" aria-hidden="true">
+      {p.name}
+    </div>
+  )}
+</article>

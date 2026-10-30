@@ -1,0 +1,55 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { site, contacts } from '../data/site';
+---
+
+<SiteLayout title="Join us" current="join/">
+  <PageIntro
+    eyebrow="Join us"
+    title="Let’s explore what’s possible."
+    description="Interested in agents, embodied intelligence, or the systems that make large-scale learning possible? We welcome prospective interns, master’s students, and PhD students."
+  />
+  <div class="contact-sections page-gutter">
+    <section>
+      <p class="eyebrow">Opportunities</p>
+      <h2 class="display">Apply to the group</h2>
+      <p>
+        If you are interested in a research internship, a master’s program
+        through the entrance examination or recommendation, or a PhD, please
+        visit our laboratory’s admissions page.
+      </p>
+      <p>
+        Complete the application form and select our research group as your
+        first preference.
+      </p>
+      <a
+        class="text-link"
+        href={site.admissions}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Admissions & application <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+    <section>
+      <p class="eyebrow">Questions & collaboration</p>
+      <h2 class="display">Get in touch</h2>
+      <p>
+        For questions about admissions, research directions, or our group,
+        contact:
+      </p>
+      <div class="contact-list">
+        {contacts.map((contact) => (
+          <div>
+            <>
+              <p class="contact-area">{contact.area}</p>
+              <h3>{contact.name}</h3>
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            </>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</SiteLayout>

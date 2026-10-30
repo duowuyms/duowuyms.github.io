@@ -1,0 +1,103 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import SelectedWork from '../components/SelectedWork.astro';
+import DirectionArt from '../components/DirectionArt.astro';
+import { site } from '../data/site';
+import { directions } from '../data/research';
+import { url } from '../lib/urls';
+---
+
+<SiteLayout>
+  <section class="home-hero page-gutter" aria-labelledby="group-title">
+    <p class="hero-affiliation">{site.affiliation}</p>
+    <h1 id="group-title">
+      <span>Agentic and Embodied</span>
+      <span>Large Model Training Group</span>
+    </h1>
+    <p class="hero-subtitle">
+      We build agents that reason, robots that learn, and systems that make
+      large-scale training possible.
+    </p>
+    <div class="hero-links">
+      <a href="#directions">
+        Explore our research <span aria-hidden="true">›</span>
+      </a>
+      <a href={url('publications/')}>
+        Publications <span aria-hidden="true">›</span>
+      </a>
+    </div>
+  </section>
+  <SelectedWork />
+  <section
+    class="about-intro page-gutter"
+    id="about"
+    aria-labelledby="about-title"
+  >
+    <h2 id="about-title" class="section-label">
+      About us
+    </h2>
+    <div>
+      <p class="mission">{site.mission}</p>
+      <p class="about-copy">
+        Large models bring together knowledge from diverse domains with powerful
+        capabilities in understanding, reasoning, and planning. We study how to
+        turn these capabilities into effective decisions in dynamic
+        environments.
+      </p>
+      <p class="about-copy">
+        Based at {site.affiliation} and advised by{' '}
+        <a href={site.advisor.url} target="_blank" rel="noopener noreferrer">
+          {site.advisor.name}
+        </a>
+        , our group connects AI agents, embodied intelligence, and distributed
+        training.
+      </p>
+    </div>
+  </section>
+  <div class="section-divider page-gutter" id="directions">
+    <h2 class="eyebrow">Three connected research directions</h2>
+    <span>Reason · Interact · Scale</span>
+  </div>
+  {directions.map((direction) => (
+    <section
+      class:list={['direction-band', direction.id]}
+      aria-labelledby={`${direction.id}-heading`}
+    >
+      <div class="direction-copy">
+        <>
+          <p class="eyebrow">{direction.verb}</p>
+          <h2 id={`${direction.id}-heading`} class="display">
+            {direction.headline.map((line, i) => (
+              <>
+                {i > 0 && <br />}
+                {line}
+              </>
+            ))}
+          </h2>
+          <p>{direction.summary}</p>
+          <a class="text-link" href={url(`research/#${direction.id}`)}>
+            Explore{' '}
+            {direction.id === 'training'
+              ? 'Distributed Training'
+              : direction.name}{' '}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </>
+      </div>
+      <DirectionArt direction={direction.id} />
+    </section>
+  ))}
+  <section class="home-invitation page-gutter">
+    <div>
+      <p class="eyebrow">Join our group</p>
+      <h2 class="display">
+        Build what comes next,
+        <br />
+        with us.
+      </h2>
+    </div>
+    <a class="text-link" href={url('join/')}>
+      Opportunities & contact <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+</SiteLayout>

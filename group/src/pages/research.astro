@@ -1,0 +1,91 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { directions } from '../data/research';
+import { publications } from '../data/publications';
+import { url } from '../lib/urls';
+---
+
+<SiteLayout title="Research Directions" current="research/">
+  <PageIntro
+    eyebrow="Our research"
+    title="Reason. Interact. Scale."
+    description="We investigate how large models can make decisions in open-world environments, learn through physical interaction, and train efficiently across distributed resources."
+  >
+    <nav class="direction-index" aria-label="Research directions">
+      {directions.map((d) => (
+        <a href={`#${d.id}`}>
+          {d.name} <span aria-hidden="true">↓</span>
+        </a>
+      ))}
+    </nav>
+  </PageIntro>
+  <div class="page-gutter">
+    {directions.map((direction) => (
+      <section
+        class="research-detail"
+        id={direction.id}
+        aria-labelledby={`${direction.id}-title`}
+      >
+        <header>
+          <>
+            <p class="eyebrow">{direction.verb}</p>
+            <h2 class="display" id={`${direction.id}-title`}>
+              {direction.headline.join(' ')}
+            </h2>
+          </>
+        </header>
+        <div class="research-body">
+          <>
+            <p class="research-description">{direction.description}</p>
+            <ul class="topic-list">
+              {direction.topics.map((topic) => (
+                <li>{topic}</li>
+              ))}
+            </ul>
+            <h3 class="section-label">Questions we explore</h3>
+            <ul class="research-questions">
+              {direction.questions.map((q) => (
+                <li>{q}</li>
+              ))}
+            </ul>
+            <h3 class="section-label">Related publications</h3>
+            <div class="related-work">
+              {direction.publications.map((id) => {
+                const p = publications.find((p) => p.id === id)!;
+                return (
+                  <a href={url(`publications/#${p.id}`)}>
+                    <span>
+                      {p.name}
+                      <small>{p.summary}</small>
+                    </span>
+                    <span class="related-venue">
+                      {p.venue} <span aria-hidden="true">↗</span>
+                    </span>
+                  </a>
+                );
+              })}
+            </div>
+          </>
+        </div>
+      </section>
+    ))}
+    <section class="research-connection">
+      <p class="eyebrow">Connecting models and systems</p>
+      <h2 class="display">Large models as decision-makers.</h2>
+      <p>
+        Our related work also explores how large models can act as generalizable
+        policies for network control, connecting model reasoning with practical
+        systems.
+      </p>
+      <div class="connection-links">
+        <a class="text-link" href={url('publications/#netllm')}>
+          NetLLM · SIGCOMM 2024 <span aria-hidden="true">↗</span>
+        </a>
+        <a class="text-link" href={url('publications/#trailblazer')}>
+          Trailblazer <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </div>
+</SiteLayout>

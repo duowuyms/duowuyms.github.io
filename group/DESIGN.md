@@ -1,0 +1,100 @@
+---
+version: alpha
+name: MMLab at SIGS
+description: An English research group website with a compact centered introduction and a moving gallery of real research.
+colors:
+  paper: '#ffffff'
+  ink: '#1d1d1f'
+  accent: '#0066cc'
+  primary: '#0066cc'
+  accent-hover: '#004f9e'
+  surface: '#f5f5f7'
+  muted: '#6e6e73'
+  rule: '#e8e8ed'
+  white: '#ffffff'
+  night: '#242426'
+  night-text: '#f5f5f7'
+  night-muted: '#c8c8cd'
+  soft-surface: '#f0f1f2'
+  diagram: '#f5f5f7'
+  diagram-rule: '#b8b8be'
+  dark-rule: '#555559'
+  scroll-thumb: '#aaaab0'
+  scroll-hover: '#85858b'
+  scroll-active: '#0066cc'
+typography:
+  display:
+    fontFamily: 'Inter Variable, Helvetica Neue, Arial, sans-serif'
+  body:
+    fontFamily: 'Inter Variable, Helvetica Neue, Arial, sans-serif'
+rounded:
+  DEFAULT: '0px'
+  work-image: '14px'
+spacing:
+  page-max: '1680px'
+  mobile-gutter: '22px'
+  desktop-gutter-max: '90px'
+components:
+  header:
+    height: '76px'
+    backgroundColor: '{colors.paper}'
+    textColor: '{colors.ink}'
+  text-link:
+    height: '44px'
+---
+
+# MMLab at SIGS design
+
+## Overview
+
+An English research group website for prospective students, researchers, and collaborators. Readers should understand the group and its three directions, then find publications, people, or application information.
+
+The user's reference is HKU MMLab, especially its Inter typography and broad introductory bands. The latest approved homepage replaces the earlier purple, two-column slogan and oversized IGen image pair with a compact centered group name and a narrow moving research gallery. The visual reference is Apple's restrained white, black, gray, and occasional blue links. Purple is no longer required. This is a content site with five document routes, not application-style tabs.
+
+Avoid dark landscape heroes, toy-like illustrations, large decorative backgrounds, heavy gradients, invented impact statistics, and a single-paper homepage. The moving gallery is the signature element; everything around it stays quiet.
+
+## Colors
+
+Fixed light appearance is intentional. White paper, near-black ink, gray secondary text, pale neutral surfaces, and blue links/focus are shared across all five pages. Research bands alternate pale neutral and charcoal surfaces. Dark sections use night-text/night-muted and light focus outlines.
+
+`src/styles/global.css` is the canonical runtime token source. Every frontmatter color except the `primary` alias maps directly to `--<key>` in `:root`; `primary` aliases `accent`. Font roles map to `--font-display` and `--font-body`. The document mirrors the runtime source; update both together. Component sizes map to their named selectors in that stylesheet. There is no generated token adapter.
+
+## Typography
+
+Use standard Inter, self-hosted through `@fontsource-variable/inter`, as explicitly requested after inspecting https://mmlab.hk/. Do not revert to Inter Tight, Manrope, or Source Sans 3.
+
+The centered homepage group name uses weight 600, tight tracking (-0.045em), and 1.1 line height, in two lines on desktop with natural wrapping on narrow phones. Its exact text is “Agentic and Embodied Large Model Training Group”. The smaller centered subtitle is “We build agents that reason, robots that learn, and systems that make large-scale training possible.” Secondary-page display headings remain 700 with normal tracking; body is 400, navigation 500, and paper titles 600. Long paper titles and author lists wrap in full. Content and accessible labels are English.
+
+## Layout
+
+The shell is at most 1680px wide; gutters grow from 22px to 90px. Homepage order: centered group introduction → Selected work → About us → three full-width research direction bands → recruitment invitation. Preserve the original group information. The research bands are analogous to HKU MMLab's campus introduction rows and link to the matching direction detail anchors.
+
+The work gallery has five curated covers: SeekVLN, IGen, CoBel-World, NetLLM, and DeCo-SGD. Images are 167px high on desktop and 155px on phones, with copy below, without card chrome or shadows. Crops show real research imagery; label IGen input images accurately. Image dimensions and containers reserve geometry.
+
+Breakpoints: 1100px adapts columns, 800px activates the mobile menu, and 540px stacks research bands and paper records. At 320px the page has no horizontal overflow. The document owns vertical scrolling. Only the unenhanced gallery uses a native, visible horizontal scrollbar; its enhanced version is a transformed carousel without a separate control row. Do not hide the page's scrollbar. Global scrollbar tokens and forced-colors behavior apply to all native scrolling surfaces.
+
+## Elevation & Depth
+
+Use whitespace, scale, tonal blocks, and quiet rules. No card shadows, glass effects, or decorative borders around each content group.
+
+## Shapes
+
+Rectangular reading sections with gently rounded gallery images. Rounded media does not imply rounded containers around all content.
+
+## Components
+
+- `SiteLayout.astro`: shared metadata, navigation, mobile menu, footer, and self-hosted font.
+- `SelectedWork.astro`: semantic work markup; `src/data/selected-work.ts` owns curation/crops and derives paper names, venues, and links from `publications.ts`.
+- `src/scripts/selected-work.ts`: carousel enhancement, about 19px/second movement, pointer drag, and horizontal wheel input. The user explicitly requested no previous/next or Play/Pause buttons; there is no control/status row. Hover/focus, active dragging, hidden document, and out-of-view media suspend movement; it resumes when those conditions clear. Reduced motion disables automatic movement. All originals remain keyboard accessible; loop copies are excluded from the tab order and accessibility tree. Without JavaScript all five originals remain available with native horizontal scrolling.
+- `PageIntro.astro`, `PublicationRow.astro`, and `DirectionArt.astro`: shared secondary headings, complete paper records, and direction-band media.
+
+The archive renders all eleven papers without JavaScript; native year/topic selects preserve URL filters and provide count/no-results/reset states. Native details/summary exposes original abstracts. The operating system owns select popups. Missing paper links are omitted, not fabricated. Navigation is visible without JavaScript; the enhanced mobile menu supports Escape and focus return.
+
+## Do's and Don'ts
+
+- Preserve original research, roster, and recruitment information while translating and adding work.
+- Use actual research media with provenance; never fabricate paper diagrams or imply input images are robot outputs.
+- Keep all internal URLs and media base-path aware.
+- Keep NetLLM and Trailblazer visible as related large-model decision-making research.
+- Do not add members solely from author lists.
+- Work on `meiyuanGroup`; merge to main and deploy only after user approval.

@@ -1,0 +1,118 @@
+---
+import { navigation, site } from '../data/site';
+import { url } from '../lib/urls';
+import '../styles/global.css';
+import '@fontsource-variable/inter/wght.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  current?: string;
+}
+const { title, description = site.mission, current = '' } = Astro.props;
+const pageTitle = title
+  ? `${title} — ${site.shortName}`
+  : `${site.name} — ${site.shortName}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" />
+    <title>{pageTitle}</title>
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta
+      property="og:image"
+      content={new URL(url('media/selected-work/seek-robot.webp'), Astro.site)}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <div class="site-shell">
+      <header class="site-header page-gutter">
+        <a class="brand" href={url()} aria-label="MMLab at SIGS home">
+          MMLab <span>@ SIGS</span>
+          <small>Tsinghua University</small>
+        </a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="main-nav"
+          hidden
+        >
+          Menu <span aria-hidden="true">+</span>
+        </button>
+        <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+          {navigation.map((item) => (
+            <a
+              href={url(item.path)}
+              aria-current={current === item.path ? 'page' : undefined}
+            >
+              {item.label}
+              {item.path === 'join/' && <span aria-hidden="true"> ↗</span>}
+            </a>
+          ))}
+        </nav>
+      </header>
+      <main id="main">
+        <slot />
+      </main>
+      <footer class="site-footer page-gutter">
+        <div>
+          <a class="footer-brand" href={url()}>
+            MMLab @ SIGS
+          </a>
+          <p>
+            {site.name}
+            <br />
+            Research Group · Tsinghua University
+          </p>
+        </div>
+        <div class="footer-right">
+          <p>Shenzhen, China</p>
+          <a href={url('join/')}>
+            Get in touch <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </footer>
+    </div>
+    <script>
+      const header = document.querySelector<HTMLElement>('.site-header');
+      const menu = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector<HTMLElement>('#main-nav');
+      if (header && menu && nav) {
+        header.classList.add('enhanced');
+        menu.hidden = false;
+        const close = () => menu.setAttribute('aria-expanded', 'false');
+        menu.addEventListener('click', () =>
+          menu.setAttribute(
+            'aria-expanded',
+            String(menu.getAttribute('aria-expanded') !== 'true'),
+          ),
+        );
+        nav.addEventListener('click', close);
+        header.addEventListener('keydown', (event) => {
+          if (
+            event.key === 'Escape' &&
+            menu.getAttribute('aria-expanded') === 'true'
+          ) {
+            close();
+            menu.focus();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

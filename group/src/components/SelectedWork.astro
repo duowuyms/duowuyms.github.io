@@ -1,0 +1,67 @@
+---
+import { selectedWork } from '../data/selected-work';
+import { url } from '../lib/urls';
+---
+
+<selected-work
+  class="selected-work"
+  aria-labelledby="selected-work-title"
+  role="region"
+>
+  <div class="work-heading page-gutter">
+    <h2 id="selected-work-title">Selected work</h2>
+    <a href={url('publications/')}>
+      View all publications <span aria-hidden="true">›</span>
+    </a>
+  </div>
+  <div
+    class="work-viewport page-gutter"
+    role="group"
+    aria-label="Selected work carousel"
+    aria-roledescription="carousel"
+  >
+    <div class="work-track">
+      {selectedWork.map((work, index) => (
+        <article
+          class="work-card"
+          data-name={work.name}
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`${index + 1} of ${selectedWork.length}: ${work.name}`}
+        >
+          <a
+            href={work.href || url(`publications/#${work.id}`)}
+            target={work.href ? '_blank' : undefined}
+            rel={work.href ? 'noopener noreferrer' : undefined}
+            draggable="false"
+          >
+            <div class:list={['work-media', `work-media-${work.crop}`]}>
+              <img
+                src={url(work.image)}
+                alt={work.alt}
+                width="410"
+                height="280"
+                loading={index < 2 ? 'eager' : 'lazy'}
+                decoding="async"
+                draggable="false"
+              />
+            </div>
+            <div class="work-copy">
+              <div class="work-title">
+                <h3>{work.name}</h3>
+                <span>
+                  {work.label} <span aria-hidden="true">↗</span>
+                </span>
+              </div>
+              <p>{work.caption}</p>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</selected-work>
+
+<script>
+  import '../scripts/selected-work';
+</script>
