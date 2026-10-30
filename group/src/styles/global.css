@@ -19,6 +19,7 @@
   --scroll-hover: #85858b;
   --scroll-active: #0066cc;
   --lattice: #a3abb8;
+  --header-height: 76px;
   --horizon-blue: rgba(0, 102, 204, 0.11);
   --horizon-violet: rgba(130, 49, 142, 0.06);
   --font-body: 'Inter Variable', 'Helvetica Neue', Arial, sans-serif;
@@ -30,7 +31,7 @@
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 24px;
+  scroll-padding-top: calc(var(--header-height) + 24px);
   scrollbar-gutter: stable;
   scrollbar-color: var(--scroll-thumb) var(--paper);
   scrollbar-width: thin;
@@ -148,7 +149,7 @@ select {
   position: absolute;
   top: 12px;
   left: 12px;
-  z-index: 10;
+  z-index: 30;
   padding: 12px 20px;
   background: var(--accent);
   color: var(--white);
@@ -204,7 +205,12 @@ select {
 .text-link:hover > span[aria-hidden] {
   transform: translate(2px, -2px);
 }
+/* The header stays visible while scrolling; anchors offset by its height. */
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--paper);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1091,11 +1097,18 @@ select {
   }
 }
 @media (max-width: 800px) {
+  :root {
+    --header-height: 100px;
+  }
   .site-header {
     flex-wrap: wrap;
     min-height: 76px;
     gap: 18px;
     padding-block: 22px;
+  }
+  /* Without the menu script the full nav is visible; don't pin that. */
+  .site-header:not(.enhanced) {
+    position: static;
   }
   .main-nav {
     width: 100%;

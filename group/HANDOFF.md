@@ -154,6 +154,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新结构调整：用户认为首页研究介绍 + Publications 已足够，删除独立的 Research Directions 页面（`research.astro`）。导航仍保留 “Research Directions” 五个栏目之一，但跳到首页 `#directions`；三条研究行加 `id`（agents/embodied/training），About us 内链指向这些锚点；每行链接改为 “See … papers”，打开 `publications/?topic=<id>` 筛选。原页面独有的 “Large models as decision-makers”（NetLLM、Trailblazer）移到首页研究行之后。原页面的长描述和 “Questions we explore” 已从 `research.ts` 删除（git 历史可找回）。现为 4 个内容页 + 404，`verify-links` 下限改为 5 页；两种 base 各 104 个链接/媒体通过。
 
+最新：用户要求滚动时顶部导航一直显示。`.site-header` 改为 sticky（白底、底部细线、无阴影，z-index 20，跳转链接 z-index 30）；`--header-height`（桌面 76px，≤800px 为 100px）用于 `scroll-padding-top`，锚点不会被遮挡。手机端无 JS 时不固定（完整导航太高）。已在桌面和 375px 检查：滚动后导航固定在顶部，`#embodied`、`#seekvln` 锚点落在导航下方，手机菜单在固定导航内展开/关闭正常。
+
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 transform 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。
