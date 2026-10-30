@@ -141,7 +141,11 @@ Node 要求 >=22.23.4（本机先前使用 24.3）；Astro 7.4.2。默认 npm �
 
 About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构建 6 页，116 个内部链接/媒体目标通过，格式与 diff 检查通过。浏览器确认原图 799×533 正常加载、研究链接进入正确锚点、390px/320px 没有页面横向溢出；桌面/手机版式已查看。截图：`/Users/zhumeiyuan/.codex/visualizations/2026/10/22/01a164f4-f8af-7000-b67d-165fcb41a35b/sigs-about-campus.png`。
 
-1. 请用户查看当前正式实现，依据反馈继续精修。可继续改善下面三条研究介绍行的真实媒体；不要自行恢复巨大背景图。
+最新研究方向行迭代：三条研究介绍行的右侧媒体原为概念插图（“Plan / Use tools / Collaborate” 文字板、蓝色 Cluster A/B/C 方块图）和 IGen 茶具输入图，已全部换成真实研究素材：AI Agents 用 CoBel-World Figure 1，Embodied 用 SeekVLN 的真实 Unitree Go2 走廊照片，Distributed Training 用 DeCo-SGD（JSAC）Figure 1。论文图白底、14px 圆角、contain 不裁切；机器人照片 cover 裁切并保留机器人。图下有说明文字，再接该方向论文列表（名称 + venue，链接到 `publications/#<id>` 锚点），数据来自 `research.ts` 与 `publications.ts`，新增论文 ID 后自动出现。旧的 agent-art/system-art/cluster 样式已删除。
+
+本轮验证：类型检查 0 errors / 0 warnings / 0 hints，格式检查通过，构建 6 页，`/group/` 与生产 base 各 127 个内部链接/媒体目标通过（注意：生产 base 验证时 `verify:links` 也需带 `GROUP_BASE_PATH`）。浏览器确认桌面三条行版式、375px 手机无横向溢出、三张图均加载、9 个论文锚点链接正确。
+
+1. 请用户查看当前正式实现，依据反馈继续精修。研究方向行已换成真实素材（见上），若用户偏好其他代表作图可在 `DirectionArt.astro` 的 media 映射中替换；不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。
 4. 可继续在 `meiyuanGroup` 分支开发；**用户确认后**才能合并 main 或发布。基线已 commit；后续每轮完成后也需 commit。本次未 push、merge 或部署。

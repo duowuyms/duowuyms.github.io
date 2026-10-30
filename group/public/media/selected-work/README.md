@@ -17,6 +17,8 @@ All ten current gallery images are verified **Figure 1** artwork, rendered direc
 
 These page references describe the publicly available PDF versions inspected for this iteration; a future paper revision can move figures. Check the caption before replacing an asset.
 
+Homepage research bands reuse `cobel-world-first-figure.webp` (AI Agents), `seek-robot.webp` (Embodied Intelligence), and `deco-sgd-first-figure.webp` (Distributed Training).
+
 The following previous covers are retained for reference; the current gallery no longer uses them:
 
 - `seek-robot.webp`: original `assets/robot-seek.webp` from https://github.com/ZhiminWangSS/seekvln-project, linked from https://zhiminwangss.github.io/seekvln-project/. Real Unitree Go2 navigation scene.
@@ -24,4 +26,4 @@ The following previous covers are retained for reference; the current gallery no
 - `netllm-cover.jpg`: resized JPEG from the existing `group/images/netllm.png`; CSS shows part of the multimodal architecture.
 - `deco-cover.jpg`: resized JPEG from the existing `group/images/deco.png`; CSS shows part of the cross-datacenter training diagram.
 
-The previous IGen card used `../igen/scene_1_tea.jpg`, an input image rather than a generated robot result. The research-direction band still uses that input image. These files are local site assets; the gallery makes no remote image requests. Sources and resource links are available in the work cards and publication archive. Preserve provenance when replacing covers.
+The previous IGen card used `../igen/scene_1_tea.jpg`, an input image rather than a generated robot result. The research bands no longer use that input image. These files are local site assets; the gallery makes no remote image requests. Sources and resource links are available in the work cards and publication archive. Preserve provenance when replacing covers.

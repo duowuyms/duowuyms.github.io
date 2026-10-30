@@ -1,74 +1,84 @@
 ---
 import { url } from '../lib/urls';
+import { publications } from '../data/publications';
+import { directions } from '../data/research';
 interface Props {
   direction: string;
 }
 const { direction } = Astro.props;
+
+// Real research media only: verified paper figures or the SeekVLN robot photo.
+const media: Record<
+  string,
+  {
+    image: string;
+    width: number;
+    height: number;
+    alt: string;
+    caption: string;
+    kind: 'figure' | 'photo';
+  }
+> = {
+  agents: {
+    image: 'media/selected-work/cobel-world-first-figure.webp',
+    width: 1599,
+    height: 715,
+    alt: 'Figure 1 from CoBel-World, comparing multi-agent communication protocols with collaborative belief reasoning in a household task',
+    caption:
+      'CoBel-World, Figure 1 — agents collaborating through shared beliefs.',
+    kind: 'figure',
+  },
+  embodied: {
+    image: 'media/selected-work/seek-robot.webp',
+    width: 1110,
+    height: 1024,
+    alt: 'A Unitree Go2 quadruped robot with onboard sensors navigating an indoor corridor',
+    caption: 'SeekVLN on a Unitree Go2 robot, navigating a real corridor.',
+    kind: 'photo',
+  },
+  training: {
+    image: 'media/selected-work/deco-sgd-first-figure.webp',
+    width: 732,
+    height: 336,
+    alt: 'Figure 1 from DeCo-SGD: large-model training across datacenters connected by wide-area networks',
+    caption:
+      'DeCo-SGD, Figure 1 — training across geographically distributed datacenters.',
+    kind: 'figure',
+  },
+};
+
+const item = media[direction];
+const ids: readonly string[] =
+  directions.find((d) => d.id === direction)?.publications ?? [];
+const papers = ids
+  .map((id) => publications.find((p) => p.id === id))
+  .filter((p) => p !== undefined);
 ---
 
-{direction === 'agents' && (
-  <div
-    class="direction-art agent-art"
-    role="img"
-    aria-label="Agent research themes: planning, tool use, and multi-agent collaboration"
-  >
-    <span class="art-label">From intent to action</span>
-    <div class="agent-steps">
-      <>
-        <div>
-          Plan.<small>Understand the goal</small>
-        </div>
-        <div>
-          Use tools.<small>Act on the world</small>
-        </div>
-        <div>
-          Collaborate.<small>Reason together</small>
-        </div>
-      </>
-    </div>
-    <span class="art-footnote">
-      Tool use · GUI interaction · Multi-agent systems
-    </span>
-  </div>
-)}
-{direction === 'embodied' && (
-  <figure class="direction-art embodied-art">
-    <img
-      src={url('media/igen/scene_1_tea.jpg')}
-      width="410"
-      height="280"
-      alt="A tea-set scene used by IGen to generate robot learning environments"
-      loading="lazy"
-    />
-    <figcaption>Open-world scene · IGen</figcaption>
-  </figure>
-)}
-{direction === 'training' && (
-  <div
-    class="direction-art system-art"
-    role="img"
-    aria-label="Conceptual illustration of three connected compute clusters, representing cross-datacenter training"
-  >
-    <span class="art-label">Compute, connected.</span>
-    <div class="clusters">
-      {['A', 'B', 'C'].map((label) => (
-        <>
-          <div class="cluster">
-            <div class="compute-grid">
-              {Array.from({ length: 6 }, () => (
-                <span />
-              ))}
-            </div>
-            <small>Cluster {label}</small>
-          </div>
-          {label !== 'C' && <span class="cluster-link" />}
-        </>
-      ))}
-    </div>
-    <span class="art-footnote">
-      Cross-datacenter training
-      <br />
-      Communication optimization & compression
-    </span>
+{item && (
+  <div class:list={['direction-art', `direction-art-${item.kind}`]}>
+    <figure>
+      <img
+        src={url(item.image)}
+        width={item.width}
+        height={item.height}
+        alt={item.alt}
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>{item.caption}</figcaption>
+    </figure>
+    {papers.length > 0 && (
+      <ul class="direction-papers" aria-label="Publications in this direction">
+        {papers.map((p) => (
+          <li>
+            <a href={url(`publications/#${p.id}`)}>{p.name}</a>
+            <span>
+              {p.venue === 'Preprint' ? `${p.year} preprint` : p.venue}
+            </span>
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
 )}
