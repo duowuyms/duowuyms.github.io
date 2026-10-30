@@ -59,7 +59,6 @@ NetLLM、Trailblazer 等相关 large-model decision-making 工作也要保留。
 | `group/src/styles/global.css`                           | 全站设计 token、排版、布局、滚动条、响应式和 gallery 样式         |
 | `group/src/layouts/SiteLayout.astro`                    | 共享导航、移动菜单、metadata、字体、footer                        |
 | `group/src/components/DirectionArt.astro`               | 三个方向的介绍媒体，后续可进一步精修                              |
-| `group/src/pages/research.astro`                        | 研究方向详情与相关论文链接                                        |
 | `group/src/pages/publications.astro`                    | 论文档案与筛选交互                                                |
 | `group/src/components/PublicationRow.astro`             | 完整论文记录组件                                                  |
 | `group/src/data/publications.ts`                        | 11 篇论文的正式信息                                               |
@@ -151,7 +150,9 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 - 研究方向行换成从论文 PDF 提取的完整高清图（1800px WebP，`public/media/research-bands/`，来源与页码见其 README）：AI Agents = MobileGen Figure 1，Embodied = IGen Figure 6 真实机械臂实验，Distributed Training = Beyond a Single AI Cluster Figure 1。媒体列加宽到约 59%。SeekVLN 机器人照片、CoBel/DeCo 首图不再用于方向行，但文件保留。
 - 验证：类型检查 0 errors，构建 6 页，两种 base 各 127 个链接/媒体通过；浏览器检查桌面、320px 无横向溢出、三张图加载、手机端单列。
 
-最新补充：用户提供旧网站“研究方向”卡片截图，要求把其信息放进新版。旧卡片中的子方向已在 `research.ts` 的 topics 中；现首页三条研究行也在简介与 Explore 链接之间显示这三项子方向（与 Research Directions 页同源）。“World models for robot learning” 改回旧站措辞 “World models for VLA training”。旧站方向名 “Embodied VLA”“Distributed LM Training” 暂未采用，仍为 Embodied Intelligence / Distributed Training，可待组内确认。中文名按英文化要求不加入。
+最新补充：用户提供旧网站“研究方向”卡片截图，要求把其信息放进新版。旧卡片中的子方向已在 `research.ts` 的 topics 中；现首页三条研究行也在简介与 Explore 链接之间显示这三项子方向（数据来自 `research.ts`）。“World models for robot learning” 改回旧站措辞 “World models for VLA training”。旧站方向名 “Embodied VLA”“Distributed LM Training” 暂未采用，仍为 Embodied Intelligence / Distributed Training，可待组内确认。中文名按英文化要求不加入。
+
+最新结构调整：用户认为首页研究介绍 + Publications 已足够，删除独立的 Research Directions 页面（`research.astro`）。导航仍保留 “Research Directions” 五个栏目之一，但跳到首页 `#directions`；三条研究行加 `id`（agents/embodied/training），About us 内链指向这些锚点；每行链接改为 “See … papers”，打开 `publications/?topic=<id>` 筛选。原页面独有的 “Large models as decision-makers”（NetLLM、Trailblazer）移到首页研究行之后。原页面的长描述和 “Questions we explore” 已从 `research.ts` 删除（git 历史可找回）。现为 4 个内容页 + 404，`verify-links` 下限改为 5 页；两种 base 各 104 个链接/媒体通过。
 
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 transform 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。

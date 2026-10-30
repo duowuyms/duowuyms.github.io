@@ -1,6 +1,6 @@
 # MMLab @ SIGS group website
 
-An independent Astro + TypeScript website. The five routes are About us (home), Research Directions, Publications, Team, and Join us. Source and tooling are scoped to this directory; the personal homepage and project websites are independent.
+An independent Astro + TypeScript website. Navigation has five sections: About us (home), Research Directions (the homepage `#directions` section), Publications, Team, and Join us. There are four content routes plus a 404 page. Source and tooling are scoped to this directory; the personal homepage and project websites are independent.
 
 ## Local development
 
@@ -27,7 +27,7 @@ npm run preview
 ## Maintaining content
 
 - `src/data/site.ts`: affiliation, navigation, contacts, and member roster.
-- `src/data/research.ts`: the three research directions and their related publication IDs.
+- `src/data/research.ts`: the three research directions (summary, sub-topics) and their related publication IDs, rendered in the homepage research bands.
 - `src/data/publications.ts`: title, authors, year, venue/status, topic, summary, image, and resource links for each paper.
 - `src/data/abstracts.json`: abstracts preserved from the original group page.
 - `src/data/selected-work.ts`: the homepage's complete work gallery, complete paper first figures, alt text, and captions. Every record and its metadata are derived from `publications.ts`. Add the matching image here; a missing image uses a text cover.

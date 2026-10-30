@@ -11,7 +11,7 @@ export const site = {
 
 export const navigation = [
   { label: 'About us', path: '' },
-  { label: 'Research Directions', path: 'research/' },
+  { label: 'Research Directions', path: '#directions' },
   { label: 'Publications', path: 'publications/' },
   { label: 'Team', path: 'team/' },
   { label: 'Join us', path: 'join/' },

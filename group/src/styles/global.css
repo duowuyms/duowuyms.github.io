@@ -797,101 +797,8 @@ select {
 .page-intro > .text-link {
   margin-top: 30px;
 }
-.direction-index {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 35px;
-  margin-top: 35px;
-}
-.direction-index a {
-  font-size: 13px;
-  padding-block: 10px;
-  text-decoration: none;
-  border-bottom: 1px solid var(--rule);
-}
-.direction-index a:hover {
-  border-color: var(--accent);
-}
-.direction-index span {
-  margin-left: 12px;
-}
-.research-detail {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 7%;
-  padding-block: 55px 65px;
-  border-top: 1px solid var(--rule);
-  scroll-margin-top: 30px;
-}
-.research-detail header .eyebrow {
-  color: var(--accent);
-}
-.research-detail h2 {
-  margin-top: 20px;
-  font-size: clamp(37px, 4.2vw, 62px);
-}
-.research-description {
-  font-size: 17px;
-  line-height: 1.85;
-}
-.topic-list {
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 25px;
-}
-.topic-list li {
-  padding: 7px 11px;
-  border: 1px solid var(--rule);
-  font-size: 12px;
-}
-.research-body .section-label {
-  margin-top: 34px;
-}
-.research-questions {
-  padding-left: 18px;
-  font-size: 14px;
-  line-height: 1.85;
-  color: var(--muted);
-  margin-top: 17px;
-}
-.research-questions li + li {
-  margin-top: 10px;
-}
-.related-work {
-  margin-top: 15px;
-}
-.related-work > a {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 25px;
-  border-top: 1px solid var(--rule);
-  padding-block: 17px;
-  font-size: 15px;
-  text-decoration: none;
-}
-.related-work small {
-  display: block;
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.7;
-  margin-top: 5px;
-  max-width: 450px;
-}
-.related-venue {
-  white-space: nowrap;
-  font-size: 11px;
-  color: var(--accent);
-}
-.related-work a:hover {
-  background: var(--surface);
-}
 .research-connection {
-  padding-block: 45px 65px;
-  border-top: 1px solid var(--rule);
+  padding-block: 70px 10px;
 }
 .research-connection h2 {
   font-size: clamp(32px, 3.5vw, 50px);
@@ -1245,14 +1152,6 @@ select {
   .page-intro {
     padding-block: 50px 40px;
   }
-  .research-detail {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding-block: 40px 50px;
-  }
-  .research-detail h2 {
-    font-size: 43px;
-  }
   .publication-row {
     grid-template-columns: 100px minmax(0, 1fr);
     gap: 22px;
@@ -1406,25 +1305,6 @@ select {
   .intro-copy {
     font-size: 16px;
     margin-top: 25px;
-  }
-  .direction-index {
-    flex-direction: column;
-    align-items: start;
-    gap: 6px;
-    margin-top: 25px;
-  }
-  .research-detail h2 {
-    font-size: 38px;
-  }
-  .research-description {
-    font-size: 16px;
-  }
-  .related-work > a {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .related-venue {
-    white-space: normal;
   }
   .connection-links {
     gap: 16px;
