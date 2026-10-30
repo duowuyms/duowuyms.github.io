@@ -53,6 +53,14 @@ import { url } from '../lib/urls';
             ))}
           </h2>
           <p>{direction.summary}</p>
+          <ul
+            class="direction-topics"
+            aria-label={`${direction.name} research topics`}
+          >
+            {direction.topics.map((topic) => (
+              <li>{topic}</li>
+            ))}
+          </ul>
           <a class="text-link" href={url(`research/#${direction.id}`)}>
             Explore{' '}
             {direction.id === 'training'

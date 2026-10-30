@@ -27,7 +27,7 @@ export const directions = [
       'We connect vision-language-action models with robotic control to build systems that perceive their surroundings and act in the physical world. Through reinforcement learning, world models, and spatial understanding, we study how policies can improve through interaction.',
     topics: [
       'Reinforcement learning for VLA',
-      'World models for robot learning',
+      'World models for VLA training',
       'Spatial understanding & perception',
     ],
     questions: [

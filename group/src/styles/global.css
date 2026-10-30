@@ -607,6 +607,25 @@ select {
   font-size: 15px;
   line-height: 1.85;
 }
+.direction-topics {
+  width: 100%;
+  max-width: 430px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--diagram-rule);
+}
+.direction-topics li {
+  padding-block: 11px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.training .direction-topics,
+.training .direction-topics li {
+  border-color: var(--dark-rule);
+}
 .direction-copy .text-link {
   margin-top: 28px;
 }
