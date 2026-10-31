@@ -6,7 +6,6 @@ export const directions = [
     summary:
       'From understanding a goal to getting things done. We study how agents plan, use tools, navigate interfaces, and collaborate.',
     topics: ['Tool-use agents', 'GUI agents', 'Multi-agent collaboration'],
-    publications: ['mobilegen', 'cobel-world', 'catp-llm'],
   },
   {
     id: 'embodied',
@@ -19,7 +18,6 @@ export const directions = [
       'World models for VLA training',
       'Spatial understanding & perception',
     ],
-    publications: ['igen', 'geomind', 'seekvln', 'evta0'],
   },
   {
     id: 'training',
@@ -32,6 +30,5 @@ export const directions = [
       'Communication optimization',
       'Gradient compression',
     ],
-    publications: ['deco-sgd', 'decentralized-survey'],
   },
 ] as const;

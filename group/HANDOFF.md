@@ -172,6 +172,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新：用户觉得紫/蓝/绿色块和金色标题不好看，要求用第一版颜色。现保留 HKU 式全宽行布局，配色恢复第一版：AI Agents 文字浅灰 #f5f5f7、图在炭黑 #242426；Embodied 文字 #f0f1f2、图在白底；Distributed Training 文字炭黑（白字、浅紫链接 #d9b3e6）、图在浅灰。标题深色/白色，去掉金色。
 
+最新：按用户要求删除滚动作品区的 “Research work” 标题和 “View all publications” 链接（区域保留读屏标签），删除 About us 中的 “Turning the knowledge of large models…” 一句；“About us”“Research Directions” 改为 44–84px 粗体大标题，方向行标题相应降为 32–52px，About us 正文放大到 17px。
+
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 transform 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。

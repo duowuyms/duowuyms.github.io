@@ -183,10 +183,10 @@ select {
 }
 /* One heading style for the homepage sections. */
 .section-title {
-  font-size: clamp(22px, 1.9vw, 28px);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
+  font-size: clamp(44px, 5.6vw, 84px);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
 }
 .text-link {
   display: inline-flex;
@@ -373,33 +373,20 @@ select {
   color: var(--accent);
   font-size: 13px;
 }
-.hero-links a,
-.work-heading a {
+.hero-links a {
   display: inline-flex;
   gap: 9px;
   align-items: center;
   min-height: 44px;
   text-decoration: none;
 }
-.hero-links a:hover,
-.work-heading a:hover {
+.hero-links a:hover {
   color: var(--accent-hover);
   text-decoration: underline;
 }
 .selected-work {
   display: block;
   padding-block: 4px 25px;
-}
-.work-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 18px;
-}
-.work-heading a {
-  color: var(--accent);
-  font-size: 12px;
 }
 .work-viewport {
   position: relative;
@@ -519,20 +506,15 @@ select {
 .about-content {
   min-width: 0;
 }
-.mission {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(23px, 2.3vw, 34px);
-  letter-spacing: -0.025em;
-  line-height: 1.5;
-  max-width: 840px;
-}
 .about-copy {
-  font-size: 15px;
+  font-size: 17px;
   color: var(--muted);
-  line-height: 1.85;
+  line-height: 1.75;
   margin-top: 18px;
   max-width: 760px;
+}
+.about-copy:first-child {
+  margin-top: 0;
 }
 .about-copy strong {
   color: var(--ink);
@@ -568,7 +550,7 @@ select {
 /* Research Directions: full-bleed bands in the spirit of HKU MMLab, in the
    first version's light grey and charcoal. */
 .directions > h2 {
-  padding-block: clamp(38px, 5vw, 64px) 28px;
+  padding-block: clamp(56px, 7vw, 104px) clamp(32px, 4vw, 56px);
   border-top: 1px solid var(--rule);
 }
 .direction-band {
@@ -635,7 +617,7 @@ select {
   padding: clamp(40px, 5.5vw, 80px);
 }
 .band-copy h3 {
-  font-size: clamp(36px, 4.2vw, 60px);
+  font-size: clamp(32px, 3.6vw, 52px);
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.05;
@@ -1162,13 +1144,6 @@ select {
     font-size: 12px;
     gap: 8px 24px;
   }
-  .work-heading {
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  .work-heading a {
-    font-size: 11px;
-  }
   .work-card {
     width: 280px;
     flex-basis: 280px;
@@ -1199,13 +1174,8 @@ select {
   .about-intro {
     padding-block: 40px 45px;
   }
-  .mission {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 26px;
-  }
   .about-copy {
-    font-size: 14px;
+    font-size: 16px;
   }
   .page-intro h1 {
     font-size: clamp(42px, 10vw, 56px);

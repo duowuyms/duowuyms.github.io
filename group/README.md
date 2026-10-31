@@ -27,17 +27,17 @@ npm run preview
 ## Maintaining content
 
 - `src/data/site.ts`: affiliation, navigation, contacts, and member roster.
-- `src/data/research.ts`: the three research directions (summary, sub-topics) and their related publication IDs, rendered in the homepage research bands.
+- `src/data/research.ts`: the three research directions (summary, sub-topics), rendered as the homepage bands (title, summary, sub-topics). Each band links to Publications filtered by the matching `topic` in `publications.ts`.
 - `src/data/publications.ts`: title, authors, year, venue/status, topic, summary, image, and resource links for each paper.
 - `src/data/abstracts.json`: abstracts preserved from the original group page.
 - `src/data/selected-work.ts`: the homepage's complete work gallery, complete paper first figures, alt text, and captions. Every record and its metadata are derived from `publications.ts`. Add the matching image here; a missing image uses a text cover.
 - `src/components/SelectedWork.astro` and `src/scripts/selected-work.ts`: progressively enhanced moving work gallery.
-- `src/components/DirectionArt.astro`: the media column of each homepage research band — one complete paper figure with caption (`public/media/research-bands/`), then the direction's publications (from `research.ts`) linked to the archive.
+- `src/components/DirectionArt.astro`: the figure panel of each homepage research band — one complete paper figure with caption (`public/media/research-bands/`). Each band's title, summary, sub-topics, and Explore papers link are rendered in `src/pages/index.astro` from `research.ts`.
 - `src/components/AboutUs.astro`: the homepage group introduction and official Shenzhen-campus photograph. Copy is grounded in the old group page; the neighboring self-evolving group's page is a structural reference, not a source for this group's research claims.
 - `src/styles/global.css`: canonical design tokens and shared styles; see `DESIGN.md` for intent.
 - `public/`: research media and figures, copied into the generated website.
 
-To add a publication, add a record to `publications.ts`, using a unique `id`. Reference that ID from `research.ts` where relevant. Avoid speculative acceptance labels, citation/star counts, or links to similarly named papers. Filters use publication year; Trailblazer keeps its initial preprint year and explicitly notes its 2026 update.
+To add a publication, add a record to `publications.ts`, using a unique `id`. Set its `topic` so it appears under the right research area filter. Avoid speculative acceptance labels, citation/star counts, or links to similarly named papers. Filters use publication year; Trailblazer keeps its initial preprint year and explicitly notes its 2026 update.
 
 The roster is translated from the existing group page. Names were not added based solely on a paper author list. GeoMIND has no resource link until a verified paper/project URL is available. DeCo-SGD's JSAC status was confirmed by the site owner; its author list and paper link follow the linked preprint. Recheck final journal metadata before publishing citations in another format.
 
