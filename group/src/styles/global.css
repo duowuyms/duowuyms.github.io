@@ -30,7 +30,6 @@
   box-sizing: border-box;
 }
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-height) + 24px);
   scrollbar-gutter: stable;
   scrollbar-color: var(--scroll-thumb) var(--paper);
@@ -759,7 +758,7 @@ select {
 }
 .footer-columns {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 40px 32px;
 }
 .footer-columns h2 {
@@ -1114,6 +1113,9 @@ select {
   .people-group ul {
     grid-template-columns: repeat(2, 1fr);
   }
+  .footer-columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 @media (max-width: 800px) {
   :root {
@@ -1378,8 +1380,14 @@ select {
     padding-bottom: 50px;
   }
 }
+/* Smooth only for in-page jumps: smooth on the root element stops a
+   page loaded with a #fragment from scrolling to it. */
+html:focus-within {
+  scroll-behavior: smooth;
+}
 @media (prefers-reduced-motion: reduce) {
-  html {
+  html,
+  html:focus-within {
     scroll-behavior: auto;
   }
   *,

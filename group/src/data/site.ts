@@ -34,9 +34,10 @@ export interface Person {
   name: string;
   url?: string;
 }
-export const team: { label: string; people: Person[] }[] = [
-  { label: 'Faculty advisor', people: [site.advisor] },
+export const team: { id: string; label: string; people: Person[] }[] = [
+  { id: 'advisor', label: 'Faculty advisor', people: [site.advisor] },
   {
+    id: 'phd',
     label: 'PhD students',
     people: [
       { name: 'Bowen Li' },
@@ -46,6 +47,7 @@ export const team: { label: string; people: Person[] }[] = [
     ],
   },
   {
+    id: 'masters',
     label: 'Master’s students',
     people: [
       { name: 'Bingkun Zhu' },

@@ -13,7 +13,7 @@ import { url } from '../lib/urls';
   />
   <div class="team-directory page-gutter">
     {team.map((group) => (
-      <section class="people-group">
+      <section class="people-group" id={group.id}>
         <>
           <h2 class="section-label">{group.label}</h2>
           <ul>

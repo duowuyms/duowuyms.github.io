@@ -1,5 +1,5 @@
 ---
-import { contacts, navigation, site } from '../data/site';
+import { contacts, navigation, site, team } from '../data/site';
 import { directions } from '../data/research';
 import { url } from '../lib/urls';
 import '../styles/global.css';
@@ -16,55 +16,44 @@ const pageTitle = title
   : `${site.name} — ${site.shortName}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 
-const footerColumns: {
-  title: string;
-  href?: string;
-  links: { label: string; href: string; note?: string; external?: boolean }[];
-}[] = [
-  {
-    title: 'About us',
-    href: url(),
-    links: [
-      { label: 'Team', href: url('team/') },
-      { label: 'Join us', href: url('join/') },
-    ],
-  },
-  {
-    title: 'Research',
-    href: url('#directions'),
-    links: directions.map((d) => ({
-      label: d.id === 'training' ? 'Distributed Training' : d.name,
-      href: url(`#${d.id}`),
+// Footer columns mirror the header navigation, with each page's sections.
+type FooterLink = {
+  label: string;
+  href: string;
+  note?: string;
+  external?: boolean;
+};
+const footerLinks: Record<string, FooterLink[]> = {
+  '': [
+    { label: 'Our group', href: url('#about') },
+    { label: 'Research work', href: url('#work') },
+  ],
+  '#directions': directions.map((d) => ({
+    label: d.id === 'training' ? 'Distributed Training' : d.name,
+    href: url(`#${d.id}`),
+  })),
+  'publications/': [
+    { label: 'All papers', href: url('publications/') },
+    { label: 'Decision-making', href: url('publications/?topic=decision') },
+  ],
+  'team/': team.map((group) => ({
+    label: group.label,
+    href: url(`team/#${group.id}`),
+  })),
+  'join/': [
+    { label: 'Apply to the group', href: url('join/#apply') },
+    ...contacts.map((c) => ({
+      label: c.name,
+      href: `mailto:${c.email}`,
+      note: c.area,
     })),
-  },
-  {
-    title: 'Publications',
-    href: url('publications/'),
-    links: [
-      { label: 'All papers', href: url('publications/') },
-      {
-        label: 'Decision-making',
-        href: url('publications/?topic=decision'),
-      },
-    ],
-  },
-  {
-    title: 'Contact',
-    links: [
-      {
-        label: site.advisor.name,
-        href: site.advisor.url,
-        note: 'Faculty advisor',
-        external: true,
-      },
-      ...contacts.map((c) => ({
-        label: c.name,
-        href: `mailto:${c.email}`,
-        note: c.area,
-      })),
-    ],
-  },
-];
+  ],
+};
+const footerColumns = navigation.map((item) => ({
+  title: item.label,
+  href: url(item.path),
+  links: footerLinks[item.path] ?? [],
+}));
 ---
 
 <!doctype html>
@@ -129,11 +118,7 @@ const footerColumns: {
           {footerColumns.map((column) => (
             <div>
               <h2>
-                {column.href ? (
-                  <a href={column.href}>{column.title}</a>
-                ) : (
-                  column.title
-                )}
+                <a href={column.href}>{column.title}</a>
               </h2>
               <ul>
                 {column.links.map((link) => (
