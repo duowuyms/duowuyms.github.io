@@ -160,6 +160,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新：用户要求页脚内容与顶部导航对应。页脚栏目现由同一个 `navigation` 列表生成（About us / Research Directions / Publications / Team / Join us，顺序名称一致），每栏列出对应页面的分区：About us（#about、#work）、三个研究方向锚点、Publications（全部、Decision-making 筛选）、Team（新增 `team/#advisor`、`#phd`、`#masters`，id 在 `site.ts` 的 team 数据中）、Join us（新增 `join/#apply`、`#contact`，以及两位联系人邮箱）。同时修复一个既有问题：`html { scroll-behavior: smooth }` 会导致从其他页面带 `#锚点` 打开时不跳转（已用最小测试页确认），改为仅 `html:focus-within` 时平滑滚动；`team/#masters`、`publications/#seekvln` 现在能正确落在导航下方。5 栏 ≥1100px，3 栏到 800px，以下 2 栏。
 
+最新：按用户要求页脚改为三栏：About us（Our group、Team、Join us），Research Directions（三个方向，不变），Publications（只保留标题链接）。所有标题和条目都可点击，鼠标悬停变为蓝色（0.15s 过渡，无下划线），字标和 Back to top 同样。联系人邮箱不再放在页脚（Join us 页有）。Team/Join 页上的 #advisor、#phd、#masters、#apply、#contact 锚点保留，可用于分享链接。
+
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 transform 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。
