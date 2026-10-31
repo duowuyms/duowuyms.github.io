@@ -763,9 +763,19 @@ select {
   color: var(--muted);
   margin: 5px 0 20px;
 }
+.year-heading {
+  padding-block: clamp(40px, 5vw, 72px) 18px;
+  font-size: clamp(40px, 4.6vw, 68px);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+.year-group:first-child .year-heading {
+  padding-top: 24px;
+}
 .publication-row {
   display: grid;
-  grid-template-columns: 145px minmax(0, 1fr) 210px;
+  grid-template-columns: 145px minmax(0, 1fr) 260px;
   gap: 30px;
   padding-block: 35px;
   border-top: 1px solid var(--rule);
@@ -783,7 +793,7 @@ select {
   color: var(--muted);
   margin-top: 12px;
 }
-.publication-content h2 {
+.publication-content h3 {
   font-family: var(--font-display);
   font-size: 23px;
   font-weight: 600;
@@ -796,6 +806,10 @@ select {
   line-height: 1.85;
   color: var(--muted);
   margin-top: 14px;
+}
+.authors strong {
+  color: var(--ink);
+  font-weight: 600;
 }
 .publication-summary {
   font-size: 14px;
@@ -823,26 +837,31 @@ select {
 .publication-image {
   align-self: start;
   display: block;
+  aspect-ratio: 16 / 10;
+  padding: 12px;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
   background: var(--white);
-  aspect-ratio: 1.5;
   overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+.publication-image:hover {
+  border-color: var(--accent);
 }
 .publication-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-.publication-row#igen .publication-image img {
-  object-fit: cover;
-}
 .publication-monogram {
   align-self: start;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 14px;
   background: var(--surface);
   color: var(--accent);
-  aspect-ratio: 1.5;
+  aspect-ratio: 16 / 10;
   font: 500 27px/1 var(--font-display);
   letter-spacing: -0.03em;
 }
@@ -975,7 +994,7 @@ select {
 }
 @media (max-width: 1100px) {
   .publication-row {
-    grid-template-columns: 115px minmax(0, 1fr) 165px;
+    grid-template-columns: 115px minmax(0, 1fr) 210px;
     gap: 22px;
   }
   .people-group ul {
@@ -1171,7 +1190,7 @@ select {
   .publication-meta > span:last-child {
     margin: 0;
   }
-  .publication-content h2 {
+  .publication-content h3 {
     font-family: var(--font-display);
     font-size: 22px;
   }

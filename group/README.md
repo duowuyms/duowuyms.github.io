@@ -28,9 +28,9 @@ npm run preview
 
 - `src/data/site.ts`: affiliation, navigation, contacts, and member roster.
 - `src/data/research.ts`: the three research directions (summary, sub-topics), rendered as the homepage bands (title, summary, sub-topics). Each band links to Publications filtered by the matching `topic` in `publications.ts`.
-- `src/data/publications.ts`: title, authors, year, venue/status, topic, summary, image, and resource links for each paper.
+- `src/data/publications.ts`: title, authors, year, venue/status, topic, summary, and resource links for each paper. Images come from `selected-work.ts`.
 - `src/data/abstracts.json`: abstracts preserved from the original group page.
-- `src/data/selected-work.ts`: the homepage's complete work gallery, complete paper first figures, alt text, and captions. Every record and its metadata are derived from `publications.ts`. Add the matching image here; a missing image uses a text cover.
+- `src/data/selected-work.ts`: the homepage's complete work gallery, complete paper first figures, alt text, and captions. Every record and its metadata are derived from `publications.ts`. Add the matching image here; a missing image uses a text cover. The Publications page reuses the same verified figures (`paperFigures`), so both pages always show the same image for a paper.
 - `src/components/SelectedWork.astro` and `src/scripts/selected-work.ts`: progressively enhanced moving work gallery.
 - `src/components/DirectionArt.astro`: the figure panel of each homepage research band — one complete paper figure with caption (`public/media/research-bands/`). Each band's title, summary, sub-topics, and Explore papers link are rendered in `src/pages/index.astro` from `research.ts`.
 - `src/components/AboutUs.astro`: the homepage group introduction and official Shenzhen-campus photograph. Copy is grounded in the old group page; the neighboring self-evolving group's page is a structural reference, not a source for this group's research claims.
@@ -62,7 +62,7 @@ No workflow is enabled here because the production URL belongs to a separate MML
 - IGen scene input images and generated clips: [official IGen project](https://chenghaogu.github.io/IGen/), from `ChenghaoGu/ChenghaoGu.github.io/IGen/img/scenes/` and `IGen/video/scenes/`. The tea-set input image is no longer shown on the homepage; the scrolling gallery now uses Figure 1 extracted from the paper PDF, saved as `public/media/selected-work/igen-first-figure.webp`. Files retain their original names under `public/media/igen/`; generated videos are retained but no longer loaded by the homepage.
 - SeekVLN first figure: extracted from page 2 of the official project PDF, saved as `public/media/selected-work/seekvln-first-figure.webp`. The robot photo is retained as a source asset. Robot photo source: [official SeekVLN project](https://zhiminwangss.github.io/seekvln-project/), `ZhiminWangSS/seekvln-project/assets/robot-seek.webp`, copied as `public/media/selected-work/seek-robot.webp`.
 - Gallery: all ten supplied covers are verified Figure 1 artwork rendered from their respective paper PDFs, fitted without cropping. PDF sources and page numbers are listed in `public/media/selected-work/README.md`. GeoMIND uses a text cover until the owner supplies its figure.
-- MobileGen, CoBel-World, CATP-LLM, Trailblazer, NetLLM, DeCo-SGD, survey figures: existing group website's `images/`.
+- Publication figures: the verified Figure 1 images in `public/media/selected-work/` (see its README). The old group website's `images/` are no longer referenced by the new site.
 - eVTA₀ overview: existing `evta0/assets/figures/model.webp`.
 - Standard Inter: self-hosted from `@fontsource-variable/inter` (OFL), matching the font used by [HKU MMLab](https://mmlab.hk/). Homepage title uses 600, secondary display headings 700, navigation 500, and body 400.
 - The original DM Sans asset and license remain in `src/assets/fonts/` for reference; the new typography does not load them.

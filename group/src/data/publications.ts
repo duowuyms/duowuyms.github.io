@@ -14,7 +14,6 @@ export interface Publication {
   venue: string;
   topic: Topic;
   summary: string;
-  image?: string;
   links: { label: string; href: string }[];
   abstract?: string;
 }
@@ -32,7 +31,6 @@ export const publications: Publication[] = [
       'Chenghao Gu*, Haolan Kang*, Junchao Lin*, Jinghe Wang, Duo Wu, Shuzhao Xie, Fanding Huang, Junchen Ge, Ziyang Gong, Letian Li, Hongying Zheng, Changwei Lv, Zhi Wang.',
     summary:
       'Generating structured 3D scenes and robot trajectories from open-world images to scale robot learning data.',
-    image: 'media/igen/scene_4_vangogh.jpg',
     links: [
       { label: 'Paper', href: 'https://arxiv.org/abs/2512.01773' },
       { label: 'Project', href: 'https://chenghaogu.github.io/IGen/' },
@@ -65,7 +63,6 @@ export const publications: Publication[] = [
       'Zhimin Wang, Meiyuan Zhu, Duo Wu, Linjia Kang, Yajun Wang, Yuan Ni, Xiaohang Wang, Tianlu Pan, Jingyan Jiang, Yaowei Wang, Zhi Wang.',
     summary:
       'Seeking evidence to ground navigation progress before deciding where to move.',
-    image: 'media/selected-work/seek-robot.webp',
     links: [
       { label: 'Paper', href: 'https://arxiv.org/abs/2609.37353' },
       {
@@ -86,7 +83,6 @@ export const publications: Publication[] = [
       'Duo Wu, Haifeng Wang, Rongwei Lu, Jinghe Wang, Tianyi Xiong, Zhimin Wang, Chao Yu, Shuai Ma, Zhi Wang.',
     summary:
       'Learning dense success-probability rewards from policy experience and sparse task outcomes, without human demonstrations.',
-    image: 'images/evta0.webp',
     links: [
       { label: 'Paper', href: 'https://arxiv.org/abs/2609.33653' },
       { label: 'Project', href: 'https://duowuyms.github.io/evta0/' },
@@ -105,7 +101,6 @@ export const publications: Publication[] = [
       'Rongwei Lu*, Jingyan Jiang*, Chunyang Li, Xingguang Wei, Zhi Wang.',
     summary:
       'Adapting gradient compression and staleness to communication conditions for efficient cross-datacenter training.',
-    image: 'images/deco.png',
     links: [{ label: 'Paper', href: 'https://arxiv.org/abs/2507.17346' }],
   },
   {
@@ -120,7 +115,6 @@ export const publications: Publication[] = [
       'Linjia Kang*, Zhimin Wang*, Yongkang Zhang*, Duo Wu, Jinghe Wang, Ming Ma, Haopeng Yan, Zhi Wang.',
     summary:
       'Adapting the difficulty of generated interaction trajectories to the capability frontier of mobile GUI agents.',
-    image: 'images/mobilegen.png',
     links: [
       { label: 'Paper', href: 'https://arxiv.org/abs/2601.22781' },
       {
@@ -141,7 +135,6 @@ export const publications: Publication[] = [
       'Duo Wu, Linjia Kang, Zhimin Wang, Fangxin Wang, Wei Zhang, Chongbo Sun, Xuefeng Tao, Wei Yang, Le Zhang, Wenwu Zhu, Peng Cui, Zhi Wang.',
     summary:
       'Grounding LLMs as generalist network policies that transfer across tasks and environments, with real-world evaluation on Douyin.',
-    image: 'images/trailblazer.png',
     links: [
       { label: 'Paper', href: 'https://arxiv.org/abs/2512.11839' },
       { label: 'Project', href: 'https://duowuyms.github.io/trailblazer/' },
@@ -160,7 +153,6 @@ export const publications: Publication[] = [
       'Zhimin Wang*, Duo Wu*, Shaokang He*, Linjia Kang, Jinghe Wang, Jing Yu, Kai Zhu, Jiawei Li, Zhi Wang.',
     summary:
       'Modeling the environment and collaborators’ intentions to improve coordination while reducing redundant communication.',
-    image: 'images/cobel_world.png',
     links: [{ label: 'Paper', href: 'https://arxiv.org/abs/2509.21981' }],
   },
   {
@@ -175,7 +167,6 @@ export const publications: Publication[] = [
       'Duo Wu*, Jinghe Wang*, Yuan Meng*, Yanning Zhang, Le Sun, Zhi Wang.',
     summary:
       'Reinforcement learning for effective tool planning that balances plan quality with execution costs.',
-    image: 'images/catp_llm.png',
     links: [
       {
         label: 'Paper',
@@ -195,7 +186,6 @@ export const publications: Publication[] = [
       'Haotian Dong*, Jingyan Jiang*, Rongwei Lu, Jiajun Luo, Jiajun Song, Bowen Li, Ying Shen, Zhi Wang.',
     summary:
       'A resource-driven perspective on decentralized LLM training across clusters, datacenters, and regions.',
-    image: 'images/survey.png',
     links: [{ label: 'Paper', href: 'https://arxiv.org/abs/2503.11023' }],
   },
   {
@@ -209,7 +199,6 @@ export const publications: Publication[] = [
       'Duo Wu, Xianda Wang, Yaqi Qiao, Zhi Wang, Junchen Jiang, Shuguang Cui, Fangxin Wang.',
     summary:
       'A framework for adapting large language models to networking decisions, including viewport prediction, bitrate adaptation, and cluster scheduling.',
-    image: 'images/netllm.png',
     links: [
       {
         label: 'Paper',

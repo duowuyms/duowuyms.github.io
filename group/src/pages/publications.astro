@@ -42,12 +42,21 @@ const years = [...new Set(publications.map((p) => p.year))].sort(
       </p>
     </form>
     <p class="publication-note">
-      * Equal contribution. Preprints are listed separately from accepted venue
-      labels.
+      Group members are shown in bold. * Equal contribution. Preprints are
+      listed separately from accepted venue labels.
     </p>
     <div class="publication-list">
-      {publications.map((publication) => (
-        <PublicationRow publication={publication} />
+      {years.map((y) => (
+        <section class="year-group" aria-labelledby={`year-${y}`}>
+          <h2 class="year-heading" id={`year-${y}`}>
+            {y}
+          </h2>
+          {publications
+            .filter((publication) => publication.year === y)
+            .map((publication) => (
+              <PublicationRow publication={publication} />
+            ))}
+        </section>
       ))}
     </div>
     <div class="no-results" hidden>
@@ -68,6 +77,9 @@ const years = [...new Set(publications.map((p) => p.year))].sort(
       const rows = Array.from(
         document.querySelectorAll<HTMLElement>('[data-publication]'),
       );
+      const groups = Array.from(
+        document.querySelectorAll<HTMLElement>('.year-group'),
+      );
       const count = form.querySelector<HTMLElement>('.results-count')!;
       const empty = document.querySelector<HTMLElement>('.no-results')!;
       const valid = (select: HTMLSelectElement, value: string | null) =>
@@ -81,6 +93,11 @@ const years = [...new Set(publications.map((p) => p.year))].sort(
             (topic.value !== 'all' && row.dataset.topic !== topic.value) ||
             (year.value !== 'all' && row.dataset.year !== year.value);
           if (!row.hidden) total++;
+        });
+        groups.forEach((group) => {
+          group.hidden = !group.querySelector(
+            '[data-publication]:not([hidden])',
+          );
         });
         count.textContent = `${total} ${total === 1 ? 'publication' : 'publications'}`;
         empty.hidden = total !== 0;

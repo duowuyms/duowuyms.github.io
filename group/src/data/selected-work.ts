@@ -2,7 +2,7 @@ import { publications } from './publications';
 
 // Use complete Figure 1 artwork from the linked papers, never decorative crops.
 // Every publication participates; missing media gets an honest text cover.
-const paperFigures: Record<string, { image: string; alt: string }> = {
+export const paperFigures: Record<string, { image: string; alt: string }> = {
   igen: {
     image: 'media/selected-work/igen-first-figure.webp',
     alt: 'Figure 1 from IGen, showing open-world images and generated robot observations and actions',
