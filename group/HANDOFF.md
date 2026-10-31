@@ -174,7 +174,9 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新：按用户要求删除滚动作品区的 “Research work” 标题和 “View all publications” 链接（区域保留读屏标签），删除 About us 中的 “Turning the knowledge of large models…” 一句；“About us”“Research Directions” 改为 44–84px 粗体大标题，方向行标题相应降为 32–52px，About us 正文放大到 17px。
 
-1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 transform 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
+最新（2026-10-30）：用户批准首页建议 1、3、4，要求优化点阵但保留背景质感。本轮将透视地板点阵改为两侧向中央渐隐的平面细点（26px 间距、0.8px 半径，手机更淡），左右极淡紫/冷灰光晕；标题字重 550、字距 -0.04em、略增首屏留白。About us 压缩通用 pretraining 文案，校园图与正文顶端对齐。Research Directions 保留左右交替，但改为浅灰/白/浅灰整行底色，移除炭黑半栏，统一完整论文图框和说明尺寸。作品滚动区图片、内容和交互未改。桌面、390px 和 320px 无页面横向溢出；设计规范已同步。
+
+1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 mask/opacity 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。
 4. 可继续在 `meiyuanGroup` 分支开发；**用户确认后**才能合并 main 或发布。基线已 commit；后续每轮完成后也需 commit。本次未 push、merge 或部署。

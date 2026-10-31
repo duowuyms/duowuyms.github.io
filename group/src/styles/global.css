@@ -12,7 +12,7 @@
   --scroll-thumb: #aaaab0;
   --scroll-hover: #85858b;
   --scroll-active: #660874;
-  --lattice: #a3abb8;
+  --lattice: #c5c3cc;
   --night: #242426;
   --night-text: #f5f5f7;
   --night-muted: #c8c8cd;
@@ -20,8 +20,8 @@
   --soft-surface: #f0f1f2;
   --header-height: 76px;
   --gutter: clamp(22px, 5.4vw, 90px);
-  --horizon-glow: rgba(102, 8, 116, 0.1);
-  --horizon-violet: rgba(130, 49, 142, 0.06);
+  --horizon-glow: rgba(102, 8, 116, 0.035);
+  --horizon-violet: rgba(106, 129, 165, 0.045);
   --font-body: 'Inter Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-display: 'Inter Variable', 'Helvetica Neue', Arial, sans-serif;
 }
@@ -271,8 +271,7 @@ select {
 .menu-toggle {
   display: none;
 }
-/* Stage behind the hero and gallery: a horizon of light behind the title
-   and a dot lattice in perspective, a ground plane the work stands on. */
+/* Quiet peripheral texture; the research gallery is the only moving layer. */
 .home-stage {
   position: relative;
   isolation: isolate;
@@ -289,55 +288,33 @@ select {
   z-index: -2;
   background:
     radial-gradient(
-      ellipse 62% 13% at 50% 47%,
+      ellipse 45% 50% at 10% 35%,
       var(--horizon-glow),
-      transparent 75%
+      transparent 85%
     ),
     radial-gradient(
-      ellipse 42% 24% at 50% 30%,
+      ellipse 45% 50% at 90% 35%,
       var(--horizon-violet),
-      transparent 72%
+      transparent 85%
     );
 }
 .home-stage::after {
-  left: -35%;
-  right: -35%;
-  top: 46%;
-  height: 90%;
+  inset: 0 0 18%;
   z-index: -1;
   background-image: radial-gradient(
     circle,
-    var(--lattice) 1.7px,
-    transparent 2.3px
+    var(--lattice) 0.8px,
+    transparent 1px
   );
-  background-size: 28px 28px;
-  background-position: center top;
-  transform: perspective(900px) rotateX(55deg);
-  transform-origin: 50% 0;
-  -webkit-mask-image:
-    linear-gradient(to bottom, transparent 0%, #000 10%, transparent 62%),
-    linear-gradient(
-      to right,
-      transparent 4%,
-      #000 30%,
-      #000 70%,
-      transparent 96%
-    );
-  -webkit-mask-composite: source-in;
+  background-size: 26px 26px;
   mask-image:
-    linear-gradient(to bottom, transparent 0%, #000 10%, transparent 62%),
-    linear-gradient(
-      to right,
-      transparent 4%,
-      #000 30%,
-      #000 70%,
-      transparent 96%
-    );
-  mask-composite: intersect;
+    radial-gradient(ellipse 34% 46% at 0% 40%, #000, transparent),
+    radial-gradient(ellipse 34% 46% at 100% 40%, #000, transparent);
+  opacity: 0.65;
 }
 .home-hero {
   text-align: center;
-  padding-block: 64px 56px;
+  padding-block: clamp(72px, 7.5vw, 112px) 64px;
 }
 .hero-affiliation {
   color: var(--muted);
@@ -347,10 +324,11 @@ select {
 .home-hero h1 {
   max-width: 1100px;
   margin: 20px auto 0;
-  font-size: clamp(32px, 4.4vw, 56px);
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.045em;
+  font-size: clamp(32px, 4.5vw, 62px);
+  font-weight: 550;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
 }
 .home-hero h1 span {
   display: block;
@@ -360,8 +338,8 @@ select {
   font-size: 15px;
   line-height: 1.75;
   letter-spacing: -0.015em;
-  max-width: 650px;
-  margin: 22px auto 0;
+  max-width: 620px;
+  margin: 26px auto 0;
   text-wrap: balance;
 }
 .hero-links {
@@ -493,15 +471,15 @@ select {
 }
 .about-intro {
   display: grid;
-  gap: 26px;
-  padding-block: clamp(38px, 5vw, 76px);
+  gap: 36px;
+  padding-block: clamp(64px, 7vw, 104px);
   border-top: 1px solid var(--rule);
 }
 .about-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  align-items: center;
-  gap: 7%;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: start;
+  gap: 8%;
 }
 .about-content {
   min-width: 0;
@@ -535,6 +513,7 @@ select {
 }
 .about-photo {
   min-width: 0;
+  margin: 0;
 }
 .about-photo img {
   width: 100%;
@@ -547,41 +526,24 @@ select {
   color: var(--muted);
   font-size: 11px;
 }
-/* Research Directions: full-bleed bands in the spirit of HKU MMLab, in the
-   first version's light grey and charcoal. */
+/* Alternating research introductions, with consistent light media panels. */
 .directions > h2 {
   padding-block: clamp(56px, 7vw, 104px) clamp(32px, 4vw, 56px);
   border-top: 1px solid var(--rule);
 }
 .direction-band {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
   min-height: clamp(400px, 34vw, 520px);
+  border-top: 1px solid var(--rule);
+  background: var(--surface);
 }
 .direction-band.embodied {
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  background: var(--paper);
 }
 .direction-band.embodied .band-figure {
   order: 1;
-}
-.agents .band-copy {
-  background: var(--surface);
-}
-.agents .band-figure {
-  background: var(--night);
-}
-.agents .band-figure figcaption {
-  color: var(--night-muted);
-}
-.embodied .band-copy {
-  background: var(--soft-surface);
-}
-.training .band-copy {
-  background: var(--night);
-  color: var(--night-text);
-}
-.training .band-figure {
-  background: var(--surface);
 }
 .band-figure {
   display: flex;
@@ -591,14 +553,13 @@ select {
   min-width: 0;
   margin: 0;
   padding: clamp(24px, 3vw, 44px);
-  background: var(--white);
+  background: transparent;
 }
 .band-figure img {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 400px;
-  padding: 12px;
+  height: clamp(220px, 20vw, 300px);
+  padding: 20px;
   border-radius: 14px;
   background: var(--white);
   object-fit: contain;
@@ -607,26 +568,28 @@ select {
   font-size: 12px;
   line-height: 1.6;
   color: var(--muted);
-  text-align: center;
+  text-align: left;
+  min-height: 3.2em;
 }
 .band-copy {
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-width: 0;
-  padding: clamp(40px, 5.5vw, 80px);
+  padding: clamp(36px, 4.5vw, 72px);
 }
 .band-copy h3 {
   font-size: clamp(32px, 3.6vw, 52px);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.035em;
-  line-height: 1.05;
+  line-height: 1.12;
 }
 .band-copy p {
   max-width: 620px;
   margin-top: 24px;
   font-size: 16px;
   line-height: 1.75;
+  color: var(--muted);
 }
 .band-copy ul {
   display: flex;
@@ -638,9 +601,6 @@ select {
   font-size: 14px;
   font-weight: 500;
   color: var(--muted);
-}
-.training .band-copy ul {
-  color: var(--night-muted);
 }
 .band-copy a {
   align-self: end;
@@ -656,15 +616,6 @@ select {
 .band-copy a:hover {
   color: var(--accent-hover);
   text-decoration: underline;
-}
-.training .band-copy a {
-  color: var(--night-accent);
-}
-.training .band-copy a:hover {
-  color: var(--white);
-}
-.training .band-copy a:focus-visible {
-  outline-color: var(--white);
 }
 .site-footer {
   display: grid;
@@ -1104,13 +1055,17 @@ select {
 }
 @media (max-width: 540px) {
   .home-hero {
-    padding-block: 44px 40px;
+    padding-block: 52px 44px;
   }
   .band-copy {
     padding: 36px var(--gutter) 28px;
   }
   .band-figure {
-    padding: 20px var(--gutter);
+    padding: 28px var(--gutter) 16px;
+  }
+  .band-figure img {
+    height: 220px;
+    padding: 14px;
   }
   .footer-nav ul {
     gap: 0 28px;
@@ -1119,14 +1074,8 @@ select {
     font-size: 17px;
   }
   .home-stage::after {
-    top: 52%;
-    background-image: radial-gradient(
-      circle,
-      var(--lattice) 1.1px,
-      transparent 1.6px
-    );
-    background-size: 18px 18px;
-    opacity: 0.7;
+    background-size: 24px 24px;
+    opacity: 0.45;
   }
   .hero-affiliation {
     font-size: 11px;
