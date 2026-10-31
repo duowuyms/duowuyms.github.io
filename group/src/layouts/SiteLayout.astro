@@ -58,6 +58,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           {navigation.map((item) => (
             <a
               href={url(item.path)}
+              data-nav-path={item.path}
               aria-current={current === item.path ? 'page' : undefined}
             >
               {item.label}
@@ -98,6 +99,30 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       const header = document.querySelector<HTMLElement>('.site-header');
       const menu = document.querySelector<HTMLButtonElement>('.menu-toggle');
       const nav = document.querySelector<HTMLElement>('#main-nav');
+      // The two homepage entries share a pathname; distinguish their anchors.
+      if (nav && document.querySelector('#directions')) {
+        const home = nav.querySelector<HTMLAnchorElement>('[data-nav-path=""]');
+        const research = nav.querySelector<HTMLAnchorElement>(
+          '[data-nav-path="#directions"]',
+        );
+        const researchAnchors = new Set([
+          '#directions',
+          '#agents',
+          '#embodied',
+          '#training',
+        ]);
+        const syncHomepageNavigation = () => {
+          const inResearch = researchAnchors.has(window.location.hash);
+          home?.removeAttribute('aria-current');
+          research?.removeAttribute('aria-current');
+          (inResearch ? research : home)?.setAttribute(
+            'aria-current',
+            inResearch ? 'location' : 'page',
+          );
+        };
+        syncHomepageNavigation();
+        window.addEventListener('hashchange', syncHomepageNavigation);
+      }
       if (header && menu && nav) {
         header.classList.add('enhanced');
         menu.hidden = false;

@@ -267,7 +267,7 @@ select {
   text-decoration: none;
   border-bottom: 1px solid transparent;
 }
-.main-nav a[aria-current='page'] {
+.main-nav a[aria-current] {
   color: var(--accent);
   border-color: currentColor;
 }

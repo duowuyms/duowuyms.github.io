@@ -178,6 +178,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新配色精修（2026-10-30）：用户认为白灰单调，同意以局部淡色增加节奏。首屏左右淡紫/冰蓝光晕略增强，中央保持白；研究方向图片背板分别为淡紫灰 #eee8f3、淡蓝灰 #e7eef7、淡青灰 #e6f0ed，文字区域统一白底，Explore papers 链接以对应深紫/蓝/青呼应。全站导航和焦点仍为清华紫；图片、布局与轮播行为未改。
 
+最新导航修复：同一首页的 #directions/#agents/#embodied/#training 现在高亮 Research Directions，其他首页锚点或无 hash 高亮 About us。初次加载及 hashchange（包括前进/后退）同步，其他页面仍按 pathname 高亮。用 aria-current="location" 表示当前研究区域，CSS 支持该值。
+
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 mask/opacity 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。
