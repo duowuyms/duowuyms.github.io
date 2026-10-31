@@ -560,126 +560,148 @@ select {
   color: var(--muted);
   font-size: 11px;
 }
-.directions-heading {
-  padding-block: clamp(38px, 5vw, 64px) 0;
-  border-top: 1px solid var(--rule);
-}
-.directions-heading + .direction-band {
-  border-top: 0;
-}
-.direction-band {
-  display: grid;
-  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-  border-top: 1px solid var(--rule);
-}
-.direction-band.embodied {
-  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+/* Research Directions: Apple-style section on pale grey with white tiles. */
+.directions {
+  padding-block: clamp(64px, 8vw, 112px);
   background: var(--surface);
 }
-.direction-copy {
+.directions-intro {
+  text-align: center;
+}
+.directions-intro h2 {
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+.directions-intro p {
+  max-width: 560px;
+  margin: 16px auto 0;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.45;
+  color: var(--muted);
+  text-wrap: balance;
+}
+.direction-tiles {
+  display: grid;
+  gap: 24px;
+  margin-top: clamp(40px, 5vw, 64px);
+}
+.direction-tile {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(32px, 4.5vw, 72px);
+  padding: clamp(32px, 4.2vw, 64px);
+  border-radius: 28px;
+  background: var(--white);
+}
+.tile-copy {
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: center;
-  padding: 64px 6% 64px var(--gutter);
 }
-.embodied .direction-copy {
-  padding: 64px var(--gutter) 64px 6%;
-}
-.direction-copy h2 {
-  font-size: clamp(32px, 3.1vw, 46px);
-  font-weight: 700;
-  line-height: 1.12;
+.tile-copy h3 {
+  font-size: clamp(30px, 2.9vw, 44px);
+  font-weight: 600;
   letter-spacing: -0.035em;
-  margin-bottom: 22px;
+  line-height: 1.1;
 }
-.direction-copy > p {
-  max-width: 430px;
-  font-size: 15px;
-  line-height: 1.85;
-}
-.direction-topics {
-  width: 100%;
-  max-width: 430px;
-  margin: 26px 0 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--diagram-rule);
-}
-.direction-topics li {
-  padding-block: 11px;
-  border-bottom: 1px solid var(--rule);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
-}
-.direction-copy .text-link {
-  margin-top: 28px;
-}
-.embodied .direction-art {
-  order: -1;
-}
-.direction-art {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 26px;
-  min-width: 0;
-  padding: 64px var(--gutter) 64px 4%;
-}
-.embodied .direction-art {
-  padding: 64px 4% 64px var(--gutter);
-}
-.direction-art figure {
-  margin: 0;
-}
-.direction-art img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 14px;
-  max-height: 440px;
-  padding: 14px;
-  border: 1px solid var(--rule);
-  background: var(--white);
-  object-fit: contain;
-}
-.direction-art figcaption {
-  margin-top: 12px;
-  font-size: 12px;
+.tile-summary {
+  max-width: 440px;
+  margin-top: 16px;
+  font-size: 17px;
   line-height: 1.6;
   color: var(--muted);
 }
-.direction-papers {
-  margin: 0;
+.tile-topics {
+  margin: 26px 0 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--diagram-rule);
 }
-.direction-papers li {
+.tile-topics li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 2;
+}
+.tile-topics li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.9em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.tile-papers {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 16px;
-  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
 }
-.direction-papers a {
+.tile-papers a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  min-height: 36px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.tile-papers small {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.tile-papers a:hover {
+  background: var(--accent);
+  color: var(--white);
+}
+.tile-papers a:hover small {
+  color: inherit;
+}
+.tile-link {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   min-height: 44px;
+  margin-top: 18px;
+  color: var(--accent);
   font-size: 15px;
-  font-weight: 600;
-  color: inherit;
   text-decoration: none;
 }
-.direction-papers a:hover {
-  color: var(--accent);
+.tile-link:hover {
+  color: var(--accent-hover);
   text-decoration: underline;
 }
-.direction-papers span {
+.tile-figure {
+  min-width: 0;
+  margin: 0;
+}
+.tile-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 460px;
+  object-fit: contain;
+}
+.tile-figure figcaption {
+  margin-top: 14px;
   font-size: 12px;
+  line-height: 1.6;
   color: var(--muted);
-  text-align: right;
+  text-align: center;
 }
 .site-footer {
   display: grid;
@@ -1073,6 +1095,9 @@ select {
   .main-nav a {
     font-size: 15px;
   }
+  .direction-tile {
+    grid-template-columns: 1fr;
+  }
   .about-intro {
     grid-template-columns: 1fr;
     gap: 25px;
@@ -1112,6 +1137,13 @@ select {
 @media (max-width: 540px) {
   .home-hero {
     padding-block: 44px 40px;
+  }
+  .direction-tile {
+    padding: 28px 22px;
+    border-radius: 22px;
+  }
+  .tile-summary {
+    font-size: 16px;
   }
   .footer-nav ul {
     gap: 0 28px;
@@ -1189,28 +1221,6 @@ select {
   }
   .about-copy {
     font-size: 14px;
-  }
-  .direction-band,
-  .direction-band.embodied {
-    grid-template-columns: 1fr;
-  }
-  .direction-copy .text-link {
-    font-size: 13px;
-    gap: 20px;
-  }
-  .direction-copy,
-  .embodied .direction-copy {
-    padding: 40px var(--gutter) 32px;
-  }
-  .direction-copy h2 {
-    font-size: 32px;
-  }
-  .direction-art,
-  .embodied .direction-art {
-    padding: 0 var(--gutter) 44px;
-  }
-  .embodied .direction-art {
-    order: 0;
   }
   .page-intro h1 {
     font-size: clamp(42px, 10vw, 56px);

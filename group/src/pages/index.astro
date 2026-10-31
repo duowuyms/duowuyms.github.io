@@ -5,6 +5,7 @@ import AboutUs from '../components/AboutUs.astro';
 import DirectionArt from '../components/DirectionArt.astro';
 import { site } from '../data/site';
 import { directions } from '../data/research';
+import { publications } from '../data/publications';
 import { url } from '../lib/urls';
 ---
 
@@ -32,36 +33,65 @@ import { url } from '../lib/urls';
     <SelectedWork />
   </div>
   <AboutUs />
-  <div class="directions-heading page-gutter" id="directions">
-    <h2 class="section-title">Research Directions</h2>
-  </div>
-  {directions.map((direction) => (
-    <section
-      class:list={['direction-band', direction.id]}
-      id={direction.id}
-      aria-labelledby={`${direction.id}-heading`}
-    >
-      <div class="direction-copy">
-        <>
-          <h2 id={`${direction.id}-heading`}>{direction.title}</h2>
-          <p>{direction.summary}</p>
-          <ul
-            class="direction-topics"
-            aria-label={`${direction.name} research topics`}
-          >
-            {direction.topics.map((topic) => (
-              <li>{topic}</li>
-            ))}
-          </ul>
-          <a
-            class="text-link"
-            href={url(`publications/?topic=${direction.id}`)}
-          >
-            See {direction.title} papers <span aria-hidden="true">↗</span>
-          </a>
-        </>
-      </div>
-      <DirectionArt direction={direction.id} />
-    </section>
-  ))}
+  <section
+    class="directions"
+    id="directions"
+    aria-labelledby="directions-title"
+  >
+    <header class="directions-intro page-gutter">
+      <h2 id="directions-title">Research Directions</h2>
+      <p>
+        Large models that reason, act in the physical world, and train at scale.
+      </p>
+    </header>
+    <div class="direction-tiles page-gutter">
+      {directions.map((direction) => (
+        <article
+          class="direction-tile"
+          id={direction.id}
+          aria-labelledby={`${direction.id}-heading`}
+        >
+          <div class="tile-copy">
+            <h3 id={`${direction.id}-heading`}>{direction.title}</h3>
+            <p class="tile-summary">{direction.summary}</p>
+            <ul
+              class="tile-topics"
+              aria-label={`${direction.title} research topics`}
+            >
+              {direction.topics.map((topic) => (
+                <li>{topic}</li>
+              ))}
+            </ul>
+            <ul
+              class="tile-papers"
+              aria-label={`${direction.title} publications`}
+            >
+              {direction.publications.map((id) => {
+                const paper = publications.find((p) => p.id === id)!;
+                return (
+                  <li>
+                    <a href={url(`publications/#${paper.id}`)}>
+                      {paper.name}
+                      <small>
+                        {paper.venue === 'Preprint'
+                          ? `${paper.year} preprint`
+                          : paper.venue}
+                      </small>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+            <a
+              class="tile-link"
+              href={url(`publications/?topic=${direction.id}`)}
+            >
+              See {direction.title} papers <span aria-hidden="true">›</span>
+            </a>
+          </div>
+          <DirectionArt direction={direction.id} />
+        </article>
+      ))}
+    </div>
+  </section>
 </SiteLayout>

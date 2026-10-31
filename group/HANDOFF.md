@@ -166,6 +166,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新首页精修（用户同意三项建议）：(1) 研究方向三行全部改为浅色（白、浅灰 `--surface`、白，细线分隔），删除深色半栏和相关 night/dark-rule 等 token；(2) 方向标题改为单行 32–46px，小于页面主标题；`research.ts` 中 `verb`/`headline` 改为单一 `title`；(3) “Research work”“About us”“Research Directions” 统一使用 `.section-title`，删除 REASON/INTERACT/SCALE 标签和 “Reason · Interact · Scale” 分隔条。新增 `--gutter` token，研究行左右与全站对齐（1440px 宽时均为 78px）。手机端单列、文字在图前、无横向溢出。
 
+最新：用户认为夜景舞台和黑白研究行不好看，已用 `git revert` 回到 `7039928` 的浅色版本（commit `f931dd6`，夜景版仍在历史 `c2ba191`）。随后按 “Apple 风格、优雅、聪明” 重做 Research Directions：整段 `#f5f5f7` 浅灰底，居中 56px 标题 + 一行说明，每个方向一张白色大圆角卡片（28px，手机 22px，无阴影无边框），左侧标题、简介、带紫色圆点的子方向、论文胶囊链接（名称 + venue，悬停变紫底白字）、紫色 “See … papers ›”，右侧论文图直接放在白卡上。`DirectionArt.astro` 现只输出图与说明。
+
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 transform 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。

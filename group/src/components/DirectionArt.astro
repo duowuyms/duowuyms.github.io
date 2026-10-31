@@ -1,7 +1,5 @@
 ---
 import { url } from '../lib/urls';
-import { publications } from '../data/publications';
-import { directions } from '../data/research';
 interface Props {
   direction: string;
 }
@@ -40,37 +38,18 @@ const media: Record<
 };
 
 const item = media[direction];
-const ids: readonly string[] =
-  directions.find((d) => d.id === direction)?.publications ?? [];
-const papers = ids
-  .map((id) => publications.find((p) => p.id === id))
-  .filter((p) => p !== undefined);
 ---
 
 {item && (
-  <div class="direction-art">
-    <figure>
-      <img
-        src={url(item.image)}
-        width={item.width}
-        height={item.height}
-        alt={item.alt}
-        loading="lazy"
-        decoding="async"
-      />
-      <figcaption>{item.caption}</figcaption>
-    </figure>
-    {papers.length > 0 && (
-      <ul class="direction-papers" aria-label="Publications in this direction">
-        {papers.map((p) => (
-          <li>
-            <a href={url(`publications/#${p.id}`)}>{p.name}</a>
-            <span>
-              {p.venue === 'Preprint' ? `${p.year} preprint` : p.venue}
-            </span>
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>
+  <figure class="tile-figure">
+    <img
+      src={url(item.image)}
+      width={item.width}
+      height={item.height}
+      alt={item.alt}
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>{item.caption}</figcaption>
+  </figure>
 )}
