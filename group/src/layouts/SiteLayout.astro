@@ -1,5 +1,6 @@
 ---
-import { navigation, site } from '../data/site';
+import { contacts, navigation, site } from '../data/site';
+import { directions } from '../data/research';
 import { url } from '../lib/urls';
 import '../styles/global.css';
 import '@fontsource-variable/inter/wght.css';
@@ -14,6 +15,56 @@ const pageTitle = title
   ? `${title} — ${site.shortName}`
   : `${site.name} — ${site.shortName}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+
+const footerColumns: {
+  title: string;
+  href?: string;
+  links: { label: string; href: string; note?: string; external?: boolean }[];
+}[] = [
+  {
+    title: 'About us',
+    href: url(),
+    links: [
+      { label: 'Team', href: url('team/') },
+      { label: 'Join us', href: url('join/') },
+    ],
+  },
+  {
+    title: 'Research',
+    href: url('#directions'),
+    links: directions.map((d) => ({
+      label: d.id === 'training' ? 'Distributed Training' : d.name,
+      href: url(`#${d.id}`),
+    })),
+  },
+  {
+    title: 'Publications',
+    href: url('publications/'),
+    links: [
+      { label: 'All papers', href: url('publications/') },
+      {
+        label: 'Decision-making',
+        href: url('publications/?topic=decision'),
+      },
+    ],
+  },
+  {
+    title: 'Contact',
+    links: [
+      {
+        label: site.advisor.name,
+        href: site.advisor.url,
+        note: 'Faculty advisor',
+        external: true,
+      },
+      ...contacts.map((c) => ({
+        label: c.name,
+        href: `mailto:${c.email}`,
+        note: c.area,
+      })),
+    ],
+  },
+];
 ---
 
 <!doctype html>
@@ -70,20 +121,46 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <slot />
       </main>
       <footer class="site-footer page-gutter">
-        <div>
-          <a class="footer-brand" href={url()}>
-            MMLab @ SIGS
-          </a>
+        <a class="brand footer-brand" href={url()}>
+          MMLab <span>@ SIGS</span>
+          <small>Tsinghua University</small>
+        </a>
+        <nav class="footer-columns" aria-label="Site map">
+          {footerColumns.map((column) => (
+            <div>
+              <h2>
+                {column.href ? (
+                  <a href={column.href}>{column.title}</a>
+                ) : (
+                  column.title
+                )}
+              </h2>
+              <ul>
+                {column.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      {...(link.external
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
+                    >
+                      {link.label}
+                    </a>
+                    {link.note && <small>{link.note}</small>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+        <div class="footer-bottom">
           <p>
-            {site.name}
+            © {new Date().getFullYear()} MMLab @ SIGS
             <br />
-            Research Group · Tsinghua University
+            {site.affiliation}, Shenzhen
           </p>
-        </div>
-        <div class="footer-right">
-          <p>Shenzhen, China</p>
-          <a href={url('join/')}>
-            Get in touch <span aria-hidden="true">↗</span>
+          <a class="back-to-top" href="#main">
+            Back to top <span aria-hidden="true">↑</span>
           </a>
         </div>
       </footer>

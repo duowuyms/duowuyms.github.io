@@ -156,6 +156,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新：用户要求滚动时顶部导航一直显示。`.site-header` 改为 sticky（白底、底部细线、无阴影，z-index 20，跳转链接 z-index 30）；`--header-height`（桌面 76px，≤800px 为 100px）用于 `scroll-padding-top`，锚点不会被遮挡。手机端无 JS 时不固定（完整导航太高）。已在桌面和 375px 检查：滚动后导航固定在顶部，`#embodied`、`#seekvln` 锚点落在导航下方，手机菜单在固定导航内展开/关闭正常。
 
+最新：用户认为首页底部 “Large models as decision-makers” 与 “Join our group / Build what comes next” 两段不需要，已删除；改为参照 HKU MMLab 的页脚：大号 MMLab @ SIGS 字标，四栏站点地图（About us / Research / Publications / Contact，粗体栏目名），底部版权 + 机构 + Back to top。NetLLM、Trailblazer 通过 Publications 和页脚 “Decision-making”（`publications/?topic=decision`）保留入口；Join us 在导航和页脚。≥800px 四栏，以下两栏。未加入机构 logo 行（没有核实过的 logo 文件）。
+
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 transform 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。

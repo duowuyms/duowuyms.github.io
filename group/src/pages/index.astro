@@ -77,39 +77,4 @@ import { url } from '../lib/urls';
       <DirectionArt direction={direction.id} />
     </section>
   ))}
-  <section
-    class="research-connection page-gutter"
-    aria-labelledby="decision-heading"
-  >
-    <p class="eyebrow">Related research</p>
-    <h2 class="display" id="decision-heading">
-      Large models as decision-makers.
-    </h2>
-    <p>
-      Our related work also explores how large models can act as generalizable
-      policies for network control, connecting model reasoning with practical
-      systems.
-    </p>
-    <div class="connection-links">
-      <a class="text-link" href={url('publications/#netllm')}>
-        NetLLM, SIGCOMM 2024 <span aria-hidden="true">↗</span>
-      </a>
-      <a class="text-link" href={url('publications/#trailblazer')}>
-        Trailblazer <span aria-hidden="true">↗</span>
-      </a>
-    </div>
-  </section>
-  <section class="home-invitation page-gutter">
-    <div>
-      <p class="eyebrow">Join our group</p>
-      <h2 class="display">
-        Build what comes next,
-        <br />
-        with us.
-      </h2>
-    </div>
-    <a class="text-link" href={url('join/')}>
-      Opportunities & contact <span aria-hidden="true">↗</span>
-    </a>
-  </section>
 </SiteLayout>
