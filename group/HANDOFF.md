@@ -166,8 +166,6 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新首页精修（用户同意三项建议）：(1) 研究方向三行全部改为浅色（白、浅灰 `--surface`、白，细线分隔），删除深色半栏和相关 night/dark-rule 等 token；(2) 方向标题改为单行 32–46px，小于页面主标题；`research.ts` 中 `verb`/`headline` 改为单一 `title`；(3) “Research work”“About us”“Research Directions” 统一使用 `.section-title`，删除 REASON/INTERACT/SCALE 标签和 “Reason · Interact · Scale” 分隔条。新增 `--gutter` token，研究行左右与全站对齐（1440px 宽时均为 78px）。手机端单列、文字在图前、无横向溢出。
 
-最新（用户选择 Night stage + 全宽黑白交替）：首屏与 Research work 区改为纯黑夜景舞台：白色标题、清华紫地平线光、白色细点透视地面（透视 1600px/64°，点保持圆形，不再拉成短横线），白色论文卡片立于其上。研究方向改为全宽黑（AI Agents）/白（Embodied）/黑（Distributed Training）。新增 `.on-dark` 作用域重映射颜色 token，深色区域强调色为浅清华紫 `#c58fd6`（对比度约 8:1）。手机端地平线光改为扁平光带。上一版全浅色方案为 commit `7039928`，可随时回退比较。
-
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 transform 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。

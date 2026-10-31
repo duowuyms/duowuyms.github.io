@@ -9,7 +9,7 @@ import { url } from '../lib/urls';
 ---
 
 <SiteLayout>
-  <div class="home-stage on-dark">
+  <div class="home-stage">
     <section class="home-hero page-gutter" aria-labelledby="group-title">
       <p class="hero-affiliation">{site.affiliation}</p>
       <h1 id="group-title">
@@ -37,11 +37,7 @@ import { url } from '../lib/urls';
   </div>
   {directions.map((direction) => (
     <section
-      class:list={[
-        'direction-band',
-        direction.id,
-        { 'on-dark': direction.id !== 'embodied' },
-      ]}
+      class:list={['direction-band', direction.id]}
       id={direction.id}
       aria-labelledby={`${direction.id}-heading`}
     >

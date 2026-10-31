@@ -16,27 +16,9 @@
   --header-height: 76px;
   --gutter: clamp(22px, 5.4vw, 90px);
   --horizon-glow: rgba(102, 8, 116, 0.1);
-  --horizon-core: transparent;
   --horizon-violet: rgba(130, 49, 142, 0.06);
   --font-body: 'Inter Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-display: 'Inter Variable', 'Helvetica Neue', Arial, sans-serif;
-}
-/* Dark surfaces re-map the same tokens, so components inside adapt. Purple
-   becomes a light Tsinghua lilac there, since #660874 is unreadable on black. */
-.on-dark {
-  --ink: #f5f5f7;
-  --muted: #a1a1a6;
-  --rule: #2c2c2e;
-  --diagram-rule: #48484a;
-  --surface: #1c1c1e;
-  --accent: #c58fd6;
-  --accent-hover: #e2c2ee;
-  --lattice: rgba(255, 255, 255, 0.5);
-  --horizon-glow: rgba(150, 40, 170, 0.55);
-  --horizon-core: rgba(220, 150, 240, 0.25);
-  --horizon-violet: rgba(102, 8, 116, 0.3);
-  background: #000;
-  color: var(--ink);
 }
 
 * {
@@ -302,17 +284,12 @@ select {
   z-index: -2;
   background:
     radial-gradient(
-      ellipse 58% 16% at 50% 45%,
+      ellipse 62% 13% at 50% 47%,
       var(--horizon-glow),
-      transparent 72%
+      transparent 75%
     ),
     radial-gradient(
-      ellipse 30% 9% at 50% 45%,
-      var(--horizon-core),
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 45% 30% at 50% 28%,
+      ellipse 42% 24% at 50% 30%,
       var(--horizon-violet),
       transparent 72%
     );
@@ -320,48 +297,36 @@ select {
 .home-stage::after {
   left: -35%;
   right: -35%;
-  top: 44%;
-  height: 70%;
+  top: 46%;
+  height: 90%;
   z-index: -1;
   background-image: radial-gradient(
     circle,
-    var(--lattice) 1.3px,
-    transparent 1.9px
+    var(--lattice) 1.7px,
+    transparent 2.3px
   );
-  background-size: 26px 26px;
+  background-size: 28px 28px;
   background-position: center top;
-  transform: perspective(1600px) rotateX(64deg);
+  transform: perspective(900px) rotateX(55deg);
   transform-origin: 50% 0;
   -webkit-mask-image:
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      #000 12%,
-      rgba(0, 0, 0, 0.35) 38%,
-      transparent 60%
-    ),
+    linear-gradient(to bottom, transparent 0%, #000 10%, transparent 62%),
     linear-gradient(
       to right,
-      transparent 2%,
-      #000 28%,
-      #000 72%,
-      transparent 98%
+      transparent 4%,
+      #000 30%,
+      #000 70%,
+      transparent 96%
     );
   -webkit-mask-composite: source-in;
   mask-image:
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      #000 12%,
-      rgba(0, 0, 0, 0.35) 38%,
-      transparent 60%
-    ),
+    linear-gradient(to bottom, transparent 0%, #000 10%, transparent 62%),
     linear-gradient(
       to right,
-      transparent 2%,
-      #000 28%,
-      #000 72%,
-      transparent 98%
+      transparent 4%,
+      #000 30%,
+      #000 70%,
+      transparent 96%
     );
   mask-composite: intersect;
 }
@@ -609,7 +574,7 @@ select {
 }
 .direction-band.embodied {
   grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
-  background: var(--paper);
+  background: var(--surface);
 }
 .direction-copy {
   display: flex;
@@ -1147,19 +1112,6 @@ select {
 @media (max-width: 540px) {
   .home-hero {
     padding-block: 44px 40px;
-  }
-  .home-stage::before {
-    background:
-      radial-gradient(
-        ellipse 120% 9% at 50% 47%,
-        var(--horizon-glow),
-        transparent 72%
-      ),
-      radial-gradient(
-        ellipse 90% 22% at 50% 25%,
-        var(--horizon-violet),
-        transparent 72%
-      );
   }
   .footer-nav ul {
     gap: 0 28px;
