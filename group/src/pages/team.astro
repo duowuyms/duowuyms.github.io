@@ -2,18 +2,13 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
 import { team, site, contacts } from '../data/site';
-import { url } from '../lib/urls';
+import MemberCard from '../components/MemberCard.astro';
 
-// Initials avatars: we have no verified member photos, so none are invented.
-const initials = (name: string) =>
-  name
-    .replace(/^Prof\.\s*/, '')
-    .split(/\s+/)
-    .map((part) => part[0])
-    .join('')
-    .slice(0, 2);
 const [advisorGroup, ...studentGroups] = team;
 const advisor = advisorGroup.people[0];
+const students = studentGroups.flatMap((group) =>
+  group.people.map((person) => ({ person, role: group.role })),
+);
 ---
 
 <SiteLayout title="Team" current="team/">
@@ -22,92 +17,23 @@ const advisor = advisorGroup.people[0];
     description={`${site.name} Research Group at ${site.affiliation}.`}
   />
   <div class="team-directory page-gutter">
-    <section
-      class="advisor"
-      id={advisorGroup.id}
-      aria-labelledby="advisor-name"
-    >
-      {advisor.photo ? (
-        <img
-          class="avatar avatar-large"
-          src={url(advisor.photo)}
-          alt=""
-          width="320"
-          height="320"
-        />
-      ) : (
-        <span class="avatar avatar-large" aria-hidden="true">
-          {initials(advisor.name)}
-        </span>
-      )}
-      <div>
-        <p class="advisor-role">{advisorGroup.label}</p>
-        <h2 id="advisor-name">{advisor.name}</h2>
-        <p class="advisor-affiliation">{site.affiliation}</p>
-        {advisor.url && (
-          <a
-            class="outline-button"
-            href={advisor.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Homepage<span class="sr-only">: {advisor.name}</span>
-          </a>
-        )}
-      </div>
+    <section class="team-lead" id="advisor" aria-label="Faculty advisor">
+      <MemberCard
+        person={advisor}
+        role={advisorGroup.role}
+        note={site.affiliation}
+        large
+      />
     </section>
-    {studentGroups.map((group) => (
-      <section
-        class="people-group"
-        id={group.id}
-        aria-labelledby={`${group.id}-title`}
-      >
-        <h2 id={`${group.id}-title`}>
-          {group.label}
-          <span>{group.people.length}</span>
-        </h2>
-        <ul>
-          {group.people.map((person) => (
-            <li>
-              {person.url ? (
-                <a
-                  class="person"
-                  href={person.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {person.photo ? (
-                    <img
-                      class="avatar"
-                      src={url(person.photo)}
-                      alt=""
-                      width="320"
-                      height="320"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <span class="avatar" aria-hidden="true">
-                      {initials(person.name)}
-                    </span>
-                  )}
-                  <span class="person-name">
-                    {person.name}
-                    <span class="sr-only"> (personal website)</span>
-                  </span>
-                </a>
-              ) : (
-                <div class="person">
-                  <span class="avatar" aria-hidden="true">
-                    {initials(person.name)}
-                  </span>
-                  <span class="person-name">{person.name}</span>
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))}
+    <section class="team-members" id="members" aria-label="Students">
+      <ul>
+        {students.map(({ person, role }) => (
+          <li>
+            <MemberCard person={person} role={role} />
+          </li>
+        ))}
+      </ul>
+    </section>
   </div>
   <section class="team-join" id="join" aria-labelledby="join-title">
     <div class="page-gutter">

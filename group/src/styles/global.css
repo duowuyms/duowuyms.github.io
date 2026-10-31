@@ -911,54 +911,82 @@ select {
   color: var(--muted);
 }
 .team-directory {
-  padding-bottom: clamp(56px, 7vw, 96px);
-}
-/* Initials avatars stand in for photos; none are invented. */
-.avatar {
-  display: inline-grid;
-  place-items: center;
-  flex: 0 0 auto;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: #f3e8f6;
-  color: var(--accent);
-  font: 600 17px/1 var(--font-display);
-  letter-spacing: -0.02em;
-  object-fit: cover;
-}
-.avatar-large {
-  width: clamp(96px, 9vw, 128px);
-  height: clamp(96px, 9vw, 128px);
-  background: var(--accent);
-  color: var(--white);
-  font-size: clamp(32px, 3vw, 42px);
-}
-.advisor {
-  display: flex;
-  align-items: center;
-  gap: clamp(24px, 3vw, 44px);
-  padding-block: 40px 56px;
+  padding-block: 8px clamp(64px, 8vw, 104px);
   border-top: 1px solid var(--rule);
 }
-.advisor-role {
-  font-size: 14px;
+/* Member grid in the academic-lab idiom: round portraits, centered names. */
+.member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.member-photo {
+  display: grid;
+  place-items: center;
+  width: 140px;
+  height: 140px;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ececf0;
+}
+.member-placeholder svg {
+  width: 56%;
+  fill: #c3c3cb;
+}
+.member-name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+a.member-name {
+  color: var(--accent);
+  text-decoration: none;
+}
+a.member-name:hover {
+  text-decoration: underline;
+}
+.member-role {
+  margin-top: 3px;
+  font-size: 13px;
   color: var(--muted);
 }
-.advisor h2 {
-  margin-top: 6px;
-  font-size: clamp(30px, 3.2vw, 44px);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.1;
+.member-note {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--muted);
 }
-.advisor-affiliation {
-  margin-top: 6px;
+.team-lead {
+  display: flex;
+  justify-content: center;
+  padding-block: 48px 40px;
+}
+.member-large .member-photo {
+  width: 176px;
+  height: 176px;
+}
+.member-large .member-name {
+  font-size: 22px;
+  letter-spacing: -0.025em;
+}
+.member-large .member-role {
   font-size: 15px;
-  color: var(--muted);
+  color: var(--ink);
 }
-.advisor .outline-button {
-  margin-top: 18px;
+.team-members ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px 24px;
+  max-width: 1080px;
+  margin: 16px auto 0;
+  padding: 0;
+  list-style: none;
+}
+.team-members li {
+  flex: 0 0 170px;
 }
 .outline-button {
   display: inline-flex;
@@ -981,52 +1009,6 @@ select {
   border-color: var(--accent);
   background: var(--accent);
   color: var(--white);
-}
-.people-group {
-  padding-block: 40px 48px;
-  border-top: 1px solid var(--rule);
-}
-.people-group h2 {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  font-size: clamp(24px, 2.2vw, 30px);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
-.people-group h2 span {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--muted);
-}
-.people-group ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 12px 24px;
-  margin: 28px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.person {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-height: 64px;
-  padding: 6px 10px 6px 6px;
-  border-radius: 999px;
-  text-decoration: none;
-  transition: background-color 0.15s ease;
-}
-.person-name {
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-}
-a.person:hover {
-  background: var(--surface);
-}
-a.person:hover .person-name {
-  color: var(--accent);
 }
 /* Join us closes the page as a charcoal band, the site's first-version tone. */
 .team-join {
@@ -1201,22 +1183,19 @@ a.person:hover .person-name {
     height: 220px;
     padding: 14px;
   }
-  .people-group ul {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 6px 10px;
+  .team-members ul {
+    gap: 32px 12px;
   }
-  .person {
-    gap: 10px;
-    min-height: 52px;
-    padding: 4px;
+  .team-members li {
+    flex-basis: calc(50% - 6px);
   }
-  .people-group .avatar {
-    width: 40px;
-    height: 40px;
-    font-size: 14px;
+  .member-photo {
+    width: 112px;
+    height: 112px;
   }
-  .person-name {
-    font-size: 15px;
+  .member-large .member-photo {
+    width: 144px;
+    height: 144px;
   }
   .footer-nav ul {
     gap: 0 28px;

@@ -40,11 +40,22 @@ export interface Person {
   // A portrait from the member's own homepage; see public/media/team/README.md.
   photo?: string;
 }
-export const team: { id: string; label: string; people: Person[] }[] = [
-  { id: 'advisor', label: 'Faculty advisor', people: [site.advisor] },
+export const team: {
+  id: string;
+  label: string;
+  role: string;
+  people: Person[];
+}[] = [
+  {
+    id: 'advisor',
+    label: 'Faculty advisor',
+    role: 'Faculty advisor',
+    people: [site.advisor],
+  },
   {
     id: 'phd',
     label: 'PhD students',
+    role: 'PhD student',
     people: [
       { name: 'Bowen Li' },
       { name: 'Duo Wu', url: 'https://duowuyms.github.io/' },
@@ -59,6 +70,7 @@ export const team: { id: string; label: string; people: Person[] }[] = [
   {
     id: 'masters',
     label: 'Master’s students',
+    role: 'Master’s student',
     people: [
       { name: 'Bingkun Zhu' },
       { name: 'Chunyang Li' },
