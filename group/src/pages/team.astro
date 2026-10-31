@@ -2,6 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
 import { team, site, contacts } from '../data/site';
+import { url } from '../lib/urls';
 
 // Initials avatars: we have no verified member photos, so none are invented.
 const initials = (name: string) =>
@@ -26,9 +27,19 @@ const advisor = advisorGroup.people[0];
       id={advisorGroup.id}
       aria-labelledby="advisor-name"
     >
-      <span class="avatar avatar-large" aria-hidden="true">
-        {initials(advisor.name)}
-      </span>
+      {advisor.photo ? (
+        <img
+          class="avatar avatar-large"
+          src={url(advisor.photo)}
+          alt=""
+          width="320"
+          height="320"
+        />
+      ) : (
+        <span class="avatar avatar-large" aria-hidden="true">
+          {initials(advisor.name)}
+        </span>
+      )}
       <div>
         <p class="advisor-role">{advisorGroup.label}</p>
         <h2 id="advisor-name">{advisor.name}</h2>
@@ -65,12 +76,23 @@ const advisor = advisorGroup.people[0];
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span class="avatar" aria-hidden="true">
-                    {initials(person.name)}
-                  </span>
-                  <span class="person-text">
-                    <span class="person-name">{person.name}</span>
-                    <span class="person-link">Website</span>
+                  {person.photo ? (
+                    <img
+                      class="avatar"
+                      src={url(person.photo)}
+                      alt=""
+                      width="320"
+                      height="320"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <span class="avatar" aria-hidden="true">
+                      {initials(person.name)}
+                    </span>
+                  )}
+                  <span class="person-name">
+                    {person.name}
+                    <span class="sr-only"> (personal website)</span>
                   </span>
                 </a>
               ) : (

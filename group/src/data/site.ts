@@ -2,7 +2,11 @@ export const site = {
   name: 'Agentic and Embodied Large Model Training',
   affiliation: 'Tsinghua Shenzhen International Graduate School',
   shortName: 'MMLab @ SIGS',
-  advisor: { name: 'Prof. Zhi Wang', url: 'http://zwang.inflexionlab.org/' },
+  advisor: {
+    name: 'Prof. Zhi Wang',
+    url: 'http://zwang.inflexionlab.org/',
+    photo: 'media/team/zhi-wang.webp',
+  },
   mission:
     'Turning the knowledge of large models into decisions and actions in open-world environments.',
   admissions:
@@ -33,6 +37,8 @@ export const contacts = [
 export interface Person {
   name: string;
   url?: string;
+  // A portrait from the member's own homepage; see public/media/team/README.md.
+  photo?: string;
 }
 export const team: { id: string; label: string; people: Person[] }[] = [
   { id: 'advisor', label: 'Faculty advisor', people: [site.advisor] },
@@ -43,7 +49,11 @@ export const team: { id: string; label: string; people: Person[] }[] = [
       { name: 'Bowen Li' },
       { name: 'Duo Wu', url: 'https://duowuyms.github.io/' },
       { name: 'Rongwei Lu', url: 'https://rongweilu.cc/' },
-      { name: 'Zhimin Wang', url: 'https://zhiminwangss.github.io/' },
+      {
+        name: 'Zhimin Wang',
+        url: 'https://zhiminwangss.github.io/',
+        photo: 'media/team/zhimin-wang.webp',
+      },
     ],
   },
   {
@@ -60,7 +70,11 @@ export const team: { id: string; label: string; people: Person[] }[] = [
       { name: 'Jiajun Song' },
       { name: 'Jinghe Wang' },
       { name: 'Le Sun' },
-      { name: 'Linjia Kang', url: 'https://xiaogou1234.github.io/' },
+      {
+        name: 'Linjia Kang',
+        url: 'https://xiaogou1234.github.io/',
+        photo: 'media/team/linjia-kang.webp',
+      },
       { name: 'Tianyi Xiong' },
       { name: 'Vahagn Ghazaryan' },
       { name: 'Xinrui Cao' },
