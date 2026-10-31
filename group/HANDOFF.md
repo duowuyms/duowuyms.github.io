@@ -168,6 +168,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新：用户认为夜景舞台和黑白研究行不好看，已用 `git revert` 回到 `7039928` 的浅色版本（commit `f931dd6`，夜景版仍在历史 `c2ba191`）。随后按 “Apple 风格、优雅、聪明” 重做 Research Directions：整段 `#f5f5f7` 浅灰底，居中 56px 标题 + 一行说明，每个方向一张白色大圆角卡片（28px，手机 22px，无阴影无边框），左侧标题、简介、带紫色圆点的子方向、论文胶囊链接（名称 + venue，悬停变紫底白字）、紫色 “See … papers ›”，右侧论文图直接放在白卡上。`DirectionArt.astro` 现只输出图与说明。
 
+最新：用户不喜欢 Apple 卡片（`68238ad`），要求像 HKU MMLab 的色块行。Research Directions 现为全宽色块行：一侧白底完整论文图（约 40%），另一侧深色块（约 60%），金色大标题、白色简介、三项子方向、右下 “Explore papers ›”（筛选 Publications，读屏文字含方向名）。配色：AI Agents 清华紫 #660874、Embodied 深海军蓝 #1c2a4a、Distributed Training 深绿 #1f3b33，标题金色 #e8c47c；中间一行图片在右。对比度 ≥6.8:1。手机端图在上、色块在下。论文胶囊列表已去掉（与 HKU 一致，Explore 链接进入筛选）。
+
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 transform 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。
