@@ -14,7 +14,7 @@ export const navigation = [
   { label: 'Research Directions', path: '#directions' },
   { label: 'Publications', path: 'publications/' },
   { label: 'Team', path: 'team/' },
-  { label: 'Join us', path: 'join/' },
+  { label: 'Join us', path: 'team/#join' },
 ];
 
 export const contacts = [

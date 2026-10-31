@@ -947,20 +947,18 @@ select {
 .people-group a:hover {
   text-decoration: underline;
 }
-.team-invitation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-  padding-block: 45px 65px;
+.team-join {
+  padding-top: clamp(56px, 7vw, 104px);
+  border-top: 1px solid var(--rule);
 }
-.team-invitation h2 {
-  font-size: 42px;
+.team-join .intro-copy {
+  margin-top: 20px;
 }
 .contact-sections {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 9%;
+  margin-top: clamp(36px, 4vw, 56px);
   padding-bottom: 80px;
 }
 .contact-sections > section {
@@ -970,7 +968,7 @@ select {
 .contact-sections .eyebrow {
   color: var(--accent);
 }
-.contact-sections h2 {
+.contact-sections h3 {
   margin: 25px 0;
   font-size: 40px;
 }
@@ -990,7 +988,7 @@ select {
   color: var(--muted);
   font-size: 12px !important;
 }
-.contact-list h3 {
+.contact-list h4 {
   font-size: 19px;
   font-weight: 500;
   margin-top: 7px;
@@ -1091,7 +1089,7 @@ select {
   .contact-sections {
     gap: 6%;
   }
-  .contact-sections h2 {
+  .contact-sections h3 {
     font-size: 33px;
   }
 }
@@ -1210,13 +1208,6 @@ select {
   }
   .people-group li {
     font-size: 16px;
-  }
-  .team-invitation {
-    flex-direction: column;
-    align-items: start;
-  }
-  .team-invitation h2 {
-    font-size: 36px;
   }
   .contact-sections {
     grid-template-columns: 1fr;

@@ -1,6 +1,6 @@
 # MMLab @ SIGS group website
 
-An independent Astro + TypeScript website. Navigation has five sections: About us (home), Research Directions (the homepage `#directions` section), Publications, Team, and Join us. There are four content routes plus a 404 page. Source and tooling are scoped to this directory; the personal homepage and project websites are independent.
+An independent Astro + TypeScript website. Navigation has five sections: About us (home), Research Directions (the homepage `#directions` section), Publications, Team, and Join us (the Team page's `#join` section). There are three content routes (home, Publications, Team) plus a 404 page. Source and tooling are scoped to this directory; the personal homepage and project websites are independent.
 
 ## Local development
 

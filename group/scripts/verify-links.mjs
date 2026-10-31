@@ -20,8 +20,8 @@ async function files(dir) {
 }
 const pages = (await files(root)).filter((file) => file.endsWith('.html'));
 assert(
-  pages.length >= 5,
-  'Expected four content pages and a 404 page. Run npm run build first.',
+  pages.length >= 4,
+  'Expected three content pages and a 404 page. Run npm run build first.',
 );
 for (const file of pages) {
   const html = await readFile(file, 'utf8');

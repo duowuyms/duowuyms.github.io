@@ -50,29 +50,29 @@ NetLLM、Trailblazer 等相关 large-model decision-making 工作也要保留。
 
 ## 文件导航
 
-| 文件                                                    | 职责                                                              |
-| ------------------------------------------------------- | ----------------------------------------------------------------- |
-| `group/src/pages/index.astro`                           | 首页，首屏、精选作品、About us、研究介绍行、加入入口              |
-| `group/src/components/SelectedWork.astro`               | 精选作品语义结构和控制按钮                                        |
-| `group/src/scripts/selected-work.ts`                    | 循环移动、悬停/焦点暂停、拖动、滚轮、可访问性增强                 |
-| `group/src/data/selected-work.ts`                       | 全部作品、论文首图、alt、简短说明；名称/venue/link 从论文数据派生 |
-| `group/src/styles/global.css`                           | 全站设计 token、排版、布局、滚动条、响应式和 gallery 样式         |
-| `group/src/layouts/SiteLayout.astro`                    | 共享导航、移动菜单、metadata、字体、footer                        |
-| `group/src/components/DirectionArt.astro`               | 三个方向的介绍媒体，后续可进一步精修                              |
-| `group/src/pages/publications.astro`                    | 论文档案与筛选交互                                                |
-| `group/src/components/PublicationRow.astro`             | 完整论文记录组件                                                  |
-| `group/src/data/publications.ts`                        | 11 篇论文的正式信息                                               |
-| `group/src/data/abstracts.json`                         | 原七篇论文摘要                                                    |
-| `group/src/data/research.ts`                            | 方向介绍及相关论文 ID                                             |
-| `group/src/data/site.ts`                                | 机构信息、导师、成员、导航、联系方式                              |
-| `group/src/pages/team.astro`, `join.astro`, `404.astro` | 其他页面                                                          |
-| `group/public/media/selected-work/`                     | 新封面，含来源 README                                             |
-| `group/public/media/igen/`                              | IGen 原项目图片和保留的视频                                       |
-| `group/astro.config.mjs`, `src/lib/urls.ts`             | base/site 与路径处理                                              |
-| `group/scripts/verify-links.mjs`                        | 构建结果中的内部链接和媒体路径检查                                |
-| `group/DESIGN.md`                                       | 最新、已批准且已实现的设计约定；以此为准                          |
-| `group/README.md`                                       | 开发、内容维护、部署、素材来源                                    |
-| `group/premium-audit.json`                              | 本轮静态审计结果，0 findings                                      |
+| 文件                                        | 职责                                                              |
+| ------------------------------------------- | ----------------------------------------------------------------- |
+| `group/src/pages/index.astro`               | 首页，首屏、精选作品、About us、研究介绍行、加入入口              |
+| `group/src/components/SelectedWork.astro`   | 精选作品语义结构和控制按钮                                        |
+| `group/src/scripts/selected-work.ts`        | 循环移动、悬停/焦点暂停、拖动、滚轮、可访问性增强                 |
+| `group/src/data/selected-work.ts`           | 全部作品、论文首图、alt、简短说明；名称/venue/link 从论文数据派生 |
+| `group/src/styles/global.css`               | 全站设计 token、排版、布局、滚动条、响应式和 gallery 样式         |
+| `group/src/layouts/SiteLayout.astro`        | 共享导航、移动菜单、metadata、字体、footer                        |
+| `group/src/components/DirectionArt.astro`   | 三个方向的介绍媒体，后续可进一步精修                              |
+| `group/src/pages/publications.astro`        | 论文档案与筛选交互                                                |
+| `group/src/components/PublicationRow.astro` | 完整论文记录组件                                                  |
+| `group/src/data/publications.ts`            | 11 篇论文的正式信息                                               |
+| `group/src/data/abstracts.json`             | 原七篇论文摘要                                                    |
+| `group/src/data/research.ts`                | 方向介绍及相关论文 ID                                             |
+| `group/src/data/site.ts`                    | 机构信息、导师、成员、导航、联系方式                              |
+| `group/src/pages/team.astro`, `404.astro`   | 团队页（底部含 Join us）、404                                     |
+| `group/public/media/selected-work/`         | 新封面，含来源 README                                             |
+| `group/public/media/igen/`                  | IGen 原项目图片和保留的视频                                       |
+| `group/astro.config.mjs`, `src/lib/urls.ts` | base/site 与路径处理                                              |
+| `group/scripts/verify-links.mjs`            | 构建结果中的内部链接和媒体路径检查                                |
+| `group/DESIGN.md`                           | 最新、已批准且已实现的设计约定；以此为准                          |
+| `group/README.md`                           | 开发、内容维护、部署、素材来源                                    |
+| `group/premium-audit.json`                  | 本轮静态审计结果，0 findings                                      |
 
 ## 论文与内容注意事项
 
@@ -185,6 +185,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 最新：Publications 链接改为学术主页常见的描边方形按钮（PAPER / PROJECT / CODE，大写小号字，1px 深色边框，4px 圆角，无箭头，悬停变清华紫底白字）；ABSTRACT 改为同一行的按钮，展开摘要显示在下方。`SiteLayout` 的 `<head>` 新增内联脚本给 `<html>` 加 `js` 类，无 JS 时摘要直接显示。
 
 最新：Publications 每条改为左图右文：论文图在左（手机端在上），右侧依次为标题、作者、斜体 venue 行（无年份的自动补 “, 年份”，后跟研究方向小字）、简介、按钮。按用户要求取消组内成员加粗，所有作者同样样式；原左侧 venue/方向栏已删除。
+
+最新：按用户要求删除独立的 Join us 页面（`join.astro`），其内容（申请、招生链接、两位联系人）移到 Team 页底部 “Join us” 大标题下（`#join`，保留 `#apply`、`#contact`）；顶部与页脚的 Join us 仍保留，指向 `team/#join`。导航高亮：Team 页在 #join/#apply/#contact 时高亮 Join us，否则 Team（与首页 About us/Research Directions 同一机制）。现为 3 个内容页 + 404，`verify-links` 下限改为 4。
 
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 mask/opacity 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
