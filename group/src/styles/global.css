@@ -911,93 +911,208 @@ select {
   color: var(--muted);
 }
 .team-directory {
-  padding-bottom: 50px;
+  padding-bottom: clamp(56px, 7vw, 96px);
 }
-.people-group {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 35px;
-  border-top: 1px solid var(--rule);
-  padding-block: 35px 45px;
-}
-.people-group ul {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.people-group li {
-  font-family: var(--font-display);
-  font-weight: 500;
+/* Initials avatars stand in for photos; none are invented. */
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #f3e8f6;
+  color: var(--accent);
+  font: 600 17px/1 var(--font-display);
   letter-spacing: -0.02em;
-  font-size: 18px;
 }
-.people-group a {
+.avatar-large {
+  width: clamp(96px, 9vw, 128px);
+  height: clamp(96px, 9vw, 128px);
+  background: var(--accent);
+  color: var(--white);
+  font-size: clamp(32px, 3vw, 42px);
+}
+.advisor {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3vw, 44px);
+  padding-block: 40px 56px;
+  border-top: 1px solid var(--rule);
+}
+.advisor-role {
+  font-size: 14px;
+  color: var(--muted);
+}
+.advisor h2 {
+  margin-top: 6px;
+  font-size: clamp(30px, 3.2vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+.advisor-affiliation {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--muted);
+}
+.advisor .outline-button {
+  margin-top: 18px;
+}
+.outline-button {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  min-height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  color: var(--ink);
+  font: 500 12px/1 var(--font-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-decoration: none;
-  min-height: 34px;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
-.people-group a span {
-  color: var(--accent);
-  font-size: 14px;
+.outline-button:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--white);
 }
-.people-group a:hover {
-  text-decoration: underline;
-}
-.team-join {
-  padding-top: clamp(56px, 7vw, 104px);
+.people-group {
+  padding-block: 40px 48px;
   border-top: 1px solid var(--rule);
 }
-.team-join .intro-copy {
-  margin-top: 20px;
+.people-group h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: clamp(24px, 2.2vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
-.contact-sections {
+.people-group h2 span {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.people-group ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px 24px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.person {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 64px;
+  padding: 6px 10px 6px 6px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+.person-text {
+  display: flex;
+  flex-direction: column;
+}
+.person-name {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+.person-link {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--muted);
+}
+a.person:hover {
+  background: var(--surface);
+}
+a.person:hover .person-name,
+a.person:hover .person-link {
+  color: var(--accent);
+}
+/* Join us closes the page as a charcoal band, the site's first-version tone. */
+.team-join {
+  padding-block: clamp(64px, 8vw, 112px);
+  background: var(--night);
+  color: var(--night-text);
+}
+.join-intro {
+  max-width: 640px;
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--night-muted);
+}
+.join-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 9%;
-  margin-top: clamp(36px, 4vw, 56px);
-  padding-bottom: 80px;
+  gap: clamp(32px, 6vw, 96px);
+  margin-top: clamp(40px, 5vw, 64px);
+  padding-top: clamp(32px, 4vw, 48px);
+  border-top: 1px solid #3a3a3d;
 }
-.contact-sections > section {
-  border-top: 1px solid var(--rule);
-  padding-top: 30px;
+.join-columns h3 {
+  font-size: clamp(24px, 2.4vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
-.contact-sections .eyebrow {
-  color: var(--accent);
-}
-.contact-sections h3 {
-  margin: 25px 0;
-  font-size: 40px;
-}
-.contact-sections p:not(.eyebrow) {
+.join-columns p {
+  max-width: 520px;
+  margin-top: 16px;
   font-size: 15px;
-  line-height: 1.9;
-  margin-top: 17px;
+  line-height: 1.8;
+  color: var(--night-muted);
 }
-.contact-sections .text-link {
-  margin-top: 25px;
+.team-join .outline-button {
+  margin-top: 24px;
+  border-color: var(--night-text);
+  color: var(--night-text);
 }
-.contact-list > div {
-  margin-top: 25px;
-  padding-top: 5px;
+.team-join .outline-button:hover {
+  border-color: var(--white);
+  background: var(--white);
+  color: var(--night);
 }
-.contact-list .contact-area {
-  color: var(--muted);
-  font-size: 12px !important;
+.team-join :focus-visible {
+  outline-color: var(--white);
 }
-.contact-list h4 {
+.contact-list {
+  display: grid;
+  gap: 22px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.contact-list li {
+  display: flex;
+  flex-direction: column;
+}
+.contact-area {
+  font-size: 12px;
+  color: var(--night-muted);
+}
+.contact-name {
+  margin-top: 4px;
   font-size: 19px;
-  font-weight: 500;
-  margin-top: 7px;
+  font-weight: 600;
 }
 .contact-list a {
-  display: inline-block;
-  padding-block: 8px;
+  align-self: start;
+  min-height: 32px;
+  padding-top: 4px;
+  color: var(--night-accent);
   font-size: 14px;
   overflow-wrap: anywhere;
+}
+.contact-list a:hover {
+  color: var(--white);
 }
 
 @media (min-width: 1680px) {
@@ -1008,9 +1123,6 @@ select {
 @media (max-width: 1100px) {
   .publication-row {
     grid-template-columns: 220px minmax(0, 1fr);
-  }
-  .people-group ul {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 800px) {
@@ -1053,6 +1165,9 @@ select {
   .main-nav a {
     font-size: 15px;
   }
+  .join-columns {
+    grid-template-columns: 1fr;
+  }
   .direction-band,
   .direction-band.embodied {
     grid-template-columns: 1fr;
@@ -1080,18 +1195,6 @@ select {
     grid-template-columns: 170px minmax(0, 1fr);
     gap: 22px;
   }
-  .people-group {
-    grid-template-columns: 1fr 2.5fr;
-  }
-  .people-group li {
-    font-size: 17px;
-  }
-  .contact-sections {
-    gap: 6%;
-  }
-  .contact-sections h3 {
-    font-size: 33px;
-  }
 }
 @media (max-width: 540px) {
   .home-hero {
@@ -1106,6 +1209,23 @@ select {
   .band-figure img {
     height: 220px;
     padding: 14px;
+  }
+  .people-group ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 10px;
+  }
+  .person {
+    gap: 10px;
+    min-height: 52px;
+    padding: 4px;
+  }
+  .people-group .avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+  .person-name {
+    font-size: 15px;
   }
   .footer-nav ul {
     gap: 0 28px;
@@ -1197,22 +1317,6 @@ select {
   .publication-content h3 {
     font-family: var(--font-display);
     font-size: 22px;
-  }
-  .people-group {
-    grid-template-columns: 1fr;
-    gap: 25px;
-    padding-block: 28px 35px;
-  }
-  .people-group ul {
-    gap: 20px 15px;
-  }
-  .people-group li {
-    font-size: 16px;
-  }
-  .contact-sections {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    padding-bottom: 50px;
   }
 }
 /* Smooth only for in-page jumps: smooth on the root element stops a

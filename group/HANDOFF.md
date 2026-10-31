@@ -188,6 +188,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新：按用户要求删除独立的 Join us 页面（`join.astro`），其内容（申请、招生链接、两位联系人）移到 Team 页底部 “Join us” 大标题下（`#join`，保留 `#apply`、`#contact`）；顶部与页脚的 Join us 仍保留，指向 `team/#join`。导航高亮：Team 页在 #join/#apply/#contact 时高亮 Join us，否则 Team（与首页 About us/Research Directions 同一机制）。现为 3 个内容页 + 404，`verify-links` 下限改为 4。
 
+最新 Team 页美化：去掉大写小标签；导师置顶为大号清华紫首字母头像 + 姓名 + 单位 + HOMEPAGE 描边按钮；博士/硕士分组标题加人数，成员为浅紫首字母头像网格（无真实照片，不编造），有主页者显示灰色 “Website” 而非箭头，悬停高亮；手机端两列。Join us 改为全宽炭黑色带（第一版 #242426），白色大标题、两栏（申请 + 白色描边按钮；联系人 + 浅紫邮箱）。`PageIntro` 的 eyebrow 改为可选。如组内能提供成员照片，可替换头像。
+
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 mask/opacity 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。
