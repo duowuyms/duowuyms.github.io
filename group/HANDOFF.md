@@ -184,6 +184,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新：Publications 链接改为学术主页常见的描边方形按钮（PAPER / PROJECT / CODE，大写小号字，1px 深色边框，4px 圆角，无箭头，悬停变清华紫底白字）；ABSTRACT 改为同一行的按钮，展开摘要显示在下方。`SiteLayout` 的 `<head>` 新增内联脚本给 `<html>` 加 `js` 类，无 JS 时摘要直接显示。
 
+最新：Publications 每条改为左图右文：论文图在左（手机端在上），右侧依次为标题、作者、斜体 venue 行（无年份的自动补 “, 年份”，后跟研究方向小字）、简介、按钮。按用户要求取消组内成员加粗，所有作者同样样式；原左侧 venue/方向栏已删除。
+
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 mask/opacity 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。

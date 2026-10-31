@@ -3,7 +3,6 @@ import type { Publication } from '../data/publications';
 import abstracts from '../data/abstracts.json';
 import { topics } from '../data/publications';
 import { paperFigures } from '../data/selected-work';
-import { team } from '../data/site';
 import { url } from '../lib/urls';
 interface Props {
   publication: Publication;
@@ -11,16 +10,8 @@ interface Props {
 const { publication: p } = Astro.props;
 const abstract = p.abstract || abstracts[p.id as keyof typeof abstracts];
 const figure = paperFigures[p.id];
-// Bold authors who appear on the Team roster; never infer members otherwise.
-const members = new Set(
-  team.flatMap((group) =>
-    group.people.map((person) => person.name.replace(/^Prof\.\s*/, '')),
-  ),
-);
-const authors = p.authors
-  .replace(/\.$/, '')
-  .split(', ')
-  .map((name) => ({ name, member: members.has(name.replace(/\*$/, '')) }));
+// Venue line in the academic idiom: always ends with the year.
+const venue = /\b\d{4}\b/.test(p.venue) ? p.venue : `${p.venue}, ${p.year}`;
 ---
 
 <article
@@ -30,20 +21,27 @@ const authors = p.authors
   data-topic={p.topic}
   data-year={p.year}
 >
-  <div class="publication-meta">
-    <span class="eyebrow">{p.venue}</span>
-    <span>{topics[p.topic]}</span>
-  </div>
+  {figure ? (
+    <a
+      class="publication-image"
+      href={p.links[0]?.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`View ${p.name} paper`}
+    >
+      <img src={url(figure.image)} alt={figure.alt} loading="lazy" />
+    </a>
+  ) : (
+    <div class="publication-monogram" aria-hidden="true">
+      {p.name}
+    </div>
+  )}
   <div class="publication-content">
     <h3>{p.title}</h3>
-    <p class="authors">
-      {authors.map((author, i) => (
-        <>
-          {i > 0 && ', '}
-          {author.member ? <strong>{author.name}</strong> : author.name}
-        </>
-      ))}
-      .
+    <p class="authors">{p.authors}</p>
+    <p class="publication-venue">
+      <em>{venue}</em>
+      <span>{topics[p.topic]}</span>
     </p>
     <p class="publication-summary">{p.summary}</p>
     {(p.links.length > 0 || abstract) && (
@@ -72,19 +70,4 @@ const authors = p.authors
       </div>
     )}
   </div>
-  {figure ? (
-    <a
-      class="publication-image"
-      href={p.links[0]?.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`View ${p.name} paper`}
-    >
-      <img src={url(figure.image)} alt={figure.alt} loading="lazy" />
-    </a>
-  ) : (
-    <div class="publication-monogram" aria-hidden="true">
-      {p.name}
-    </div>
-  )}
 </article>

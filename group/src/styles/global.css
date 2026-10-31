@@ -775,23 +775,11 @@ select {
 }
 .publication-row {
   display: grid;
-  grid-template-columns: 145px minmax(0, 1fr) 260px;
-  gap: 30px;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: clamp(28px, 3.5vw, 48px);
   padding-block: 35px;
   border-top: 1px solid var(--rule);
   scroll-margin-top: 30px;
-}
-.publication-meta > span {
-  display: block;
-}
-.publication-meta .eyebrow {
-  color: var(--accent);
-  letter-spacing: 0.05em;
-}
-.publication-meta > span:last-child {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 12px;
 }
 .publication-content h3 {
   font-family: var(--font-display);
@@ -807,9 +795,20 @@ select {
   color: var(--muted);
   margin-top: 14px;
 }
-.authors strong {
-  color: var(--ink);
-  font-weight: 600;
+.publication-venue {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  margin-top: 6px;
+  font-size: 15px;
+}
+.publication-venue em {
+  font-style: italic;
+}
+.publication-venue span {
+  font-size: 12px;
+  color: var(--muted);
 }
 .publication-summary {
   font-size: 14px;
@@ -1010,8 +1009,7 @@ select {
 }
 @media (max-width: 1100px) {
   .publication-row {
-    grid-template-columns: 115px minmax(0, 1fr) 210px;
-    gap: 22px;
+    grid-template-columns: 220px minmax(0, 1fr);
   }
   .people-group ul {
     grid-template-columns: repeat(2, 1fr);
@@ -1081,12 +1079,8 @@ select {
     padding-block: 50px 40px;
   }
   .publication-row {
-    grid-template-columns: 100px minmax(0, 1fr);
+    grid-template-columns: 170px minmax(0, 1fr);
     gap: 22px;
-  }
-  .publication-image,
-  .publication-monogram {
-    display: none;
   }
   .people-group {
     grid-template-columns: 1fr 2.5fr;
@@ -1194,17 +1188,13 @@ select {
   }
   .publication-row {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 18px;
     padding-block: 28px;
   }
-  .publication-meta {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    align-items: baseline;
-  }
-  .publication-meta > span:last-child {
-    margin: 0;
+  .publication-image,
+  .publication-monogram {
+    width: 100%;
+    max-width: 420px;
   }
   .publication-content h3 {
     font-family: var(--font-display);
