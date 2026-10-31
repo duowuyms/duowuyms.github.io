@@ -194,6 +194,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新：Team 成员排版改为参考 https://robin-lab.cs.utexas.edu/lab/ 的形式：导师居中大圆形头像 + 姓名 + 角色 + 单位；学生统一居中网格（桌面每行 5 人，末行居中；手机每行 2 人），圆形头像下为姓名（有主页者为紫色链接）和角色（PhD student / Master’s student，来自 `site.ts` 的 `role`）。无照片者用灰色人形占位图，之后在 `site.ts` 给对应成员加 `photo` 即可替换。新组件 `MemberCard.astro`。原 #phd、#masters 锚点不再存在（无站内链接引用）。
 
+最新：按用户要求缩小各级标题：页面标题（Our team. / Publications）最大 58px（手机 44px），首页与 Team 的分节标题（About us / Research Directions / Join us）最大 48px，研究方向行标题 36px，Publications 年份 38px，均低于首页主标题 62px；相应收紧标题上下留白。
+
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 mask/opacity 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。

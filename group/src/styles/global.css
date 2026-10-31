@@ -189,7 +189,7 @@ select {
 }
 /* One heading style for the homepage sections. */
 .section-title {
-  font-size: clamp(44px, 5.6vw, 84px);
+  font-size: clamp(32px, 3.4vw, 48px);
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 1;
@@ -534,7 +534,7 @@ select {
 }
 /* Each direction has a quiet media tint; reading areas stay white. */
 .directions > h2 {
-  padding-block: clamp(56px, 7vw, 104px) clamp(32px, 4vw, 56px);
+  padding-block: clamp(44px, 5vw, 72px) clamp(28px, 3vw, 40px);
   border-top: 1px solid var(--rule);
 }
 .direction-band {
@@ -592,7 +592,7 @@ select {
   padding: clamp(36px, 4.5vw, 72px);
 }
 .band-copy h3 {
-  font-size: clamp(32px, 3.6vw, 52px);
+  font-size: clamp(26px, 2.5vw, 36px);
   font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 1.12;
@@ -694,14 +694,17 @@ select {
   color: var(--accent);
 }
 .page-intro {
-  padding-block: 70px 55px;
+  padding-block: 56px 40px;
 }
 .page-intro > .eyebrow {
   color: var(--accent);
 }
+.page-intro > .eyebrow + h1 {
+  margin-top: 16px;
+}
 .page-intro h1 {
-  font-size: clamp(48px, 6.7vw, 96px);
-  margin-top: 22px;
+  font-size: clamp(36px, 4.2vw, 58px);
+  margin-top: 0;
   max-width: 1100px;
 }
 .intro-copy {
@@ -764,8 +767,8 @@ select {
   margin: 5px 0 20px;
 }
 .year-heading {
-  padding-block: clamp(40px, 5vw, 72px) 18px;
-  font-size: clamp(40px, 4.6vw, 68px);
+  padding-block: clamp(32px, 4vw, 56px) 14px;
+  font-size: clamp(28px, 2.8vw, 38px);
   font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 1;
@@ -1032,7 +1035,7 @@ a.member-name:hover {
   border-top: 1px solid #3a3a3d;
 }
 .join-columns h3 {
-  font-size: clamp(24px, 2.4vw, 32px);
+  font-size: clamp(20px, 1.8vw, 24px);
   font-weight: 700;
   letter-spacing: -0.03em;
 }
@@ -1257,7 +1260,7 @@ a.member-name:hover {
     font-size: 16px;
   }
   .page-intro h1 {
-    font-size: clamp(42px, 10vw, 56px);
+    font-size: clamp(34px, 9vw, 44px);
   }
   .intro-copy {
     font-size: 16px;
