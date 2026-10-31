@@ -46,24 +46,30 @@ const authors = p.authors
       .
     </p>
     <p class="publication-summary">{p.summary}</p>
-    <div class="publication-links">
-      {p.links.map((link) => (
-        <a href={link.href} target="_blank" rel="noopener noreferrer">
-          {link.label}{' '}
-          <>
-            <span aria-hidden="true">↗</span>
+    {(p.links.length > 0 || abstract) && (
+      <div class="publication-links">
+        {p.links.map((link) => (
+          <a href={link.href} target="_blank" rel="noopener noreferrer">
+            {link.label}
             <span class="sr-only">: {p.name}</span>
-          </>
-        </a>
-      ))}
-    </div>
+          </a>
+        ))}
+        {abstract && (
+          <button
+            class="abstract-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls={`${p.id}-abstract`}
+          >
+            Abstract<span class="sr-only">: {p.name}</span>
+          </button>
+        )}
+      </div>
+    )}
     {abstract && (
-      <details class="abstract">
-        <>
-          <summary>Abstract</summary>
-          <p>{abstract}</p>
-        </>
-      </details>
+      <div class="abstract" id={`${p.id}-abstract`}>
+        <p>{abstract}</p>
+      </div>
     )}
   </div>
   {figure ? (

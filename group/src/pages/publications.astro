@@ -68,6 +68,20 @@ const years = [...new Set(publications.map((p) => p.year))].sort(
     </div>
   </div>
   <script>
+    // Abstract buttons sit in the link row; without JavaScript the abstracts
+    // simply stay visible.
+    document
+      .querySelectorAll<HTMLButtonElement>('.abstract-toggle')
+      .forEach((button) => {
+        const panel = document.getElementById(
+          button.getAttribute('aria-controls')!,
+        );
+        button.addEventListener('click', () => {
+          const open = button.getAttribute('aria-expanded') !== 'true';
+          button.setAttribute('aria-expanded', String(open));
+          panel?.classList.toggle('is-open', open);
+        });
+      });
     const form = document.querySelector<HTMLFormElement>(
       '.publication-filters',
     );

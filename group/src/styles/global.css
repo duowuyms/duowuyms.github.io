@@ -818,21 +818,43 @@ select {
 }
 .publication-links {
   display: flex;
-  gap: 25px;
+  gap: 10px;
   flex-wrap: wrap;
-  margin-top: 10px;
+  margin-top: 18px;
 }
-.publication-links a {
+/* Outlined buttons in the academic-site idiom: no arrows, small capitals. */
+.publication-links a,
+.abstract-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 13px;
-  min-height: 44px;
-  font-size: 12px;
+  min-height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink);
+  font: 500 12px/1 var(--font-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-decoration: none;
-  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
-.publication-links a:hover {
+.publication-links a:hover,
+.abstract-toggle:hover,
+.abstract-toggle[aria-expanded='true'] {
   border-color: var(--accent);
+  background: var(--accent);
+  color: var(--white);
+}
+.abstract-toggle {
+  display: none;
+}
+.js .abstract-toggle {
+  display: inline-flex;
 }
 .publication-image {
   align-self: start;
@@ -866,19 +888,13 @@ select {
   letter-spacing: -0.03em;
 }
 .abstract {
+  max-width: 760px;
   margin-top: 16px;
 }
-.abstract summary {
-  font-size: 12px;
-  min-height: 32px;
-  padding-block: 5px;
-  width: fit-content;
-}
-.abstract summary:hover {
-  color: var(--accent);
+.js .abstract:not(.is-open) {
+  display: none;
 }
 .abstract p {
-  margin-top: 10px;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.85;
