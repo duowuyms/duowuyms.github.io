@@ -32,9 +32,8 @@ import { url } from '../lib/urls';
     <SelectedWork />
   </div>
   <AboutUs />
-  <div class="section-divider page-gutter" id="directions">
-    <h2 class="eyebrow">Three connected research directions</h2>
-    <span>Reason · Interact · Scale</span>
+  <div class="directions-heading page-gutter" id="directions">
+    <h2 class="section-title">Research Directions</h2>
   </div>
   {directions.map((direction) => (
     <section
@@ -44,15 +43,7 @@ import { url } from '../lib/urls';
     >
       <div class="direction-copy">
         <>
-          <p class="eyebrow">{direction.verb}</p>
-          <h2 id={`${direction.id}-heading`} class="display">
-            {direction.headline.map((line, i) => (
-              <>
-                {i > 0 && <br />}
-                {line}
-              </>
-            ))}
-          </h2>
+          <h2 id={`${direction.id}-heading`}>{direction.title}</h2>
           <p>{direction.summary}</p>
           <ul
             class="direction-topics"
@@ -66,11 +57,7 @@ import { url } from '../lib/urls';
             class="text-link"
             href={url(`publications/?topic=${direction.id}`)}
           >
-            See{' '}
-            {direction.id === 'training'
-              ? 'Distributed Training'
-              : direction.name}{' '}
-            papers <span aria-hidden="true">↗</span>
+            See {direction.title} papers <span aria-hidden="true">↗</span>
           </a>
         </>
       </div>

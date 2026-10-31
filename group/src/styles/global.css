@@ -8,18 +8,13 @@
   --muted: #6e6e73;
   --rule: #e8e8ed;
   --white: #fff;
-  --night: #242426;
-  --night-text: #f5f5f7;
-  --night-muted: #c8c8cd;
-  --soft-surface: #f0f1f2;
-  --diagram: #f5f5f7;
   --diagram-rule: #b8b8be;
-  --dark-rule: #555559;
   --scroll-thumb: #aaaab0;
   --scroll-hover: #85858b;
   --scroll-active: #660874;
   --lattice: #a3abb8;
   --header-height: 76px;
+  --gutter: clamp(22px, 5.4vw, 90px);
   --horizon-glow: rgba(102, 8, 116, 0.1);
   --horizon-violet: rgba(130, 49, 142, 0.06);
   --font-body: 'Inter Variable', 'Helvetica Neue', Arial, sans-serif;
@@ -162,7 +157,7 @@ select {
   margin-inline: auto;
 }
 .page-gutter {
-  padding-inline: clamp(22px, 5.4vw, 90px);
+  padding-inline: var(--gutter);
 }
 .display {
   font-family: var(--font-display);
@@ -180,6 +175,13 @@ select {
 .section-label {
   font-size: 14px;
   font-weight: 500;
+}
+/* One heading style for the homepage sections. */
+.section-title {
+  font-size: clamp(22px, 1.9vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
 }
 .text-link {
   display: inline-flex;
@@ -388,12 +390,7 @@ select {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  margin-bottom: 13px;
-}
-.work-heading h2 {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  margin-bottom: 18px;
 }
 .work-heading a {
   color: var(--accent);
@@ -508,9 +505,6 @@ select {
   padding-block: clamp(38px, 5vw, 76px);
   border-top: 1px solid var(--rule);
 }
-.about-intro > h2 {
-  color: var(--muted);
-}
 .about-grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -566,35 +560,40 @@ select {
   color: var(--muted);
   font-size: 11px;
 }
-.section-divider {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-block: 22px;
-  gap: 20px;
+.directions-heading {
+  padding-block: clamp(38px, 5vw, 64px) 0;
   border-top: 1px solid var(--rule);
 }
-.section-divider > span {
-  font-size: 12px;
-  color: var(--muted);
+.directions-heading + .direction-band {
+  border-top: 0;
 }
 .direction-band {
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-  min-height: clamp(390px, 37vw, 580px);
+  border-top: 1px solid var(--rule);
+}
+.direction-band.embodied {
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+  background: var(--surface);
 }
 .direction-copy {
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  padding: 55px 11%;
+  padding: 64px 6% 64px var(--gutter);
+}
+.embodied .direction-copy {
+  padding: 64px var(--gutter) 64px 6%;
 }
 .direction-copy h2 {
-  font-size: clamp(44px, 4.7vw, 72px);
-  margin: 20px 0 26px;
+  font-size: clamp(32px, 3.1vw, 46px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  margin-bottom: 22px;
 }
-.direction-copy > p:not(.eyebrow) {
+.direction-copy > p {
   max-width: 430px;
   font-size: 15px;
   line-height: 1.85;
@@ -614,37 +613,11 @@ select {
   font-weight: 500;
   line-height: 1.5;
 }
-.training .direction-topics,
-.training .direction-topics li {
-  border-color: var(--dark-rule);
-}
 .direction-copy .text-link {
   margin-top: 28px;
 }
-.direction-band.agents {
-  background: var(--surface);
-}
-.agents .direction-copy {
-  color: var(--ink);
-}
-.direction-band.embodied {
-  background: var(--soft-surface);
-}
-.direction-band.embodied {
-  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
-}
 .embodied .direction-art {
   order: -1;
-}
-.direction-band.training {
-  background: var(--night);
-  color: var(--night-text);
-}
-.training .direction-copy a:hover {
-  color: var(--white);
-}
-.training .direction-copy :focus-visible {
-  outline-color: var(--white);
 }
 .direction-art {
   display: flex;
@@ -652,15 +625,10 @@ select {
   justify-content: center;
   gap: 26px;
   min-width: 0;
-  padding: 55px 7%;
+  padding: 64px var(--gutter) 64px 4%;
 }
-.agents .direction-art {
-  background: var(--night);
-  color: var(--night-text);
-}
-.training .direction-art {
-  background: var(--diagram);
-  color: var(--ink);
+.embodied .direction-art {
+  padding: 64px 4% 64px var(--gutter);
 }
 .direction-art figure {
   margin: 0;
@@ -672,6 +640,7 @@ select {
   border-radius: 14px;
   max-height: 440px;
   padding: 14px;
+  border: 1px solid var(--rule);
   background: var(--white);
   object-fit: contain;
 }
@@ -681,18 +650,11 @@ select {
   line-height: 1.6;
   color: var(--muted);
 }
-.agents .direction-art figcaption,
-.agents .direction-papers span {
-  color: var(--night-muted);
-}
 .direction-papers {
   margin: 0;
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--diagram-rule);
-}
-.agents .direction-papers {
-  border-color: var(--dark-rule);
 }
 .direction-papers li {
   display: flex;
@@ -700,9 +662,6 @@ select {
   align-items: baseline;
   gap: 16px;
   border-bottom: 1px solid var(--rule);
-}
-.agents .direction-papers li {
-  border-color: var(--dark-rule);
 }
 .direction-papers a {
   display: inline-flex;
@@ -716,13 +675,6 @@ select {
 .direction-papers a:hover {
   color: var(--accent);
   text-decoration: underline;
-}
-.agents .direction-papers a:hover {
-  color: var(--white);
-  text-decoration: underline;
-}
-.agents .direction-art :focus-visible {
-  outline-color: var(--white);
 }
 .direction-papers span {
   font-size: 12px;
@@ -1068,20 +1020,14 @@ select {
 }
 
 @media (min-width: 1680px) {
-  .page-gutter {
-    padding-inline: 90px;
+  :root {
+    --gutter: 90px;
   }
 }
 @media (max-width: 1100px) {
   .publication-row {
     grid-template-columns: 115px minmax(0, 1fr) 165px;
     gap: 22px;
-  }
-  .direction-copy {
-    padding-inline: 10%;
-  }
-  .direction-copy > p:not(.eyebrow) {
-    font-size: 14px;
   }
   .people-group ul {
     grid-template-columns: repeat(2, 1fr);
@@ -1138,15 +1084,6 @@ select {
   }
   .about-photo {
     max-width: 640px;
-  }
-  .direction-copy h2 {
-    font-size: clamp(36px, 5.5vw, 48px);
-  }
-  .direction-copy {
-    padding: 38px 9%;
-  }
-  .direction-band {
-    min-height: 360px;
   }
   .page-intro {
     padding-block: 50px 40px;
@@ -1212,9 +1149,6 @@ select {
     gap: 10px;
     margin-bottom: 10px;
   }
-  .work-heading h2 {
-    font-size: 13px;
-  }
   .work-heading a {
     font-size: 11px;
   }
@@ -1230,8 +1164,8 @@ select {
     border-radius: 12px;
     padding: 12px;
   }
-  .page-gutter {
-    padding-inline: 22px;
+  :root {
+    --gutter: 22px;
   }
   .brand {
     font-family: var(--font-display);
@@ -1256,39 +1190,24 @@ select {
   .about-copy {
     font-size: 14px;
   }
-  .section-divider {
-    padding-block: 18px;
-  }
-  .section-divider > span {
-    display: none;
-  }
-  .section-divider .eyebrow {
-    font-size: 10px;
-  }
   .direction-band,
   .direction-band.embodied {
     grid-template-columns: 1fr;
-  }
-  .direction-copy {
-    padding: 35px 26px 40px;
-  }
-  .direction-copy h2 {
-    font-size: 43px;
-    margin-block: 17px 23px;
-  }
-  .direction-copy > p:not(.eyebrow) {
-    font-size: 15px;
   }
   .direction-copy .text-link {
     font-size: 13px;
     gap: 20px;
   }
-  .direction-art {
-    padding: 0 26px 40px;
+  .direction-copy,
+  .embodied .direction-copy {
+    padding: 40px var(--gutter) 32px;
   }
-  .agents .direction-art,
-  .training .direction-art {
-    padding-top: 32px;
+  .direction-copy h2 {
+    font-size: 32px;
+  }
+  .direction-art,
+  .embodied .direction-art {
+    padding: 0 var(--gutter) 44px;
   }
   .embodied .direction-art {
     order: 0;
