@@ -5,9 +5,9 @@ description: An English research group website with a compact centered introduct
 colors:
   paper: '#ffffff'
   ink: '#1d1d1f'
-  accent: '#0066cc'
-  primary: '#0066cc'
-  accent-hover: '#004f9e'
+  accent: '#660874'
+  primary: '#660874'
+  accent-hover: '#4e0559'
   surface: '#f5f5f7'
   muted: '#6e6e73'
   rule: '#e8e8ed'
@@ -21,7 +21,7 @@ colors:
   dark-rule: '#555559'
   scroll-thumb: '#aaaab0'
   scroll-hover: '#85858b'
-  scroll-active: '#0066cc'
+  scroll-active: '#660874'
   lattice: '#a3abb8'
 typography:
   display:
@@ -56,9 +56,9 @@ Avoid dark landscape heroes, toy-like illustrations, large decorative background
 
 ## Colors
 
-Fixed light appearance is intentional. White paper, near-black ink, gray secondary text, pale neutral surfaces, and blue links/focus are shared across all pages. Research bands alternate pale neutral and charcoal surfaces. Dark sections use night-text/night-muted and light focus outlines.
+Fixed light appearance is intentional. White paper, near-black ink, gray secondary text, pale neutral surfaces, and Tsinghua purple (`#660874`) links, hover, current-navigation, and focus states are shared across all pages. The user first chose Apple-style blue, then switched the accent to Tsinghua purple for identity; keep it as a restrained accent on white, never a purple wash, gradient, or pink-purple. Research bands alternate pale neutral and charcoal surfaces. Dark sections use night-text/night-muted and light focus outlines.
 
-`src/styles/global.css` is the canonical runtime token source. The translucent `--horizon-blue` (`rgba(0, 102, 204, 0.11)`) and `--horizon-violet` (`rgba(130, 49, 142, 0.06)`) glow tokens live only in CSS. Every frontmatter color except the `primary` alias maps directly to `--<key>` in `:root`; `primary` aliases `accent`. Font roles map to `--font-display` and `--font-body`. The document mirrors the runtime source; update both together. Component sizes map to their named selectors in that stylesheet. There is no generated token adapter.
+`src/styles/global.css` is the canonical runtime token source. The translucent `--horizon-glow` (`rgba(102, 8, 116, 0.1)`) and `--horizon-violet` (`rgba(130, 49, 142, 0.06)`) glow tokens live only in CSS. Every frontmatter color except the `primary` alias maps directly to `--<key>` in `:root`; `primary` aliases `accent`. Font roles map to `--font-display` and `--font-body`. The document mirrors the runtime source; update both together. Component sizes map to their named selectors in that stylesheet. There is no generated token adapter.
 
 ## Typography
 
@@ -68,7 +68,7 @@ The centered homepage group name uses weight 600, tight tracking (-0.045em), and
 
 ## Layout
 
-The shell is at most 1680px wide; gutters grow from 22px to 90px. The centered introduction and the Research work gallery share one `.home-stage` background, the homepage's only decorative layer: a soft horizon of light behind the title (`--horizon-blue`, with a faint `--horizon-violet` nod to Tsinghua purple) and a `--lattice` dot grid tilted into perspective, a ground plane that recedes from the gallery toward the horizon. It is static (the gallery remains the only motion), masked to fade at the sides and bottom, quieter on phones, and hidden in forced-colors mode. Homepage order: centered group introduction → Research work → About us → three full-width research direction bands → footer. Preserve the original group information. The research bands are analogous to HKU MMLab's campus introduction rows. Each band carries an `id` (`agents`, `embodied`, `training`) used by About us links, and its link opens Publications filtered to that area (`publications/?topic=<id>`). The homepage ends after the bands; NetLLM and Trailblazer stay reachable through Publications and the footer's Decision-making link. Each band's copy column lists the direction's three sub-topics from `research.ts` (the same list as the Research Directions page and the original group page's topic cards) as a ruled list between the summary and the explore link. Each band's media column (the wider column, about 59%) shows one complete paper figure — MobileGen Figure 1 (agents), IGen Figure 6 real-world robot experiments (embodied), and Beyond a Single AI Cluster Figure 1 (training) — with a caption, followed by a ruled list of that direction's papers (name and venue) linking to their archive anchors. Figures sit on white with 14px rounding and are never cropped. No conceptual diagrams or invented illustrations.
+The shell is at most 1680px wide; gutters grow from 22px to 90px. The centered introduction and the Research work gallery share one `.home-stage` background, the homepage's only decorative layer: a soft horizon of light behind the title (`--horizon-glow` in Tsinghua purple, with a faint `--horizon-violet`) and a `--lattice` dot grid tilted into perspective, a ground plane that recedes from the gallery toward the horizon. It is static (the gallery remains the only motion), masked to fade at the sides and bottom, quieter on phones, and hidden in forced-colors mode. Homepage order: centered group introduction → Research work → About us → three full-width research direction bands → footer. Preserve the original group information. The research bands are analogous to HKU MMLab's campus introduction rows. Each band carries an `id` (`agents`, `embodied`, `training`) used by About us links, and its link opens Publications filtered to that area (`publications/?topic=<id>`). The homepage ends after the bands; NetLLM and Trailblazer stay reachable through Publications and the footer's Decision-making link. Each band's copy column lists the direction's three sub-topics from `research.ts` (the same list as the Research Directions page and the original group page's topic cards) as a ruled list between the summary and the explore link. Each band's media column (the wider column, about 59%) shows one complete paper figure — MobileGen Figure 1 (agents), IGen Figure 6 real-world robot experiments (embodied), and Beyond a Single AI Cluster Figure 1 (training) — with a caption, followed by a ruled list of that direction's papers (name and venue) linking to their archive anchors. Figures sit on white with 14px rounding and are never cropped. No conceptual diagrams or invented illustrations.
 
 About us first identifies MMLab@SIGS, Tsinghua SIGS, and the faculty advisor, then connects pretrained-model capabilities with the group's three research directions. It preserves the old page's research scope rather than adopting the neighboring group's distinct research agenda. `AboutUs.astro` pairs the English introduction with an attributed, unaltered official photograph of the Information Building at the Shenzhen campus. The photograph sits beside the text, never behind it; on mobile it follows the introduction. The campus choice is the current design recommendation, pending user feedback. The old AI-stylized gathering pictures are candidates for a future team-life section, not the main About us identity image.
 
@@ -86,8 +86,8 @@ Rectangular reading sections with gently rounded gallery images. Rounded media d
 
 ## Components
 
-- `SiteLayout.astro`: shared metadata, navigation, mobile menu, footer, and self-hosted font. The footer follows HKU MMLab's sitemap structure: a large `MMLab @ SIGS` wordmark, then three linked columns with bold headings — About us (Our group `#about`, Team, Join us), Research Directions (the three direction anchors), and Publications (heading only). Every heading and item is a link; all footer links, the wordmark, and Back to top turn accent blue on hover with a short color transition and no underline. A ruled bottom row holds copyright, affiliation, and Back to top. Four grid tracks above 800px (the fourth stays empty, keeping columns compact), two below; no affiliation logo row because no verified logo files are available. Smooth scrolling applies only under `html:focus-within`, because smooth scrolling on the root stops pages loaded with a `#fragment` from jumping to it.
-- `AboutUs.astro`: group identity, original research rationale, linked research directions, team entry point, and attributed Shenzhen-campus photograph.
+- `SiteLayout.astro`: shared metadata, navigation, mobile menu, footer, and self-hosted font. The footer follows HKU MMLab's structure in its simplest form: a large `MMLab @ SIGS` wordmark, then the five navigation headings only (About us, Research Directions, Publications, Team, Join us), rendered from the same `navigation` list as the header, as bold 19px links (17px on phones) that turn Tsinghua purple on hover. A ruled bottom row holds copyright, affiliation, and Back to top. The header's Join us has no arrow. No affiliation logo row because no verified logo files are available. Smooth scrolling applies only under `html:focus-within`, because smooth scrolling on the root stops pages loaded with a `#fragment` from jumping to it.
+- `AboutUs.astro`: group identity, original research rationale, linked research directions, team entry point, and Shenzhen-campus photograph (caption only; the source is recorded in `public/media/about/README.md`, not linked on the page, at the user's request).
 - `SelectedWork.astro`: semantic work markup; `src/data/selected-work.ts` maps complete paper first figures and derives every record, paper name, venue, and link from `publications.ts`; new publications automatically appear with an honest text cover until an image is supplied.
 - `src/scripts/selected-work.ts`: carousel enhancement, about 19px/second movement, pointer drag, and horizontal wheel input. The user explicitly requested no previous/next or Play/Pause buttons; there is no control/status row. Hover/focus, active dragging, hidden document, and out-of-view media suspend movement; it resumes when those conditions clear. Reduced motion disables automatic movement. All originals remain keyboard accessible; loop copies are excluded from the tab order and accessibility tree. Without JavaScript all originals remain available with native horizontal scrolling.
 - `PageIntro.astro`, `PublicationRow.astro`, and `DirectionArt.astro`: shared secondary headings, complete paper records, and direction-band media (one real figure/photo plus the direction's paper list, derived from `research.ts` and `publications.ts`).

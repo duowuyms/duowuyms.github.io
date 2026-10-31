@@ -162,6 +162,8 @@ About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构
 
 最新：按用户要求页脚改为三栏：About us（Our group、Team、Join us），Research Directions（三个方向，不变），Publications（只保留标题链接）。所有标题和条目都可点击，鼠标悬停变为蓝色（0.15s 过渡，无下划线），字标和 Back to top 同样。联系人邮箱不再放在页脚（Join us 页有）。Team/Join 页上的 #advisor、#phd、#masters、#apply、#contact 锚点保留，可用于分享链接。
 
+最新：用户选择全站强调色改为清华紫 `#660874`（悬停 `#4e0559`），替换原 Apple 蓝；链接、悬停、当前导航、焦点、滚动条激活色、首屏地平线光（`--horizon-glow`）均为紫色。页脚只保留五个标题（与顶部导航同源），悬停变紫；顶部 Join us 去掉箭头；About us 校园照片去掉来源链接，仅保留 “Tsinghua SIGS · Shenzhen” 说明，来源记录仍在 `public/media/about/README.md`。
+
 1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 transform 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
 2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
 3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。

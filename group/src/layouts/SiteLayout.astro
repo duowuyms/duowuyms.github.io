@@ -1,6 +1,5 @@
 ---
 import { navigation, site } from '../data/site';
-import { directions } from '../data/research';
 import { url } from '../lib/urls';
 import '../styles/global.css';
 import '@fontsource-variable/inter/wght.css';
@@ -15,32 +14,6 @@ const pageTitle = title
   ? `${title} — ${site.shortName}`
   : `${site.name} — ${site.shortName}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-
-// Footer site map, in the spirit of HKU MMLab's: every heading and item links.
-const footerColumns: {
-  title: string;
-  href: string;
-  links: { label: string; href: string }[];
-}[] = [
-  {
-    title: 'About us',
-    href: url(),
-    links: [
-      { label: 'Our group', href: url('#about') },
-      { label: 'Team', href: url('team/') },
-      { label: 'Join us', href: url('join/') },
-    ],
-  },
-  {
-    title: 'Research Directions',
-    href: url('#directions'),
-    links: directions.map((d) => ({
-      label: d.id === 'training' ? 'Distributed Training' : d.name,
-      href: url(`#${d.id}`),
-    })),
-  },
-  { title: 'Publications', href: url('publications/'), links: [] },
-];
 ---
 
 <!doctype html>
@@ -88,7 +61,6 @@ const footerColumns: {
               aria-current={current === item.path ? 'page' : undefined}
             >
               {item.label}
-              {item.path === 'join/' && <span aria-hidden="true"> ↗</span>}
             </a>
           ))}
         </nav>
@@ -101,23 +73,14 @@ const footerColumns: {
           MMLab <span>@ SIGS</span>
           <small>Tsinghua University</small>
         </a>
-        <nav class="footer-columns" aria-label="Site map">
-          {footerColumns.map((column) => (
-            <div>
-              <h2>
-                <a href={column.href}>{column.title}</a>
-              </h2>
-              {column.links.length > 0 && (
-                <ul>
-                  {column.links.map((link) => (
-                    <li>
-                      <a href={link.href}>{link.label}</a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
+        <nav class="footer-nav" aria-label="Site map">
+          <ul>
+            {navigation.map((item) => (
+              <li>
+                <a href={url(item.path)}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
         </nav>
         <div class="footer-bottom">
           <p>
