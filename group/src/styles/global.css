@@ -13,10 +13,11 @@
   --scroll-hover: #85858b;
   --scroll-active: #660874;
   --lattice: #a3abb8;
-  --band-agents: #660874;
-  --band-embodied: #1c2a4a;
-  --band-training: #1f3b33;
-  --band-title: #e8c47c;
+  --night: #242426;
+  --night-text: #f5f5f7;
+  --night-muted: #c8c8cd;
+  --night-accent: #d9b3e6;
+  --soft-surface: #f0f1f2;
   --header-height: 76px;
   --gutter: clamp(22px, 5.4vw, 90px);
   --horizon-glow: rgba(102, 8, 116, 0.1);
@@ -564,8 +565,8 @@ select {
   color: var(--muted);
   font-size: 11px;
 }
-/* Research Directions: full-bleed bands in the spirit of HKU MMLab — a paper
-   figure on one side, a deep color block with a gold title on the other. */
+/* Research Directions: full-bleed bands in the spirit of HKU MMLab, in the
+   first version's light grey and charcoal. */
 .directions > h2 {
   padding-block: clamp(38px, 5vw, 64px) 28px;
   border-top: 1px solid var(--rule);
@@ -574,7 +575,6 @@ select {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
   min-height: clamp(400px, 34vw, 520px);
-  color: var(--white);
 }
 .direction-band.embodied {
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
@@ -582,14 +582,24 @@ select {
 .direction-band.embodied .band-figure {
   order: 1;
 }
-.direction-band.agents {
-  background: var(--band-agents);
+.agents .band-copy {
+  background: var(--surface);
 }
-.direction-band.embodied {
-  background: var(--band-embodied);
+.agents .band-figure {
+  background: var(--night);
 }
-.direction-band.training {
-  background: var(--band-training);
+.agents .band-figure figcaption {
+  color: var(--night-muted);
+}
+.embodied .band-copy {
+  background: var(--soft-surface);
+}
+.training .band-copy {
+  background: var(--night);
+  color: var(--night-text);
+}
+.training .band-figure {
+  background: var(--surface);
 }
 .band-figure {
   display: flex;
@@ -606,6 +616,9 @@ select {
   width: 100%;
   height: auto;
   max-height: 400px;
+  padding: 12px;
+  border-radius: 14px;
+  background: var(--white);
   object-fit: contain;
 }
 .band-figure figcaption {
@@ -622,7 +635,6 @@ select {
   padding: clamp(40px, 5.5vw, 80px);
 }
 .band-copy h3 {
-  color: var(--band-title);
   font-size: clamp(36px, 4.2vw, 60px);
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -643,7 +655,10 @@ select {
   list-style: none;
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--muted);
+}
+.training .band-copy ul {
+  color: var(--night-muted);
 }
 .band-copy a {
   align-self: end;
@@ -652,15 +667,21 @@ select {
   gap: 6px;
   min-height: 44px;
   margin-top: 28px;
-  color: var(--band-title);
+  color: var(--accent);
   font-size: 16px;
   text-decoration: none;
 }
 .band-copy a:hover {
-  color: var(--white);
+  color: var(--accent-hover);
   text-decoration: underline;
 }
-.band-copy a:focus-visible {
+.training .band-copy a {
+  color: var(--night-accent);
+}
+.training .band-copy a:hover {
+  color: var(--white);
+}
+.training .band-copy a:focus-visible {
   outline-color: var(--white);
 }
 .site-footer {
