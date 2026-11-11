@@ -913,83 +913,56 @@ select {
   margin-block: 15px;
   color: var(--muted);
 }
+/* Group labels and names share the same reading grid. */
 .team-directory {
-  padding-block: 8px clamp(64px, 8vw, 104px);
+  padding-bottom: clamp(64px, 8vw, 104px);
+}
+.team-group {
+  display: grid;
+  grid-template-columns: minmax(170px, 1fr) minmax(0, 3fr);
+  gap: 24px clamp(24px, 4vw, 64px);
+  align-items: baseline;
+  padding-block: clamp(24px, 3.5vw, 48px);
   border-top: 1px solid var(--rule);
 }
-/* Member grid in the academic-lab idiom: round portraits, centered names. */
-.member {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-.member-photo {
-  display: grid;
-  place-items: center;
-  width: 140px;
-  height: 140px;
-  margin-bottom: 14px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #ececf0;
-}
-.member-placeholder svg {
-  width: 56%;
-  fill: #c3c3cb;
-}
-.member-name {
-  font-size: 16px;
+.team-group h2 {
+  font-size: clamp(17px, 1.5vw, 22px);
   font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.35;
-}
-a.member-name {
-  color: var(--accent);
-  text-decoration: none;
-}
-a.member-name:hover {
-  text-decoration: underline;
-}
-.member-role {
-  margin-top: 3px;
-  font-size: 13px;
-  color: var(--muted);
-}
-.member-note {
-  margin-top: 2px;
-  font-size: 13px;
-  color: var(--muted);
-}
-.team-lead {
-  display: flex;
-  justify-content: center;
-  padding-block: 48px 40px;
-}
-.member-large .member-photo {
-  width: 176px;
-  height: 176px;
-}
-.member-large .member-name {
-  font-size: 22px;
   letter-spacing: -0.025em;
 }
-.member-large .member-role {
-  font-size: 15px;
-  color: var(--ink);
-}
-.team-members ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px 24px;
-  max-width: 1080px;
-  margin: 16px auto 0;
+.team-names {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px clamp(12px, 2vw, 28px);
+  margin: 0;
   padding: 0;
   list-style: none;
 }
-.team-members li {
-  flex: 0 0 170px;
+.member-name {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+a.member-name {
+  color: var(--accent);
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+a.member-name:hover {
+  color: var(--accent-hover);
+  text-decoration-color: currentColor;
+}
+.team-lead .member-name {
+  font-size: clamp(23px, 2.3vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+.team-lead p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 14px;
 }
 .outline-button {
   display: inline-flex;
@@ -1172,6 +1145,20 @@ a.member-name:hover {
     gap: 22px;
   }
 }
+@media (max-width: 900px) {
+  .team-names {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 680px) {
+  .team-group {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .team-names {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 @media (max-width: 540px) {
   .home-hero {
     padding-block: 52px 44px;
@@ -1185,20 +1172,6 @@ a.member-name:hover {
   .band-figure img {
     height: 220px;
     padding: 14px;
-  }
-  .team-members ul {
-    gap: 32px 12px;
-  }
-  .team-members li {
-    flex-basis: calc(50% - 6px);
-  }
-  .member-photo {
-    width: 112px;
-    height: 112px;
-  }
-  .member-large .member-photo {
-    width: 144px;
-    height: 144px;
   }
   .footer-nav ul {
     gap: 0 28px;

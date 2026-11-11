@@ -1,0 +1,22 @@
+---
+import type { Person } from '../data/site';
+
+interface Props {
+  person: Person;
+}
+const { person } = Astro.props;
+---
+
+{person.url ? (
+  <a
+    class="member-name"
+    href={person.url}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {person.name}
+    <span class="sr-only"> (personal website)</span>
+  </a>
+) : (
+  <span class="member-name">{person.name}</span>
+)}

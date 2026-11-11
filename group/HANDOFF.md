@@ -20,7 +20,7 @@
 
 1. **只在 `meiyuanGroup` 分支工作。** 用户确认满意前不要合并 main、不要部署、不要 push 到别处。
 2. **每完成并验证一轮修改就单独 commit 一次**（用户要求，便于版本回退）。commit 信息写清改了什么。
-3. 不编造：不生成假的论文图、假照片、假链接、假数据或影响力数字。缺素材就用诚实的占位（文字封面、灰色人形占位图）。
+3. 不编造：不生成假的论文图、假照片、假链接、假数据或影响力数字。缺素材就用诚实的占位（例如论文的文字封面）。
 4. 不因为某人出现在论文作者列表里就把他加进成员名单。成员名单只来自 `src/data/site.ts`（源自旧站）。
 5. 不要把 IGen 的输入场景图（如茶具、梵高卧室）当作机器人生成结果展示。
 6. 用户审美变化快，改动前先看清当前实现。**先描述再动手**：对大的视觉方向，先给 2–3 个选项或先做一版让用户看，不要一次推翻多处。
@@ -60,7 +60,7 @@ npm run build          # 最后恢复默认 base 的 dist
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/group/`（首页）      | 顶部白色导航（滚动时固定）→ 首屏 → 论文作品滚动带 → About us（`#about`）→ Research Directions（`#directions`，三个方向 `#agents` `#embodied` `#training`）→ 页脚 |
 | `/group/publications/` | 论文档案：研究方向/年份筛选（URL 保存 `?topic=`/`?year=`），按年份分组                                                                                           |
-| `/group/team/`         | 导师 + 学生头像网格，页面底部是 Join us（`#join`，含 `#apply`、`#contact`）                                                                                      |
+| `/group/team/`         | 按角色分组的纯文字名单，页面底部是 Join us（`#join`，含 `#apply`、`#contact`）                                                                                   |
 
 - 「Research Directions」导航跳到首页 `#directions`；「Join us」跳到 `team/#join`。之前独立的 Research Directions 页和 Join us 页都已按用户要求删除。
 - 同一页面上有两个导航项时（首页的 About us 与 Research Directions，Team 页的 Team 与 Join us），`SiteLayout.astro` 里的 `syncSharedPage` 根据 URL hash 只高亮其中一个。
@@ -81,8 +81,7 @@ npm run build          # 最后恢复默认 base 的 dist
 
 ### Team 页
 
-- 布局参考 https://robin-lab.cs.utexas.edu/lab/ ：导师居中大圆形头像，下方学生统一居中网格（桌面每行 5 人，末行居中；手机每行 2 人），圆形头像 + 姓名（有个人主页的为紫色链接，没有的为黑字）+ 角色（PhD student / Master’s student）。组件 `MemberCard.astro`。
-- 有照片的：Prof. Zhi Wang、Zhimin Wang、Linjia Kang（从各自个人主页裁成 320px 方图，来源见 `public/media/team/README.md`）。其余人是灰色人形占位图。加照片：图放进 `public/media/team/`，在 `site.ts` 该成员上加 `photo: 'media/team/xxx.webp'`。
+- 按用户要求，导师和学生均不展示照片或头像占位图。名单分为 Faculty advisor、PhD students、Master’s students 三组，用细线分隔。导师姓名字号稍大；学生姓名桌面四列，手机两列。有个人链接的姓名用紫色下划线。姓名由 `MemberName.astro` 渲染，原头像素材留在 `public/media/team/`。
 - 底部 Join us 是全宽炭黑色带（`--night` #242426）：白色大标题、两栏（申请说明 + ADMISSIONS AND APPLICATION 按钮；联系人 Duo Wu、Rongwei Lu 及邮箱）。
 
 ## 6. 设计系统要点（细节见 DESIGN.md）
@@ -126,12 +125,11 @@ npm run build          # 最后恢复默认 base 的 dist
 
 ## 9. 待办与开放问题
 
-1. **头像**：Duo Wu 主页照片是两人合影（需本人给单人照或同意裁剪）；Rongwei Lu 的 https://rongweilu.cc/ 当时访问不了；Jiajun Luo 主页头像是动漫插画；其余成员没有个人主页。都需要组内提供照片。
-2. **GeoMIND** 链接与配图（见上）。
-3. **Publications 页**：曾建议但尚未做——把筛选下拉改成可点击的胶囊；为 IGen、GeoMIND、SeekVLN、eVTA₀ 补摘要（可从 arXiv 原文逐字复制，GeoMIND 需等材料）；论文标题本身可链接到论文。
-4. 可能去掉 Publications 页的 “RESEARCH OUTPUT” 小标签（与其他页一致）。
-5. 上线前：真实手机/跨浏览器、读屏器、减少动态效果的浏览器内实测（目前只做了代码层面和桌面/375px 检查）。
-6. **部署**：目标 URL 属于另一个仓库 `mmlab-sigs.github.io`，发布流程未建立。用上面的生产 base 构建后，把 `dist/` 的**内容**放进目标站对应子目录，并协调全站 404。不要把本仓库根站替换成 group 的 dist。需用户确认后再做。
+1. **GeoMIND** 链接与配图（见上）。
+2. **Publications 页**：曾建议但尚未做——把筛选下拉改成可点击的胶囊；为 IGen、GeoMIND、SeekVLN、eVTA₀ 补摘要（可从 arXiv 原文逐字复制，GeoMIND 需等材料）；论文标题本身可链接到论文。
+3. 可能去掉 Publications 页的 “RESEARCH OUTPUT” 小标签（与其他页一致）。
+4. 上线前：真实手机/跨浏览器、读屏器、减少动态效果的浏览器内实测（目前只做了代码层面和桌面/375px 检查）。
+5. **部署**：目标 URL 属于另一个仓库 `mmlab-sigs.github.io`，发布流程未建立。用上面的生产 base 构建后，把 `dist/` 的**内容**放进目标站对应子目录，并协调全站 404。不要把本仓库根站替换成 group 的 dist。需用户确认后再做。
 
 ## 10. 文件地图（都在 `group/` 下）
 
@@ -145,9 +143,9 @@ npm run build          # 最后恢复默认 base 的 dist
 | `src/components/AboutUs.astro`                                      | About us 段                                                  |
 | `src/components/DirectionArt.astro`                                 | 研究行的论文图与说明                                         |
 | `src/components/PublicationRow.astro`                               | 单篇论文                                                     |
-| `src/components/MemberCard.astro`                                   | 成员头像卡片                                                 |
+| `src/components/MemberName.astro`                                   | 成员姓名与个人链接                                                 |
 | `src/components/PageIntro.astro`                                    | 子页面大标题区                                               |
-| `src/data/site.ts`                                                  | 机构信息、导师、导航、联系人、成员名单（含 `role`、`photo`） |
+| `src/data/site.ts`                                                  | 机构信息、导师、导航、联系人、按角色分组的成员名单 |
 | `src/data/publications.ts`, `abstracts.json`                        | 论文数据与旧站摘要                                           |
 | `src/data/research.ts`                                              | 三个方向的标题、简介、子方向                                 |
 | `src/data/selected-work.ts`                                         | 论文图映射 `paperFigures`、滚动带数据                        |

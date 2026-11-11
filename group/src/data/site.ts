@@ -5,7 +5,6 @@ export const site = {
   advisor: {
     name: 'Prof. Zhi Wang',
     url: 'http://zwang.inflexionlab.org/',
-    photo: 'media/team/zhi-wang.webp',
   },
   mission:
     'Turning the knowledge of large models into decisions and actions in open-world environments.',
@@ -37,25 +36,20 @@ export const contacts = [
 export interface Person {
   name: string;
   url?: string;
-  // A portrait from the member's own homepage; see public/media/team/README.md.
-  photo?: string;
 }
 export const team: {
   id: string;
   label: string;
-  role: string;
   people: Person[];
 }[] = [
   {
     id: 'advisor',
     label: 'Faculty advisor',
-    role: 'Faculty advisor',
     people: [site.advisor],
   },
   {
     id: 'phd',
     label: 'PhD students',
-    role: 'PhD student',
     people: [
       { name: 'Bowen Li' },
       { name: 'Duo Wu', url: 'https://duowuyms.github.io/' },
@@ -63,14 +57,12 @@ export const team: {
       {
         name: 'Zhimin Wang',
         url: 'https://zhiminwangss.github.io/',
-        photo: 'media/team/zhimin-wang.webp',
       },
     ],
   },
   {
     id: 'masters',
     label: 'Master’s students',
-    role: 'Master’s student',
     people: [
       { name: 'Bingkun Zhu' },
       { name: 'Chunyang Li' },
@@ -85,7 +77,6 @@ export const team: {
       {
         name: 'Linjia Kang',
         url: 'https://xiaogou1234.github.io/',
-        photo: 'media/team/linjia-kang.webp',
       },
       { name: 'Tianyi Xiong' },
       { name: 'Vahagn Ghazaryan' },
