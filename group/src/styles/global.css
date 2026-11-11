@@ -19,10 +19,6 @@
   --embodied-ink: #365c85;
   --training-surface: #e6f0ed;
   --training-ink: #35665c;
-  --night: #242426;
-  --night-text: #f5f5f7;
-  --night-muted: #c8c8cd;
-  --night-accent: #d9b3e6;
   --soft-surface: #f0f1f2;
   --header-height: 76px;
   --gutter: clamp(22px, 5.4vw, 90px);
@@ -913,28 +909,56 @@ select {
   margin-block: 15px;
   color: var(--muted);
 }
-/* Group labels and names share the same reading grid. */
+/* The introduction and roster share a two-column layout on desktop. */
 .team-directory {
-  padding-bottom: clamp(64px, 8vw, 104px);
-}
-.team-group {
   display: grid;
-  grid-template-columns: minmax(170px, 1fr) minmax(0, 3fr);
-  gap: 24px clamp(24px, 4vw, 64px);
-  align-items: baseline;
-  padding-block: clamp(24px, 3.5vw, 48px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.75fr);
+  align-items: start;
+  gap: clamp(40px, 7vw, 112px);
+  padding-block: clamp(44px, 6vw, 88px) clamp(56px, 7vw, 96px);
+}
+.team-intro .page-intro {
+  padding: 0;
+}
+.team-intro .intro-copy {
+  max-width: 34ch;
+  margin-top: 16px;
+}
+.team-lead {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.team-lead h2 {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+.team-lead .member-name {
+  margin-top: 6px;
+  font-size: clamp(23px, 2.3vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+.team-lead p {
+  color: var(--muted);
+  font-size: 14px;
+}
+.team-group + .team-group {
+  margin-top: 24px;
+  padding-top: 24px;
   border-top: 1px solid var(--rule);
 }
 .team-group h2 {
-  font-size: clamp(17px, 1.5vw, 22px);
+  font-size: clamp(20px, 2vw, 26px);
   font-weight: 600;
   letter-spacing: -0.025em;
 }
 .team-names {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px clamp(12px, 2vw, 28px);
-  margin: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(14px, 2vw, 28px);
+  margin: 12px 0 0;
   padding: 0;
   list-style: none;
 }
@@ -942,70 +966,38 @@ select {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  font-size: 16px;
+  font-size: clamp(16px, 1.4vw, 18px);
   font-weight: 500;
   line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 a.member-name {
-  color: var(--accent);
-  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  color: var(--ink);
+  text-decoration-color: var(--muted);
 }
 a.member-name:hover {
-  color: var(--accent-hover);
+  color: var(--accent);
   text-decoration-color: currentColor;
 }
-.team-lead .member-name {
-  font-size: clamp(23px, 2.3vw, 32px);
-  font-weight: 600;
-  letter-spacing: -0.035em;
-}
-.team-lead p {
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 14px;
-}
-.outline-button {
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  padding: 0 16px;
-  border: 1px solid var(--ink);
-  border-radius: 4px;
-  color: var(--ink);
-  font: 500 12px/1 var(--font-body);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
-}
-.outline-button:hover {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--white);
-}
-/* Join us closes the page as a charcoal band, the site's first-version tone. */
 .team-join {
-  padding-block: clamp(64px, 8vw, 112px);
-  background: var(--night);
-  color: var(--night-text);
+  --join-muted: color-mix(in srgb, var(--muted) 80%, var(--ink));
+  padding-block: clamp(48px, 6vw, 80px);
+  background: var(--agents-surface);
 }
 .join-intro {
   max-width: 640px;
   margin-top: 20px;
   font-size: 18px;
   line-height: 1.7;
-  color: var(--night-muted);
+  color: var(--join-muted);
 }
 .join-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(32px, 6vw, 96px);
-  margin-top: clamp(40px, 5vw, 64px);
-  padding-top: clamp(32px, 4vw, 48px);
-  border-top: 1px solid #3a3a3d;
+  margin-top: clamp(28px, 4vw, 44px);
+  padding-top: clamp(24px, 3vw, 36px);
+  border-top: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
 }
 .join-columns h3 {
   font-size: clamp(20px, 1.8vw, 24px);
@@ -1017,20 +1009,24 @@ a.member-name:hover {
   margin-top: 16px;
   font-size: 15px;
   line-height: 1.8;
-  color: var(--night-muted);
+  color: var(--join-muted);
 }
-.team-join .outline-button {
+.admissions-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   margin-top: 24px;
-  border-color: var(--night-text);
-  color: var(--night-text);
+  padding: 8px 16px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
 }
-.team-join .outline-button:hover {
-  border-color: var(--white);
-  background: var(--white);
-  color: var(--night);
-}
-.team-join :focus-visible {
-  outline-color: var(--white);
+.admissions-button:hover {
+  background: var(--accent-hover);
+  color: var(--white);
 }
 .contact-list {
   display: grid;
@@ -1045,7 +1041,7 @@ a.member-name:hover {
 }
 .contact-area {
   font-size: 12px;
-  color: var(--night-muted);
+  color: var(--join-muted);
 }
 .contact-name {
   margin-top: 4px;
@@ -1056,12 +1052,12 @@ a.member-name:hover {
   align-self: start;
   min-height: 32px;
   padding-top: 4px;
-  color: var(--night-accent);
+  color: var(--accent);
   font-size: 14px;
   overflow-wrap: anywhere;
 }
 .contact-list a:hover {
-  color: var(--white);
+  color: var(--accent-hover);
 }
 
 @media (min-width: 1680px) {
@@ -1147,16 +1143,16 @@ a.member-name:hover {
 }
 @media (max-width: 900px) {
   .team-names {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (max-width: 680px) {
-  .team-group {
+  .team-directory {
     grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
   }
-  .team-names {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .team-intro {
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
   }
 }
 @media (max-width: 540px) {

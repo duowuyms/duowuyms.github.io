@@ -1,6 +1,5 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import PageIntro from '../components/PageIntro.astro';
 import { team, site, contacts } from '../data/site';
 import MemberName from '../components/MemberName.astro';
 
@@ -8,22 +7,22 @@ const [advisorGroup, ...studentGroups] = team;
 ---
 
 <SiteLayout title="Team" current="team/">
-  <PageIntro
-    title="Our team."
-    description={`${site.name} Research Group at ${site.affiliation}.`}
-  />
   <div class="team-directory page-gutter">
-    <section
-      class="team-group team-lead"
-      id={advisorGroup.id}
-      aria-labelledby="advisor-title"
-    >
-      <h2 id="advisor-title">{advisorGroup.label}</h2>
-      <div>
+    <div class="team-intro">
+      <header class="page-intro">
+        <h1 class="display">Team</h1>
+        <p class="intro-copy">{site.name} Research Group</p>
+      </header>
+      <section
+        class="team-lead"
+        id={advisorGroup.id}
+        aria-labelledby="advisor-title"
+      >
+        <h2 id="advisor-title">{advisorGroup.label}</h2>
         <MemberName person={advisorGroup.people[0]} />
         <p>{site.affiliation}</p>
-      </div>
-    </section>
+      </section>
+    </div>
     <div id="members">
       {studentGroups.map((group) => (
         <section
@@ -66,7 +65,7 @@ const [advisorGroup, ...studentGroups] = team;
             first preference.
           </p>
           <a
-            class="outline-button"
+            class="admissions-button"
             href={site.admissions}
             target="_blank"
             rel="noopener noreferrer"

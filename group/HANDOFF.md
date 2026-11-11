@@ -81,13 +81,13 @@ npm run build          # 最后恢复默认 base 的 dist
 
 ### Team 页
 
-- 按用户要求，导师和学生均不展示照片或头像占位图。名单分为 Faculty advisor、PhD students、Master’s students 三组，用细线分隔。导师姓名字号稍大；学生姓名桌面四列，手机两列。有个人链接的姓名用紫色下划线。姓名由 `MemberName.astro` 渲染，原头像素材留在 `public/media/team/`。
-- 底部 Join us 是全宽炭黑色带（`--night` #242426）：白色大标题、两栏（申请说明 + ADMISSIONS AND APPLICATION 按钮；联系人 Duo Wu、Rongwei Lu 及邮箱）。
+- Team 使用纯文字两栏布局：左栏为标题、小组简介和导师，右栏分博士生与硕士生两组。姓名统一为近黑色，有个人链接的姓名带细下划线，悬停变紫。窄屏上两栏上下排列，学生姓名每行两列。原头像素材留在 `public/media/team/`。
+- Join us 用浅紫灰底（复用 `--agents-surface`），包含实心清华紫申请按钮和两位联系人的邮箱。
 
 ## 6. 设计系统要点（细节见 DESIGN.md）
 
 - 字体：标准 **Inter**（`@fontsource-variable/inter` 自托管），与 HKU MMLab 一致。不要换 Inter Tight / Manrope / Source Sans 3。
-- 颜色：白底、近黑文字 `#1d1d1f`、灰色次要文字；强调色为**清华紫 `#660874`**（悬停 `#4e0559`）。炭黑区域上的链接用浅紫 `#d9b3e6`。所有 token 在 `src/styles/global.css` 顶部 `:root`。
+- 颜色：白底、近黑文字 `#1d1d1f`、灰色次要文字；强调色为**清华紫 `#660874`**（悬停 `#4e0559`）。所有 token 在 `src/styles/global.css` 顶部 `:root`。
 - 标题层级（最大值）：首页主标题 62px > 页面标题 58px > 分节标题（About us / Research Directions / Join us，`.section-title`）48px > 年份 38px > 方向行标题 36px。用户刚要求过「标题小一点」，不要再放大。
 - 不用全大写小标签（eyebrow）、不用 “A · B · C” 中点串、不在链接后加 ↗。Publications 页标题上方的 “RESEARCH OUTPUT” 是目前唯一剩下的小标签，用户没提过，可以考虑去掉以保持一致。
 - 无卡片投影、无玻璃效果、无渐变色块。
