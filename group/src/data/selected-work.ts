@@ -7,6 +7,10 @@ export const paperFigures: Record<string, { image: string; alt: string }> = {
     image: 'media/selected-work/igen-first-figure.webp',
     alt: 'Figure 1 from IGen, showing open-world images and generated robot observations and actions',
   },
+  geomind: {
+    image: 'media/selected-work/geomind-first-figure.webp',
+    alt: 'Figure 1 from GeoMind, showing six spatial reasoning and memory task families with tabletop robot examples',
+  },
   seekvln: {
     image: 'media/selected-work/seekvln-first-figure.webp',
     alt: 'Figure 1 from SeekVLN, showing progress myopia and evidence-seeking navigation examples',
@@ -59,7 +63,7 @@ const captions: Record<string, string> = {
   netllm: 'Large models for networking decisions.',
 };
 
-// Put works with supplied figures first; keep every record, including GeoMIND.
+// Put works with supplied figures first; keep every record.
 const orderedPublications = [
   ...publications.filter((paper) => paperFigures[paper.id]),
   ...publications.filter((paper) => !paperFigures[paper.id]),

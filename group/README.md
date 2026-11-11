@@ -39,7 +39,7 @@ npm run preview
 
 To add a publication, add a record to `publications.ts`, using a unique `id`. Set its `topic` so it appears under the right research area filter. Avoid speculative acceptance labels, citation/star counts, or links to similarly named papers. Filters use publication year; Trailblazer keeps its initial preprint year and explicitly notes its 2026 update.
 
-The roster is translated from the existing group page. Names were not added based solely on a paper author list. GeoMIND has no resource link until a verified paper/project URL is available. DeCo-SGD's JSAC status was confirmed by the site owner; its author list and paper link follow the linked preprint. Recheck final journal metadata before publishing citations in another format.
+The roster is translated from the existing group page. Names were not added based solely on a paper author list. GeoMind links to arXiv and uses Figure 1 from the paper. DeCo-SGD's JSAC status was confirmed by the site owner; its author list and paper link follow the linked preprint. Recheck final journal metadata before publishing citations in another format.
 
 ## Deployment and path configuration
 
@@ -62,7 +62,7 @@ No workflow is enabled here because the production URL belongs to a separate MML
 - The Team page shows Prof. Zhi Wang’s portrait from his public homepage. Students are listed by name and role. Portrait provenance is recorded in `public/media/team/README.md`.
 - IGen scene input images and generated clips: [official IGen project](https://chenghaogu.github.io/IGen/), from `ChenghaoGu/ChenghaoGu.github.io/IGen/img/scenes/` and `IGen/video/scenes/`. The tea-set input image is no longer shown on the homepage; the scrolling gallery now uses Figure 1 extracted from the paper PDF, saved as `public/media/selected-work/igen-first-figure.webp`. Files retain their original names under `public/media/igen/`; generated videos are retained but no longer loaded by the homepage.
 - SeekVLN first figure: extracted from page 2 of the official project PDF, saved as `public/media/selected-work/seekvln-first-figure.webp`. The robot photo is retained as a source asset. Robot photo source: [official SeekVLN project](https://zhiminwangss.github.io/seekvln-project/), `ZhiminWangSS/seekvln-project/assets/robot-seek.webp`, copied as `public/media/selected-work/seek-robot.webp`.
-- Gallery: all ten supplied covers are verified Figure 1 artwork rendered from their respective paper PDFs, fitted without cropping. PDF sources and page numbers are listed in `public/media/selected-work/README.md`. GeoMIND uses a text cover until the owner supplies its figure.
+- Gallery: all eleven covers are verified Figure 1 artwork rendered from their respective paper PDFs, fitted without cropping. PDF sources and page numbers are listed in `public/media/selected-work/README.md`.
 - Publication figures: the verified Figure 1 images in `public/media/selected-work/` (see its README). The old group website's `images/` are no longer referenced by the new site.
 - eVTA₀ overview: existing `evta0/assets/figures/model.webp`.
 - Standard Inter: self-hosted from `@fontsource-variable/inter` (OFL), matching the font used by [HKU MMLab](https://mmlab.hk/). Homepage title uses 600, secondary display headings 700, navigation 500, and body 400.

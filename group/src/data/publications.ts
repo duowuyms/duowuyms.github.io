@@ -39,17 +39,17 @@ export const publications: Publication[] = [
   },
   {
     id: 'geomind',
-    name: 'GeoMIND',
+    name: 'GeoMind',
     year: 2026,
     venue: 'NeurIPS 2026',
     topic: 'embodied',
     title:
-      'GeoMIND: A Benchmark for Spatial Understanding in Robotic Manipulation',
+      'GeoMind: A Benchmark for Spatial Understanding in Robotic Manipulation',
     authors:
       'Jinghe Wang*, Xinrui Cao*, Duo Wu*, Chenghao Gu, Yong Zhong, Linjia Kang, Tianyi Xiong, Zhi Wang.',
     summary:
-      'A benchmark for evaluating spatial understanding in robotic manipulation.',
-    links: [],
+      'A tabletop manipulation benchmark with 54 task variants that test spatial reasoning and memory as objects and scenes change.',
+    links: [{ label: 'Paper', href: 'https://arxiv.org/abs/2611.12175' }],
   },
   {
     id: 'seekvln',

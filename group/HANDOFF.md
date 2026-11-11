@@ -11,7 +11,7 @@
 ## 2. 背景与需求
 
 - 原站（需替换的中文/旧版小组页）：https://mmlab-sigs.github.io/groups/agentic-and-embodied-large-model-training-group/
-- 用户收到的原始需求（来自组内同学）：把小组页改成英文，优化 presentation（“审美好看”），加上新论文：GeoMIND、路荣伟师兄的 JSAC（即 DeCo-SGD 的期刊版）、SeekVLN、eVTA₀。
+- 用户收到的原始需求（来自组内同学）：把小组页改成英文，优化 presentation（“审美好看”），加上新论文：GeoMind、路荣伟师兄的 JSAC（即 DeCo-SGD 的期刊版）、SeekVLN、eVTA₀。
 - 用户允许大改结构和视觉。技术栈已定：**Astro 7 + TypeScript + 手写 CSS**，不要重新选型。
 - 本仓库 `duowuyms/duowuyms.github.io` 是 Duo Wu 的个人主页仓库（根目录是 Jekyll 个人站，另有 `evta0/`、`trailblazer/` 等项目页）。**小组站只在 `group/` 目录内**，不要改动仓库其他部分。
 - 旧版小组页的 `group/index.html` 和 `group/images/` 仍保留作参考，新站不再引用它们。直接打开旧 `index.html` 看到的是旧站。
@@ -110,11 +110,11 @@ npm run build          # 最后恢复默认 base 的 dist
 
 ## 8. 内容事实（核实过的，勿随意改）
 
-现有 11 篇论文（`src/data/publications.ts`）：IGen、GeoMIND、SeekVLN、eVTA₀、DeCo-SGD（JSAC）、MobileGen、Trailblazer、CoBel-World、CATP-LLM、Beyond a Single AI Cluster、NetLLM。
+现有 11 篇论文（`src/data/publications.ts`）：IGen、GeoMind、SeekVLN、eVTA₀、DeCo-SGD（JSAC）、MobileGen、Trailblazer、CoBel-World、CATP-LLM、Beyond a Single AI Cluster、NetLLM。
 
 - **DeCo-SGD / JSAC**：用户确认标题 “Taming Latency and Bandwidth: A Theoretical Framework and Adaptive Algorithm for Communication-Constrained Training”，IEEE JSAC，arXiv 2507.17346。作者顺序依据 preprint，上线前核对期刊最终书目。它是更新已有条目，不要重复新增。
 - **IGen**：CVPR 2026，arXiv 2512.01773，项目 https://chenghaogu.github.io/IGen/ 。
-- **GeoMIND**：“A Benchmark for Spatial Understanding in Robotic Manipulation”，NeurIPS 2026。**没有已核实的论文/项目链接和配图**，所以无按钮、用文字封面。用户说在问学长，收到后补 `publications.ts` 的 links 和 `selected-work.ts` 的 `paperFigures`。
+- **GeoMind**：“A Benchmark for Spatial Understanding in Robotic Manipulation”，NeurIPS 2026。论文链接为 https://arxiv.org/abs/2611.12175 ，首页和 Publications 共用 v1 PDF 第 2 页的完整 Figure 1。论文所列 GitHub 地址当前返回 404，页面先提供论文入口。
 - **SeekVLN**：arXiv 2609.37353，项目 https://zhiminwangss.github.io/seekvln-project/ 。
 - **eVTA₀**：arXiv 2609.33653，项目 https://duowuyms.github.io/evta0/ 。
 - **Trailblazer**：arXiv 2512.11839，初版 2025、2026 更新，归在 2025，不要改成 2026 录用。
@@ -125,8 +125,8 @@ npm run build          # 最后恢复默认 base 的 dist
 
 ## 9. 待办与开放问题
 
-1. **GeoMIND** 链接与配图（见上）。
-2. **Publications 页**：曾建议但尚未做——把筛选下拉改成可点击的胶囊；为 IGen、GeoMIND、SeekVLN、eVTA₀ 补摘要（可从 arXiv 原文逐字复制，GeoMIND 需等材料）；论文标题本身可链接到论文。
+1. **GeoMind**：作者的代码仓库公开后补上 Code 链接。
+2. **Publications 页**：曾建议但尚未做——把筛选下拉改成可点击的胶囊；为 IGen、GeoMind、SeekVLN、eVTA₀ 补摘要；论文标题本身可链接到论文。
 3. 上线前：真实手机/跨浏览器、读屏器、减少动态效果的浏览器内实测（目前只做了代码层面和桌面/375px 检查）。
 4. **部署**：目标 URL 属于另一个仓库 `mmlab-sigs.github.io`，发布流程未建立。用上面的生产 base 构建后，把 `dist/` 的**内容**放进目标站对应子目录，并协调全站 404。不要把本仓库根站替换成 group 的 dist。需用户确认后再做。
 

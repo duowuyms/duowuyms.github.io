@@ -1,10 +1,11 @@
 # Homepage cover provenance
 
-All ten current gallery images are verified **Figure 1** artwork, rendered directly from the paper PDF to WebP. Only the surrounding page text, caption, and whitespace are excluded; the figure's own panels, labels, and legends are preserved. The gallery uses `object-fit: contain`, with no enlarged crops. GeoMIND has a text cover; the owner is obtaining its figure from a colleague.
+All eleven current gallery images are verified **Figure 1** artwork, rendered directly from the paper PDF to WebP. Only the surrounding page text, caption, and whitespace are excluded; the figure's own panels, labels, and legends are preserved. The gallery uses `object-fit: contain`, with no enlarged crops.
 
 | File                                     | PDF source                                                                                                                                          | PDF page |
 | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | `igen-first-figure.webp`                 | https://arxiv.org/pdf/2512.01773                                                                                                                    | 1        |
+| `geomind-first-figure.webp`              | https://arxiv.org/pdf/2611.12175v1                                                                                                                  | 2        |
 | `seekvln-first-figure.webp`              | https://github.com/ZhiminWangSS/seekvln-project/blob/main/assets/seekvln-paper.pdf                                                                  | 2        |
 | `evta0-first-figure.webp`                | https://arxiv.org/pdf/2609.33653                                                                                                                    | 4        |
 | `deco-sgd-first-figure.webp`             | https://arxiv.org/pdf/2507.17346                                                                                                                    | 2        |
