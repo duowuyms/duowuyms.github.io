@@ -1,6 +1,6 @@
 # Team photos
 
-Square headshots cropped (320 × 320 WebP) from each member's own public homepage, the site the Team page links to. Nothing is retouched; members without a usable personal photo keep an initials avatar.
+Square headshots cropped (320 × 320 WebP) from each member's own public homepage, the site the Team page links to. Only Prof. Zhi Wang’s portrait is displayed. The student roster uses text.
 
 | File               | Member         | Source                                                                                                  |
 | ------------------ | -------------- | ------------------------------------------------------------------------------------------------------- |

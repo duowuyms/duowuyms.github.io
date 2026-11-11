@@ -81,7 +81,7 @@ npm run build          # 最后恢复默认 base 的 dist
 
 ### Team 页
 
-- Team 使用纯文字两栏布局：左栏为标题、小组简介和导师，右栏分博士生与硕士生两组。姓名统一为近黑色，有个人链接的姓名带细下划线，悬停变紫。窄屏上两栏上下排列，学生姓名每行两列。原头像素材留在 `public/media/team/`。
+- Team 使用两栏布局。左栏为标题、小组简介和导师，导师姓名与机构信息下方展示照片。右栏分博士生与硕士生两组，名单为纯文字。姓名统一为近黑色，有个人链接的姓名带细下划线，悬停变紫。窄屏上两栏上下排列，学生姓名每行两列。原头像素材留在 `public/media/team/`。
 - Join us 用浅紫灰底（复用 `--agents-surface`），包含实心清华紫申请按钮和两位联系人的邮箱。
 
 ## 6. 设计系统要点（细节见 DESIGN.md）
@@ -89,7 +89,7 @@ npm run build          # 最后恢复默认 base 的 dist
 - 字体：标准 **Inter**（`@fontsource-variable/inter` 自托管），与 HKU MMLab 一致。不要换 Inter Tight / Manrope / Source Sans 3。
 - 颜色：白底、近黑文字 `#1d1d1f`、灰色次要文字；强调色为**清华紫 `#660874`**（悬停 `#4e0559`）。所有 token 在 `src/styles/global.css` 顶部 `:root`。
 - 标题层级（最大值）：首页主标题 62px > 页面标题 58px > 分节标题（About us / Research Directions / Join us，`.section-title`）48px > 年份 38px > 方向行标题 36px。用户刚要求过「标题小一点」，不要再放大。
-- 不用全大写小标签（eyebrow）、不用 “A · B · C” 中点串、不在链接后加 ↗。Publications 页标题上方的 “RESEARCH OUTPUT” 是目前唯一剩下的小标签，用户没提过，可以考虑去掉以保持一致。
+- 不用全大写小标签（eyebrow）、不用 “A · B · C” 中点串、不在链接后加 ↗。Publications 页直接显示标题，资源和摘要按钮采用浅灰描边。
 - 无卡片投影、无玻璃效果、无渐变色块。
 - 所有内部链接用 `src/lib/urls.ts` 的 `url()`，以适配 `/group/` 与生产子目录两种 base。
 
@@ -127,9 +127,8 @@ npm run build          # 最后恢复默认 base 的 dist
 
 1. **GeoMIND** 链接与配图（见上）。
 2. **Publications 页**：曾建议但尚未做——把筛选下拉改成可点击的胶囊；为 IGen、GeoMIND、SeekVLN、eVTA₀ 补摘要（可从 arXiv 原文逐字复制，GeoMIND 需等材料）；论文标题本身可链接到论文。
-3. 可能去掉 Publications 页的 “RESEARCH OUTPUT” 小标签（与其他页一致）。
-4. 上线前：真实手机/跨浏览器、读屏器、减少动态效果的浏览器内实测（目前只做了代码层面和桌面/375px 检查）。
-5. **部署**：目标 URL 属于另一个仓库 `mmlab-sigs.github.io`，发布流程未建立。用上面的生产 base 构建后，把 `dist/` 的**内容**放进目标站对应子目录，并协调全站 404。不要把本仓库根站替换成 group 的 dist。需用户确认后再做。
+3. 上线前：真实手机/跨浏览器、读屏器、减少动态效果的浏览器内实测（目前只做了代码层面和桌面/375px 检查）。
+4. **部署**：目标 URL 属于另一个仓库 `mmlab-sigs.github.io`，发布流程未建立。用上面的生产 base 构建后，把 `dist/` 的**内容**放进目标站对应子目录，并协调全站 404。不要把本仓库根站替换成 group 的 dist。需用户确认后再做。
 
 ## 10. 文件地图（都在 `group/` 下）
 

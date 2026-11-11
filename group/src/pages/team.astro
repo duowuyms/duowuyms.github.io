@@ -2,6 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { team, site, contacts } from '../data/site';
 import MemberName from '../components/MemberName.astro';
+import { url } from '../lib/urls';
 
 const [advisorGroup, ...studentGroups] = team;
 ---
@@ -21,6 +22,13 @@ const [advisorGroup, ...studentGroups] = team;
         <h2 id="advisor-title">{advisorGroup.label}</h2>
         <MemberName person={advisorGroup.people[0]} />
         <p>{site.affiliation}</p>
+        <img
+          class="team-advisor-photo"
+          src={url('media/team/zhi-wang.webp')}
+          alt=""
+          width="320"
+          height="320"
+        />
       </section>
     </div>
     <div id="members">

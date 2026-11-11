@@ -316,7 +316,7 @@ select {
 }
 .home-hero {
   text-align: center;
-  padding-block: clamp(72px, 7.5vw, 112px) 64px;
+  padding-block: clamp(72px, 7.5vw, 112px) 32px;
 }
 .hero-affiliation {
   color: var(--muted);
@@ -827,7 +827,7 @@ select {
   align-items: center;
   min-height: 36px;
   padding: 0 16px;
-  border: 1px solid var(--ink);
+  border: 1px solid color-mix(in srgb, var(--ink) 50%, var(--paper));
   border-radius: 4px;
   background: transparent;
   color: var(--ink);
@@ -943,6 +943,14 @@ select {
 .team-lead p {
   color: var(--muted);
   font-size: 14px;
+}
+.team-advisor-photo {
+  display: block;
+  width: clamp(136px, 14vw, 176px);
+  height: auto;
+  aspect-ratio: 1;
+  margin-top: 20px;
+  border-radius: 10px;
 }
 .team-group + .team-group {
   margin-top: 24px;
@@ -1157,7 +1165,7 @@ a.member-name:hover {
 }
 @media (max-width: 540px) {
   .home-hero {
-    padding-block: 52px 44px;
+    padding-block: 52px 28px;
   }
   .band-copy {
     padding: 36px var(--gutter) 28px;
