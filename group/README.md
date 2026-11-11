@@ -70,6 +70,6 @@ No workflow is enabled here because the production URL belongs to a separate MML
 
 The homepage gallery moves slowly, with dragging and horizontal wheel navigation, without previous/next or Play/Pause buttons. Hover/focus, active dragging, or a hidden/offscreen document suspends movement; reduced motion disables automatic movement. Without JavaScript it becomes a native horizontal list. No video autoplay or remote font requests are required. Research images are not labeled as measured results.
 
-Version control: all work stays on `meiyuanGroup`. The reviewed starting point is commit `2d03930`; commit each completed and checked iteration separately. Do not merge or deploy without user approval.
+Version control: all work stays on `meiyuanGroup`. The first implementation is commit `2d03930`; commit each completed and checked iteration separately. Do not merge or deploy without user approval.
 
-See `HANDOFF.md` for the conversation decisions, current state, verification, and remaining review/deployment work.
+New contributors should start with `HANDOFF.md`: current state, working rules, the owner's preferences and rejected directions, verified content facts, open tasks, and known pitfalls.

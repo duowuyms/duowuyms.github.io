@@ -1,213 +1,165 @@
-# 小组网站改版交接（2026-10-30）
+# 小组网站改版交接（更新于 2026-11-11）
 
-## 给接手 agent 的起点
+写给接手的 agent：本文件假设你只能看到 GitHub 仓库，没有之前的对话。先读完本文件，再读 `DESIGN.md`（设计约定，与代码一致，以它为准）和 `README.md`（开发、内容维护、部署、素材来源）。
 
-用户已批准最新的浅色、居中标题、滚动作品展示带草案，并要求“实现一下这个，实现结束之后整理当前对话，准备交接给另一个 agent”。**该草案现已接入正式 Astro 源码，不再只是外部 mockup。** 最新补充要求：去掉滚动带的左右切换与 Pause/Play 按钮，已移除整个控制/状态栏。之后用户要求扩充到所有研究工作，并换用论文首图/总览图，已更新为 11 项完整图展示。 后续应在当前实现上继续精修，先听取用户反馈，不要重新启动框架选择或恢复早期方案。
+## 1. 一句话现状
 
-仓库：`/Users/zhumeiyuan/Desktop/THUSIGS/duowuyms.github.io`。
-当前分支：`meiyuanGroup`。用户要求只在此分支修改，只有用户觉得 OK 后才能合并 main。当前起始实现已提交为 **`2d03930`**（包含无按钮版本），尚未 push、merge 或部署。用户新增要求：**每轮修改完成并检查后都做一次 commit，便于版本管理**。切换分支、清理文件前先检查并保护工作区。原 `group/index.html`、`group/images/` 保留；不要以为直接打开旧 HTML 就能看到新版。
+在 `meiyuanGroup` 分支上，用 Astro 重做了 Tsinghua SIGS MMLab「Agentic and Embodied Large Model Training Group」的英文小组网站。功能完整、可构建、已多轮按网站负责人（以下称「用户」）的反馈精修。**尚未合并 main，尚未部署。** 后续工作是继续按用户反馈精修和补内容，不是重新选型或重做。
 
-当前预览地址：`http://127.0.0.1:4321/group/`。本轮已启动开发服务器；若进程不在，按下方命令重启。源码与工具均在 `group/` 内，个人主页和其他论文项目网站没有改动。
+> 如果你在 GitHub 上看不到 `meiyuanGroup` 分支或最近的提交，说明分支还没 push。请让用户 push，不要从 main 上的旧版开始。
 
-## 原始目标与信息架构
+## 2. 背景与需求
 
-原网站：https://mmlab-sigs.github.io/groups/agentic-and-embodied-large-model-training-group/ 。用户受托把小组页翻成英文、改善 presentation、增加新论文，可以大改结构和视觉，也接受 Vue 等框架。前面已讨论并确定 **Astro + TypeScript + 自定义 CSS**，无需重新选型。
+- 原站（需替换的中文/旧版小组页）：https://mmlab-sigs.github.io/groups/agentic-and-embodied-large-model-training-group/
+- 用户收到的原始需求（来自组内同学）：把小组页改成英文，优化 presentation（“审美好看”），加上新论文：GeoMIND、路荣伟师兄的 JSAC（即 DeCo-SGD 的期刊版）、SeekVLN、eVTA₀。
+- 用户允许大改结构和视觉。技术栈已定：**Astro 7 + TypeScript + 手写 CSS**，不要重新选型。
+- 本仓库 `duowuyms/duowuyms.github.io` 是 Duo Wu 的个人主页仓库（根目录是 Jekyll 个人站，另有 `evta0/`、`trailblazer/` 等项目页）。**小组站只在 `group/` 目录内**，不要改动仓库其他部分。
+- 旧版小组页的 `group/index.html` 和 `group/images/` 仍保留作参考，新站不再引用它们。直接打开旧 `index.html` 看到的是旧站。
 
-五个栏目必须保留：**About us、Research Directions、Publications、Team、Join us**。首页本身对应 About us。其下用类似 HKU MMLab 校区介绍的一栏一栏内容介绍研究方向，点击进入对应研究方向页面/锚点，而不是只做一篇论文的宣传页。
+## 3. 必须遵守的工作规则
 
-三个方向：
+1. **只在 `meiyuanGroup` 分支工作。** 用户确认满意前不要合并 main、不要部署、不要 push 到别处。
+2. **每完成并验证一轮修改就单独 commit 一次**（用户要求，便于版本回退）。commit 信息写清改了什么。
+3. 不编造：不生成假的论文图、假照片、假链接、假数据或影响力数字。缺素材就用诚实的占位（文字封面、灰色人形占位图）。
+4. 不因为某人出现在论文作者列表里就把他加进成员名单。成员名单只来自 `src/data/site.ts`（源自旧站）。
+5. 不要把 IGen 的输入场景图（如茶具、梵高卧室）当作机器人生成结果展示。
+6. 用户审美变化快，改动前先看清当前实现。**先描述再动手**：对大的视觉方向，先给 2–3 个选项或先做一版让用户看，不要一次推翻多处。
 
-1. AI Agents：工具使用、GUI 交互、多智能体协作。
-2. Embodied Intelligence：VLA/RL、world models、空间理解。
-3. Distributed Large-Model Training：跨数据中心、通信优化、压缩与可扩展训练。
-
-NetLLM、Trailblazer 等相关 large-model decision-making 工作也要保留。保留原有基本介绍、团队名单、完整旧论文记录、招聘说明与联系方式；不要仅凭论文作者列表增添成员。
-
-## 用户已确定的视觉偏好（后面的决定优先）
-
-- 主要参考：https://mmlab.hk/ 。喜欢其大气字体和介绍行布局。用户明确要求同款字体；先前浏览器检查确认标准 **Inter**，现用 `@fontsource-variable/inter` 自托管。不要恢复 Inter Tight、Manrope 或 Source Sans 3。
-- 曾要求清华紫及邻近色，但不喜欢浓紫、粉紫和廉价渐变。**最新决定是 Apple 风格的白底、黑灰文字、少量蓝色链接，不必坚持紫色。** 全站共享配色已同步为这一方向。
-- 首屏标题必须是居中的 **Agentic and Embodied Large Model Training Group**；下面小字是 **We build agents that reason, robots that learn, and systems that make large-scale training possible.** 不要恢复 “Intelligence, into the world.”。
-- 首屏要紧凑，图片区域窄一点，不要下面铺一整张巨大图片。拒绝了深色海景、toy 感机器人/服务器插画，之后也否定了普通浅色风景加论文网格的效果。
-- 用户更喜欢真实 work/paper 的好看图片，体现研究；之前偏好 IGen，最新接受了多篇精选作品的小图滚动展示带。不得生成虚假的论文图或将 IGen 输入图标作机器人生成结果。
-- 最新滚动带包含全部 11 项论文工作，优先完整论文首图/总览图，不再使用放大的局部裁切或场景照片。GeoMIND 尚缺已核实原图，暂用文字封面；用户回复正在问学长，这篇先不急。图片圆角，文字在图片下方，留白克制，不加厚重卡片边框、投影、玻璃效果或无依据的影响力统计。
-- 首页以下仍保留三个研究介绍区域。本轮没有重新设计方向介绍的全部内容；可在收到用户反馈后继续优化其真实配图。
-
-## 已实现内容
-
-前面已建立独立 Astro 项目：五个内容页面 + 404、共享导航/footer、移动菜单、完整团队和招聘页、数据驱动论文档案、原七篇论文 abstracts、11 篇论文的 year/topic 筛选（URL 保留筛选状态、空结果、重置）。所有内部路径适配可配置 base。
-
-本轮落地最新方案：
-
-- 居中小组全名、较小副标题、研究方向和论文入口，替换旧的双栏口号与大幅 IGen 双图。
-- 共享颜色改为白/黑灰/蓝色交互色，导航更紧凑；保留清晰的 Inter 排版。
-- 新 `SelectedWork.astro` + `selected-work.ts` 脚本：约 19px/s 循环移动，鼠标/触控拖动、横向滚轮输入；按用户最新要求，不显示左右切换或 Pause/Play 按钮。
-- 悬停、焦点进入、切换到后台和离开视野时暂停位移；拖动时暂停；悬停、焦点等条件消失后继续自动滚动。减少动态效果偏好下禁用自动位移。
-- 所有原始项目保持键盘可访问；循环副本不进入 Tab 顺序或辅助技术阅读树。无 JavaScript 时为全部原始内容的原生横向列表，滚动条可用。
-- 图片全在本地，有英文 alt、固定容器尺寸和来源说明。SeekVLN 真实 Go2 走廊图也加入 Publications 记录。
-- 删除未再使用的 `HeroMedia.astro` 及旧 hero/video 样式；以前下载的视频仍保留于素材目录，但当前首页不加载。
-- 更新 `DESIGN.md`、`README.md`、媒体来源说明，并新增此交接文档。
-
-## 文件导航
-
-| 文件                                        | 职责                                                              |
-| ------------------------------------------- | ----------------------------------------------------------------- |
-| `group/src/pages/index.astro`               | 首页，首屏、精选作品、About us、研究介绍行、加入入口              |
-| `group/src/components/SelectedWork.astro`   | 精选作品语义结构和控制按钮                                        |
-| `group/src/scripts/selected-work.ts`        | 循环移动、悬停/焦点暂停、拖动、滚轮、可访问性增强                 |
-| `group/src/data/selected-work.ts`           | 全部作品、论文首图、alt、简短说明；名称/venue/link 从论文数据派生 |
-| `group/src/styles/global.css`               | 全站设计 token、排版、布局、滚动条、响应式和 gallery 样式         |
-| `group/src/layouts/SiteLayout.astro`        | 共享导航、移动菜单、metadata、字体、footer                        |
-| `group/src/components/DirectionArt.astro`   | 三个方向的介绍媒体，后续可进一步精修                              |
-| `group/src/pages/publications.astro`        | 论文档案与筛选交互                                                |
-| `group/src/components/PublicationRow.astro` | 完整论文记录组件                                                  |
-| `group/src/data/publications.ts`            | 11 篇论文的正式信息                                               |
-| `group/src/data/abstracts.json`             | 原七篇论文摘要                                                    |
-| `group/src/data/research.ts`                | 方向介绍及相关论文 ID                                             |
-| `group/src/data/site.ts`                    | 机构信息、导师、成员、导航、联系方式                              |
-| `group/src/pages/team.astro`, `404.astro`   | 团队页（底部含 Join us）、404                                     |
-| `group/public/media/selected-work/`         | 新封面，含来源 README                                             |
-| `group/public/media/igen/`                  | IGen 原项目图片和保留的视频                                       |
-| `group/astro.config.mjs`, `src/lib/urls.ts` | base/site 与路径处理                                              |
-| `group/scripts/verify-links.mjs`            | 构建结果中的内部链接和媒体路径检查                                |
-| `group/DESIGN.md`                           | 最新、已批准且已实现的设计约定；以此为准                          |
-| `group/README.md`                           | 开发、内容维护、部署、素材来源                                    |
-| `group/premium-audit.json`                  | 本轮静态审计结果，0 findings                                      |
-
-## 论文与内容注意事项
-
-现有 11 篇：IGen、GeoMIND、SeekVLN、eVTA₀、DeCo-SGD、MobileGen、Trailblazer、CoBel-World、CATP-LLM、Beyond a Single AI Cluster、NetLLM。新增四篇为 IGen、GeoMIND、SeekVLN、eVTA₀；JSAC 是更新现有 DeCo-SGD，**不要重复新增**。
-
-- 用户确认路荣伟师兄 JSAC 标题：**Taming Latency and Bandwidth: A Theoretical Framework and Adaptive Algorithm for Communication-Constrained Training**（DeCo-SGD，arXiv 2507.17346）。当前作者顺序依据 preprint，正式期刊版本可能不同；上线前核对最终期刊书目。
-- IGen：**Scalable Data Generation for Robot Learning from Open-World Images**，CVPR 2026，arXiv 2512.01773，项目 https://chenghaogu.github.io/IGen/ 。封面茶具图是输入图。
-- GeoMIND：**A Benchmark for Spatial Understanding in Robotic Manipulation**，目前按已有本地资料列 NeurIPS 2026。没有确认到 paper/project URL，因此未编造链接；可向用户补齐或继续核对。
-- SeekVLN：**Seek Before You Move: Evidence Seeking for Progress Grounding in Vision-Language Navigation**，arXiv 2609.37353，项目 https://zhiminwangss.github.io/seekvln-project/ 。封面来源 GitHub `ZhiminWangSS/seekvln-project/assets/robot-seek.webp`。
-- eVTA₀：**Demonstration-Free Success-Probability Reward Learning for Generalist Robot Policies**，arXiv 2609.33653，项目 https://duowuyms.github.io/evta0/ 。不是用户偏好的首页大封面，但档案中保留。
-- Trailblazer：**Grounding Large Language Models as Generalizable Policies in Network Control**，arXiv 2512.11839；初版年份 2025，2026 更新，不要简单改成 2026 接收论文。
-- 名字是 **Zhimin Wang**，不是 Zhiming Wang。成员 roster 源自旧页面，不因论文新增作者自动扩充。
-- 导师 Prof. Zhi Wang；agent/embodied 联系 `wu-d24@mails.tsinghua.edu.cn`，training 联系 `lurw24@mails.tsinghua.edu.cn`。原 Notion 招生链接和 first-preference group 说明保留。
-
-## 验证与运行
-
-本轮执行：
-
-- `npm run check`：20 个文件，0 errors / 0 warnings / 0 hints。
-- `npm run build`：默认 `/group/` 和目标生产 base 都成功，各 6 页；最后恢复默认 `/group/` 的 dist。
-- `npm run verify:links`：两种 base 均通过，105 个内部链接/媒体目标。
-- `npm run format:check`：通过；交接文档与媒体来源 README 也单独用 Prettier 格式化。
-- frontend premium 静态 strict audit：0 findings；DESIGN.md lint：0 errors，15 个 orphaned-token warnings（lint 不识别文档外 CSS 的引用；运行时 token 已在 CSS 使用并映射说明）。
-- 首次实现的浏览器实测（当时仍有控制按钮；随后按用户要求移除）：桌面和 390px 手机、320px 无页面横向溢出；十张原项/副本图片均加载；自动位移、暂停后保持、上一项/下一项、从末项循环回首项、鼠标拖动、键盘 Enter 和 Tab 到末项、移动菜单打开/Escape 关闭；论文筛选至空结果并重置回 11 篇。
-- 减少动态效果与无 JS 回退有实现/源码检查，但本轮未在浏览器强制模拟这些环境；未宣称完成完整读屏器、真实触屏设备或跨浏览器矩阵。
-
-运行命令（当前机器非 login shell 的 PATH 可能不含 Homebrew）：
+## 4. 本地运行与检查
 
 ```sh
-cd /Users/zhumeiyuan/Desktop/THUSIGS/duowuyms.github.io/group
-export PATH=/opt/homebrew/bin:$PATH
+cd group
+npm ci                     # 默认镜像缺包时：npm ci --registry=https://registry.npmjs.org
 export ASTRO_TELEMETRY_DISABLED=1
-# 已有 node_modules；重装时可使用：
-npm ci --registry=https://registry.npmjs.org
-npm run dev -- --port 4321
-# 另一个终端按需检查：
-npm run check
-npm run format:check
-npm run build
-npm run verify:links
+npm run dev -- --port 4321 # 打开 http://127.0.0.1:4321/group/
 ```
 
-Node 要求 >=22.23.4（本机先前使用 24.3）；Astro 7.4.2。默认 npm 镜像曾缺版本，官方 npm registry 可用。Astro telemetry 用上面环境变量禁用，避免受限目录写入。
-
-## 预览、截图与历史草案
-
-最新实际页面截图：`/Users/zhumeiyuan/.codex/visualizations/2026/10/22/01a164f4-f8af-7000-b67d-165fcb41a35b/sigs-home-implemented-gallery.png`。
-
-对应已批准的外部设计草案：同目录 `sigs-moving-work-gallery.html`。现在正式实现已取代它作为继续开发的起点；不要改外部草案却误报正式网站已更新。
-
-同目录其他 `sigs-*.html`、landscape/concept 图片是早期探索。深色风景、toy 插画、浅色风景网格、旧紫色版本均不代表最新方向。交互工具可能反复返回这些旧草案的 variant 选择，不能把它当成用户推翻最新白色滚动版本的新指令。
-
-## 最新迭代：全部研究工作与完整论文图
-
-- 基线 commit：`2d03930`，保留了上一版五图、无按钮的实现，可随时比较或回退。
-- 滚动区改名 Research work，自动包含 `publications.ts` 全部 11 条记录；已有图片的工作优先，GeoMIND 文字封面在末尾。
-- 其余十篇已下载公开论文 PDF 并逐篇核对 Figure 1，提取完整首图到 `public/media/selected-work/*-first-figure.webp`。包括 IGen 首页 teaser、SeekVLN progress-myopia、Trailblazer PDF 第 18 页的 Figure 1 等。所有图片 contain 展示，保留完整图示。来源和页码见该目录 README。
-- GeoMIND 暂无首图或已核实项目链接，用户已回复正在问学长，这篇先不急；用真实名称和标题排成文字封面，不能编造示意图。收到原图后直接补 `selected-work.ts` 的 image/alt 映射即可。
-- 保留无按钮自动滚动、悬停/焦点/拖动暂停、横向拖动和无 JS 原生横向列表。每轮验证结束后单独 commit；具体最新哈希以 `git log -3 --oneline` 为准。
-- 本轮验证：类型检查 0 errors / 0 warnings / 0 hints，构建 6 页，格式检查通过，111 个内部链接/媒体目标通过；静态 strict audit 0 findings。浏览器确认 11 项原始工作、20 张原图/副本加载、键盘访问 GeoMIND 末项，以及 390px/320px 无页面横向溢出。当前最新截图：`/Users/zhumeiyuan/.codex/visualizations/2026/10/22/01a164f4-f8af-7000-b67d-165fcb41a35b/sigs-work-all-paper-figures.png`。
-
-## 后续待办与边界
-
-最新 About us 迭代：用户要求参照旧小组网站及 self-evolving embodied agents 小组，完善介绍，并询问校园图与原 AI 合照的选择。已重写为“团队身份/导师 → 预训练模型能力 → 三个相连研究方向”，保留原研究范围，未套用另一组的独特研究愿景或招生类别。新组件 `src/components/AboutUs.astro` 左文右图，链接三个方向和 Team；移动端文字在前、图片在后。当前推荐并实现的是学院官方图库的深圳信息大楼照片，蓝天、白色建筑、绿树，与浅色版式协调，图片下有来源链接。AI 合照更适合未来 Team/小组生活区域，尚未移入新版；校园图的最终偏好仍可根据用户反馈调整。原图与来源记录在 `public/media/about/`。本轮按用户要求在验证后单独 commit。
-
-About us 验证：21 个文件类型检查 0 errors / 0 warnings / 0 hints，构建 6 页，116 个内部链接/媒体目标通过，格式与 diff 检查通过。浏览器确认原图 799×533 正常加载、研究链接进入正确锚点、390px/320px 没有页面横向溢出；桌面/手机版式已查看。截图：`/Users/zhumeiyuan/.codex/visualizations/2026/10/22/01a164f4-f8af-7000-b67d-165fcb41a35b/sigs-about-campus.png`。
-
-最新研究方向行迭代：三条研究介绍行的右侧媒体原为概念插图（“Plan / Use tools / Collaborate” 文字板、蓝色 Cluster A/B/C 方块图）和 IGen 茶具输入图，已全部换成真实研究素材：AI Agents 用 CoBel-World Figure 1，Embodied 用 SeekVLN 的真实 Unitree Go2 走廊照片，Distributed Training 用 DeCo-SGD（JSAC）Figure 1。论文图白底、14px 圆角、contain 不裁切；机器人照片 cover 裁切并保留机器人。图下有说明文字，再接该方向论文列表（名称 + venue，链接到 `publications/#<id>` 锚点），数据来自 `research.ts` 与 `publications.ts`，新增论文 ID 后自动出现。旧的 agent-art/system-art/cluster 样式已删除。
-
-本轮验证：类型检查 0 errors / 0 warnings / 0 hints，格式检查通过，构建 6 页，`/group/` 与生产 base 各 127 个内部链接/媒体目标通过（注意：生产 base 验证时 `verify:links` 也需带 `GROUP_BASE_PATH`）。浏览器确认桌面三条行版式、375px 手机无横向溢出、三张图均加载、9 个论文锚点链接正确。
-
-最新首页美化迭代（用户要求“加一点背景，更好看”，并换更好看的论文图）：
-
-- 首屏与 Research work 滚动带共用 `.home-stage` 背景：标题后方一道柔和的“地平线”光（蓝色为主，极淡清华紫），以及透视倾斜的点阵地面，滚动带的作品像站在这片地面上。静态无动画（滚动带仍是唯一动态），两侧和底部渐隐，手机端点更小更淡，forced-colors 下隐藏。没有使用大图、深色背景或浓重渐变。
-- 研究方向行换成从论文 PDF 提取的完整高清图（1800px WebP，`public/media/research-bands/`，来源与页码见其 README）：AI Agents = MobileGen Figure 1，Embodied = IGen Figure 6 真实机械臂实验，Distributed Training = Beyond a Single AI Cluster Figure 1。媒体列加宽到约 59%。SeekVLN 机器人照片、CoBel/DeCo 首图不再用于方向行，但文件保留。
-- 验证：类型检查 0 errors，构建 6 页，两种 base 各 127 个链接/媒体通过；浏览器检查桌面、320px 无横向溢出、三张图加载、手机端单列。
-
-最新补充：用户提供旧网站“研究方向”卡片截图，要求把其信息放进新版。旧卡片中的子方向已在 `research.ts` 的 topics 中；现首页三条研究行也在简介与 Explore 链接之间显示这三项子方向（数据来自 `research.ts`）。“World models for robot learning” 改回旧站措辞 “World models for VLA training”。旧站方向名 “Embodied VLA”“Distributed LM Training” 暂未采用，仍为 Embodied Intelligence / Distributed Training，可待组内确认。中文名按英文化要求不加入。
-
-最新结构调整：用户认为首页研究介绍 + Publications 已足够，删除独立的 Research Directions 页面（`research.astro`）。导航仍保留 “Research Directions” 五个栏目之一，但跳到首页 `#directions`；三条研究行加 `id`（agents/embodied/training），About us 内链指向这些锚点；每行链接改为 “See … papers”，打开 `publications/?topic=<id>` 筛选。原页面独有的 “Large models as decision-makers”（NetLLM、Trailblazer）移到首页研究行之后。原页面的长描述和 “Questions we explore” 已从 `research.ts` 删除（git 历史可找回）。现为 4 个内容页 + 404，`verify-links` 下限改为 5 页；两种 base 各 104 个链接/媒体通过。
-
-最新：用户要求滚动时顶部导航一直显示。`.site-header` 改为 sticky（白底、底部细线、无阴影，z-index 20，跳转链接 z-index 30）；`--header-height`（桌面 76px，≤800px 为 100px）用于 `scroll-padding-top`，锚点不会被遮挡。手机端无 JS 时不固定（完整导航太高）。已在桌面和 375px 检查：滚动后导航固定在顶部，`#embodied`、`#seekvln` 锚点落在导航下方，手机菜单在固定导航内展开/关闭正常。
-
-最新：用户认为首页底部 “Large models as decision-makers” 与 “Join our group / Build what comes next” 两段不需要，已删除；改为参照 HKU MMLab 的页脚：大号 MMLab @ SIGS 字标，四栏站点地图（About us / Research / Publications / Contact，粗体栏目名），底部版权 + 机构 + Back to top。NetLLM、Trailblazer 通过 Publications 和页脚 “Decision-making”（`publications/?topic=decision`）保留入口；Join us 在导航和页脚。≥800px 四栏，以下两栏。未加入机构 logo 行（没有核实过的 logo 文件）。
-
-最新：用户要求页脚内容与顶部导航对应。页脚栏目现由同一个 `navigation` 列表生成（About us / Research Directions / Publications / Team / Join us，顺序名称一致），每栏列出对应页面的分区：About us（#about、#work）、三个研究方向锚点、Publications（全部、Decision-making 筛选）、Team（新增 `team/#advisor`、`#phd`、`#masters`，id 在 `site.ts` 的 team 数据中）、Join us（新增 `join/#apply`、`#contact`，以及两位联系人邮箱）。同时修复一个既有问题：`html { scroll-behavior: smooth }` 会导致从其他页面带 `#锚点` 打开时不跳转（已用最小测试页确认），改为仅 `html:focus-within` 时平滑滚动；`team/#masters`、`publications/#seekvln` 现在能正确落在导航下方。5 栏 ≥1100px，3 栏到 800px，以下 2 栏。
-
-最新：按用户要求页脚改为三栏：About us（Our group、Team、Join us），Research Directions（三个方向，不变），Publications（只保留标题链接）。所有标题和条目都可点击，鼠标悬停变为蓝色（0.15s 过渡，无下划线），字标和 Back to top 同样。联系人邮箱不再放在页脚（Join us 页有）。Team/Join 页上的 #advisor、#phd、#masters、#apply、#contact 锚点保留，可用于分享链接。
-
-最新：用户选择全站强调色改为清华紫 `#660874`（悬停 `#4e0559`），替换原 Apple 蓝；链接、悬停、当前导航、焦点、滚动条激活色、首屏地平线光（`--horizon-glow`）均为紫色。页脚只保留五个标题（与顶部导航同源），悬停变紫；顶部 Join us 去掉箭头；About us 校园照片去掉来源链接，仅保留 “Tsinghua SIGS · Shenzhen” 说明，来源记录仍在 `public/media/about/README.md`。
-
-最新首页精修（用户同意三项建议）：(1) 研究方向三行全部改为浅色（白、浅灰 `--surface`、白，细线分隔），删除深色半栏和相关 night/dark-rule 等 token；(2) 方向标题改为单行 32–46px，小于页面主标题；`research.ts` 中 `verb`/`headline` 改为单一 `title`；(3) “Research work”“About us”“Research Directions” 统一使用 `.section-title`，删除 REASON/INTERACT/SCALE 标签和 “Reason · Interact · Scale” 分隔条。新增 `--gutter` token，研究行左右与全站对齐（1440px 宽时均为 78px）。手机端单列、文字在图前、无横向溢出。
-
-最新：用户认为夜景舞台和黑白研究行不好看，已用 `git revert` 回到 `7039928` 的浅色版本（commit `f931dd6`，夜景版仍在历史 `c2ba191`）。随后按 “Apple 风格、优雅、聪明” 重做 Research Directions：整段 `#f5f5f7` 浅灰底，居中 56px 标题 + 一行说明，每个方向一张白色大圆角卡片（28px，手机 22px，无阴影无边框），左侧标题、简介、带紫色圆点的子方向、论文胶囊链接（名称 + venue，悬停变紫底白字）、紫色 “See … papers ›”，右侧论文图直接放在白卡上。`DirectionArt.astro` 现只输出图与说明。
-
-最新：用户不喜欢 Apple 卡片（`68238ad`），要求像 HKU MMLab 的色块行。Research Directions 现为全宽色块行：一侧白底完整论文图（约 40%），另一侧深色块（约 60%），金色大标题、白色简介、三项子方向、右下 “Explore papers ›”（筛选 Publications，读屏文字含方向名）。配色：AI Agents 清华紫 #660874、Embodied 深海军蓝 #1c2a4a、Distributed Training 深绿 #1f3b33，标题金色 #e8c47c；中间一行图片在右。对比度 ≥6.8:1。手机端图在上、色块在下。论文胶囊列表已去掉（与 HKU 一致，Explore 链接进入筛选）。
-
-最新：用户觉得紫/蓝/绿色块和金色标题不好看，要求用第一版颜色。现保留 HKU 式全宽行布局，配色恢复第一版：AI Agents 文字浅灰 #f5f5f7、图在炭黑 #242426；Embodied 文字 #f0f1f2、图在白底；Distributed Training 文字炭黑（白字、浅紫链接 #d9b3e6）、图在浅灰。标题深色/白色，去掉金色。
-
-最新：按用户要求删除滚动作品区的 “Research work” 标题和 “View all publications” 链接（区域保留读屏标签），删除 About us 中的 “Turning the knowledge of large models…” 一句；“About us”“Research Directions” 改为 44–84px 粗体大标题，方向行标题相应降为 32–52px，About us 正文放大到 17px。
-
-最新（2026-10-30）：用户批准首页建议 1、3、4，要求优化点阵但保留背景质感。本轮将透视地板点阵改为两侧向中央渐隐的平面细点（26px 间距、0.8px 半径，手机更淡），左右极淡紫/冷灰光晕；标题字重 550、字距 -0.04em、略增首屏留白。About us 压缩通用 pretraining 文案，校园图与正文顶端对齐。Research Directions 保留左右交替，但改为浅灰/白/浅灰整行底色，移除炭黑半栏，统一完整论文图框和说明尺寸。作品滚动区图片、内容和交互未改。桌面、390px 和 320px 无页面横向溢出；设计规范已同步。
-
-最新配色精修（2026-10-30）：用户认为白灰单调，同意以局部淡色增加节奏。首屏左右淡紫/冰蓝光晕略增强，中央保持白；研究方向图片背板分别为淡紫灰 #eee8f3、淡蓝灰 #e7eef7、淡青灰 #e6f0ed，文字区域统一白底，Explore papers 链接以对应深紫/蓝/青呼应。全站导航和焦点仍为清华紫；图片、布局与轮播行为未改。
-
-最新导航修复：同一首页的 #directions/#agents/#embodied/#training 现在高亮 Research Directions，其他首页锚点或无 hash 高亮 About us。初次加载及 hashchange（包括前进/后退）同步，其他页面仍按 pathname 高亮。用 aria-current="location" 表示当前研究区域，CSS 支持该值。
-
-最新 Publications 页：(1) 缩略图统一改为与首页滚动区相同的已核实 Figure 1（`selected-work.ts` 导出 `paperFigures`），16:10 白底细边圆角框，去掉 IGen 的梵高输入图；`publications.ts` 的 `image` 字段已删除；(2) 按年份分组，大号年份标题，筛选时隐藏空年份；(3) 作者中属于 Team 名单的成员加粗（严格按 `site.ts` 名单匹配，不从作者列表推断新增成员；例如 Meiyuan Zhu 不在名单故未加粗）。
-
-最新：Publications 链接改为学术主页常见的描边方形按钮（PAPER / PROJECT / CODE，大写小号字，1px 深色边框，4px 圆角，无箭头，悬停变清华紫底白字）；ABSTRACT 改为同一行的按钮，展开摘要显示在下方。`SiteLayout` 的 `<head>` 新增内联脚本给 `<html>` 加 `js` 类，无 JS 时摘要直接显示。
-
-最新：Publications 每条改为左图右文：论文图在左（手机端在上），右侧依次为标题、作者、斜体 venue 行（无年份的自动补 “, 年份”，后跟研究方向小字）、简介、按钮。按用户要求取消组内成员加粗，所有作者同样样式；原左侧 venue/方向栏已删除。
-
-最新：按用户要求删除独立的 Join us 页面（`join.astro`），其内容（申请、招生链接、两位联系人）移到 Team 页底部 “Join us” 大标题下（`#join`，保留 `#apply`、`#contact`）；顶部与页脚的 Join us 仍保留，指向 `team/#join`。导航高亮：Team 页在 #join/#apply/#contact 时高亮 Join us，否则 Team（与首页 About us/Research Directions 同一机制）。现为 3 个内容页 + 404，`verify-links` 下限改为 4。
-
-最新 Team 页美化：去掉大写小标签；导师置顶为大号清华紫首字母头像 + 姓名 + 单位 + HOMEPAGE 描边按钮；博士/硕士分组标题加人数，成员为浅紫首字母头像网格（无真实照片，不编造），有主页者显示灰色 “Website” 而非箭头，悬停高亮；手机端两列。Join us 改为全宽炭黑色带（第一版 #242426），白色大标题、两栏（申请 + 白色描边按钮；联系人 + 浅紫邮箱）。`PageIntro` 的 eyebrow 改为可选。如组内能提供成员照片，可替换头像。
-
-最新：Team 页去掉 “Website” 字样，有主页的成员整行可点击。从成员个人主页取头像（方形裁剪 320px，来源见 `public/media/team/README.md`）：Prof. Zhi Wang、Zhimin Wang、Linjia Kang。未用：Duo Wu 主页照片是两人合影（需本人提供单人照或确认裁剪），Jiajun Luo 头像是动漫插画非照片，Rongwei Lu 的 rongweilu.cc 当时无法访问。其余成员保持首字母头像。
-
-最新：Team 成员排版改为参考 https://robin-lab.cs.utexas.edu/lab/ 的形式：导师居中大圆形头像 + 姓名 + 角色 + 单位；学生统一居中网格（桌面每行 5 人，末行居中；手机每行 2 人），圆形头像下为姓名（有主页者为紫色链接）和角色（PhD student / Master’s student，来自 `site.ts` 的 `role`）。无照片者用灰色人形占位图，之后在 `site.ts` 给对应成员加 `photo` 即可替换。新组件 `MemberCard.astro`。原 #phd、#masters 锚点不再存在（无站内链接引用）。
-
-最新：按用户要求缩小各级标题：页面标题（Our team. / Publications）最大 58px（手机 44px），首页与 Team 的分节标题（About us / Research Directions / Join us）最大 48px，研究方向行标题 36px，Publications 年份 38px，均低于首页主标题 62px；相应收紧标题上下留白。
-
-1. 请用户查看当前正式实现，依据反馈继续精修。背景强度可在 `global.css` 的 `--lattice`、`--horizon-*` 和 `.home-stage::after` 的 mask/opacity 调整；方向行图片在 `DirectionArt.astro` 的 media 映射中替换。不要自行恢复巨大背景图或概念插图。
-2. 补齐 GeoMIND 的正式 paper/project 链接，核对 JSAC 最终书目信息；必要时核对成员姓名与最新录用状态。不要编造链接或新增未确认成员。
-3. 如进入发布准备，补充真实设备/跨浏览器、减少动态效果与读屏器检查。保持现有基础可访问性和无 JS 内容。
-4. 可继续在 `meiyuanGroup` 分支开发；**用户确认后**才能合并 main 或发布。基线已 commit；后续每轮完成后也需 commit。本次未 push、merge 或部署。
-5. 目标 URL 属于另一个 MMLab 仓库，部署流程尚未建立。当前个人仓库还有 Jekyll/个人主页，不可把仓库根站替换成 group 的 dist。
-
-目标构建：
+每轮提交前都要跑：
 
 ```sh
+npm run check          # astro check，应为 0 errors / 0 warnings
+npm run format:check   # Prettier；不通过就 npx prettier --write <文件>
+npm run build          # 默认 base /group/，应构建 4 页
+npm run verify:links   # 检查 dist 内所有内部链接、锚点、媒体
+# 生产 base 也要验证（注意 verify:links 也必须带 GROUP_BASE_PATH）：
 GROUP_SITE_URL=https://mmlab-sigs.github.io \
 GROUP_BASE_PATH=/groups/agentic-and-embodied-large-model-training-group/ \
-npm run build
+sh -c 'npm run build && npm run verify:links'
+npm run build          # 最后恢复默认 base 的 dist
 ```
 
-把 `dist/` 的**内容**整合到目标站对应子目录；dist 不会自行带上 base 目录层级。保留其他组和站点内容。没有新增自动部署 workflow；先确认目标仓库发布机制和全站 404 处理。
+- Node ≥ 22.23.4（用过 24.3）；Astro 7.4.2。
+- 最近一次全部通过：4 页，两种 base 各 102 个链接/媒体目标。
+- 浏览器检查至少看桌面（1440px）和手机（375px），确认无页面横向滚动。
+
+## 5. 当前网站结构
+
+导航五项（顶部与页脚同一个 `navigation` 列表，`src/data/site.ts`）：**About us · Research Directions · Publications · Team · Join us**。只有 3 个内容路由 + 404：
+
+| 路由                   | 内容                                                                                                                                                             |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/group/`（首页）      | 顶部白色导航（滚动时固定）→ 首屏 → 论文作品滚动带 → About us（`#about`）→ Research Directions（`#directions`，三个方向 `#agents` `#embodied` `#training`）→ 页脚 |
+| `/group/publications/` | 论文档案：研究方向/年份筛选（URL 保存 `?topic=`/`?year=`），按年份分组                                                                                           |
+| `/group/team/`         | 导师 + 学生头像网格，页面底部是 Join us（`#join`，含 `#apply`、`#contact`）                                                                                      |
+
+- 「Research Directions」导航跳到首页 `#directions`；「Join us」跳到 `team/#join`。之前独立的 Research Directions 页和 Join us 页都已按用户要求删除。
+- 同一页面上有两个导航项时（首页的 About us 与 Research Directions，Team 页的 Team 与 Join us），`SiteLayout.astro` 里的 `syncSharedPage` 根据 URL hash 只高亮其中一个。
+
+### 首页各部分
+
+- **首屏**：居中标题 “Agentic and Embodied Large Model Training Group”（最大 62px，字重 550），副标题 “We build agents that reason, robots that learn, and systems that make large-scale training possible.”，两个紫色链接。背景是左右两侧极淡的紫/冰蓝光晕加稀疏平面细点（`.home-stage`），中间留白，静态无动画。
+- **作品滚动带**（`SelectedWork.astro` + `src/scripts/selected-work.ts`）：全部 11 篇论文的已核实 Figure 1，约 19px/s 自动循环；悬停/聚焦/拖动/离开视野时暂停；可拖动和横向滚轮；减少动态效果时不自动滚。**按用户要求不要左右箭头、不要播放/暂停按钮、不要 “Research work” 标题和 “View all publications” 链接。**
+- **About us**：大标题，左文右图（清华 SIGS 信息大楼官方照片，图下只写 “Tsinghua SIGS · Shenzhen”，用户要求去掉来源链接；来源记在 `public/media/about/README.md`）。
+- **Research Directions**：参考 HKU MMLab（https://mmlab.hk/）的全宽左右交替行。每行一侧是论文完整图（图框背板分别为淡紫 `#eee8f3`、冰蓝 `#e7eef7`、淡青 `#e6f0ed`），另一侧白底文字：方向名、简介、三个子方向、右下 “Explore papers ›”（打开 Publications 对应筛选）。图：AI Agents = MobileGen Fig. 1，Embodied = IGen Fig. 6（真实机械臂实验），Training = Beyond a Single AI Cluster Fig. 1（来源见 `public/media/research-bands/README.md`）。
+- **页脚**：大号 “MMLab @ SIGS” 字标，五个导航标题（悬停变紫），底部版权与 Back to top。
+
+### Publications 页
+
+- 每篇：左边论文 Figure 1（16:10 白底细边圆角框；手机端在上方），右边标题 → 作者（所有作者同样样式，用户要求不加粗组内成员）→ 斜体 venue 行（自动补年份，后跟研究方向小字）→ 一句简介 → 按钮。
+- 按钮是学术主页风格的描边方形按钮：PAPER / PROJECT / CODE / ABSTRACT，大写小字，无箭头，悬停变紫。ABSTRACT 展开摘要；`<head>` 内联脚本给 `<html>` 加 `js` 类，无 JS 时摘要直接显示。
+- 图片与首页滚动带共用 `src/data/selected-work.ts` 的 `paperFigures`。
+
+### Team 页
+
+- 布局参考 https://robin-lab.cs.utexas.edu/lab/ ：导师居中大圆形头像，下方学生统一居中网格（桌面每行 5 人，末行居中；手机每行 2 人），圆形头像 + 姓名（有个人主页的为紫色链接，没有的为黑字）+ 角色（PhD student / Master’s student）。组件 `MemberCard.astro`。
+- 有照片的：Prof. Zhi Wang、Zhimin Wang、Linjia Kang（从各自个人主页裁成 320px 方图，来源见 `public/media/team/README.md`）。其余人是灰色人形占位图。加照片：图放进 `public/media/team/`，在 `site.ts` 该成员上加 `photo: 'media/team/xxx.webp'`。
+- 底部 Join us 是全宽炭黑色带（`--night` #242426）：白色大标题、两栏（申请说明 + ADMISSIONS AND APPLICATION 按钮；联系人 Duo Wu、Rongwei Lu 及邮箱）。
+
+## 6. 设计系统要点（细节见 DESIGN.md）
+
+- 字体：标准 **Inter**（`@fontsource-variable/inter` 自托管），与 HKU MMLab 一致。不要换 Inter Tight / Manrope / Source Sans 3。
+- 颜色：白底、近黑文字 `#1d1d1f`、灰色次要文字；强调色为**清华紫 `#660874`**（悬停 `#4e0559`）。炭黑区域上的链接用浅紫 `#d9b3e6`。所有 token 在 `src/styles/global.css` 顶部 `:root`。
+- 标题层级（最大值）：首页主标题 62px > 页面标题 58px > 分节标题（About us / Research Directions / Join us，`.section-title`）48px > 年份 38px > 方向行标题 36px。用户刚要求过「标题小一点」，不要再放大。
+- 不用全大写小标签（eyebrow）、不用 “A · B · C” 中点串、不在链接后加 ↗。Publications 页标题上方的 “RESEARCH OUTPUT” 是目前唯一剩下的小标签，用户没提过，可以考虑去掉以保持一致。
+- 无卡片投影、无玻璃效果、无渐变色块。
+- 所有内部链接用 `src/lib/urls.ts` 的 `url()`，以适配 `/group/` 与生产子目录两种 base。
+
+## 7. 用户试过并否定的方向（不要再提）
+
+按时间顺序，括号内是可回看的 commit：
+
+- 深色海景/风景大图首屏、toy 风格机器人/服务器插画、浅色风景 + 论文网格。
+- 首屏下方一整张巨大图片；只突出一篇论文的首页。
+- 滚动带的左右切换和 Pause/Play 按钮。
+- 概念插图式的研究方向配图（文字板、Cluster A/B/C 方块图）。
+- 浓紫、粉紫和廉价渐变。（后来用户主动选择清华紫作为点缀强调色，但不要大面积紫色。）
+- **夜景首屏 + 黑白研究行**（`c2ba191`，已 revert）：用户觉得丑。
+- **Apple 式白色大圆角卡片的研究方向**（`68238ad`）：用户要的是 HKU 式的全宽行。
+- **紫/海军蓝/深绿色块 + 金色标题的研究行**（`6582439`）：用户觉得颜色丑。
+- 研究行用第一版灰/炭黑配色（`30f3819`）后又被另一轮改成现在的淡色背板版本（`4de3915`、`e6ee07b`）。若用户再改，先问清楚要哪一版。
+- 组内成员在作者列表中加粗；成员下方的 “Website” 字样；首页 “Large models as decision-makers” 段落和 “Build what comes next, with us.” 邀请段。
+
+## 8. 内容事实（核实过的，勿随意改）
+
+现有 11 篇论文（`src/data/publications.ts`）：IGen、GeoMIND、SeekVLN、eVTA₀、DeCo-SGD（JSAC）、MobileGen、Trailblazer、CoBel-World、CATP-LLM、Beyond a Single AI Cluster、NetLLM。
+
+- **DeCo-SGD / JSAC**：用户确认标题 “Taming Latency and Bandwidth: A Theoretical Framework and Adaptive Algorithm for Communication-Constrained Training”，IEEE JSAC，arXiv 2507.17346。作者顺序依据 preprint，上线前核对期刊最终书目。它是更新已有条目，不要重复新增。
+- **IGen**：CVPR 2026，arXiv 2512.01773，项目 https://chenghaogu.github.io/IGen/ 。
+- **GeoMIND**：“A Benchmark for Spatial Understanding in Robotic Manipulation”，NeurIPS 2026。**没有已核实的论文/项目链接和配图**，所以无按钮、用文字封面。用户说在问学长，收到后补 `publications.ts` 的 links 和 `selected-work.ts` 的 `paperFigures`。
+- **SeekVLN**：arXiv 2609.37353，项目 https://zhiminwangss.github.io/seekvln-project/ 。
+- **eVTA₀**：arXiv 2609.33653，项目 https://duowuyms.github.io/evta0/ 。
+- **Trailblazer**：arXiv 2512.11839，初版 2025、2026 更新，归在 2025，不要改成 2026 录用。
+- 论文图均为从公开 PDF 按 Figure 1（或标注的图号）完整截取，不裁切内部；来源与页码见 `public/media/selected-work/README.md` 和 `public/media/research-bands/README.md`。
+- 人名：是 **Zhimin Wang**，不是 Zhiming。导师 Prof. Zhi Wang（主页 http://zwang.inflexionlab.org/ 跳转到 https://mmlab-sigs.github.io/groups/zwang/ ）。
+- 联系人：AI agents & embodied — Duo Wu `wu-d24@mails.tsinghua.edu.cn`；distributed training — Rongwei Lu `lurw24@mails.tsinghua.edu.cn`。招生链接是 `site.ts` 里的 Notion 页，保留 “first preference” 说明。
+- 研究方向名目前是 AI Agents / Embodied Intelligence / Distributed Training。旧站叫 “Embodied VLA”“Distributed LM Training”，用户未决定是否改回，可问。子方向沿用旧站，其中 “World models for VLA training” 已改回旧站措辞。
+
+## 9. 待办与开放问题
+
+1. **头像**：Duo Wu 主页照片是两人合影（需本人给单人照或同意裁剪）；Rongwei Lu 的 https://rongweilu.cc/ 当时访问不了；Jiajun Luo 主页头像是动漫插画；其余成员没有个人主页。都需要组内提供照片。
+2. **GeoMIND** 链接与配图（见上）。
+3. **Publications 页**：曾建议但尚未做——把筛选下拉改成可点击的胶囊；为 IGen、GeoMIND、SeekVLN、eVTA₀ 补摘要（可从 arXiv 原文逐字复制，GeoMIND 需等材料）；论文标题本身可链接到论文。
+4. 可能去掉 Publications 页的 “RESEARCH OUTPUT” 小标签（与其他页一致）。
+5. 上线前：真实手机/跨浏览器、读屏器、减少动态效果的浏览器内实测（目前只做了代码层面和桌面/375px 检查）。
+6. **部署**：目标 URL 属于另一个仓库 `mmlab-sigs.github.io`，发布流程未建立。用上面的生产 base 构建后，把 `dist/` 的**内容**放进目标站对应子目录，并协调全站 404。不要把本仓库根站替换成 group 的 dist。需用户确认后再做。
+
+## 10. 文件地图（都在 `group/` 下）
+
+| 文件                                                                | 作用                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `src/pages/index.astro`                                             | 首页：首屏、滚动带、About us、Research Directions 行         |
+| `src/pages/publications.astro`                                      | 论文档案、筛选和摘要展开脚本                                 |
+| `src/pages/team.astro`                                              | Team 与 Join us                                              |
+| `src/layouts/SiteLayout.astro`                                      | `<head>`、固定导航、手机菜单、页脚、导航高亮脚本             |
+| `src/components/SelectedWork.astro`, `src/scripts/selected-work.ts` | 滚动带结构与交互                                             |
+| `src/components/AboutUs.astro`                                      | About us 段                                                  |
+| `src/components/DirectionArt.astro`                                 | 研究行的论文图与说明                                         |
+| `src/components/PublicationRow.astro`                               | 单篇论文                                                     |
+| `src/components/MemberCard.astro`                                   | 成员头像卡片                                                 |
+| `src/components/PageIntro.astro`                                    | 子页面大标题区                                               |
+| `src/data/site.ts`                                                  | 机构信息、导师、导航、联系人、成员名单（含 `role`、`photo`） |
+| `src/data/publications.ts`, `abstracts.json`                        | 论文数据与旧站摘要                                           |
+| `src/data/research.ts`                                              | 三个方向的标题、简介、子方向                                 |
+| `src/data/selected-work.ts`                                         | 论文图映射 `paperFigures`、滚动带数据                        |
+| `src/styles/global.css`                                             | 全部样式与设计 token                                         |
+| `public/media/*/README.md`                                          | 每类素材的来源记录                                           |
+| `scripts/verify-links.mjs`                                          | 构建产物链接检查（期望 ≥4 个页面）                           |
+
+## 11. 踩过的坑
+
+- **`html { scroll-behavior: smooth }` 会让从别的页面带 `#锚点` 打开时不跳转**（Chromium 实测）。现在只在 `html:focus-within` 时平滑滚动，不要改回去。
+- 固定导航遮挡锚点：用 `--header-height` 驱动 `scroll-padding-top`（桌面 76px，≤800px 为 100px）。改导航高度要同步改。
+- 用正则批量删 CSS 规则时，曾把 `.hero-links a, .work-heading a {…}` 这类合并选择器拆坏，导致别的元素继承了错误样式。删样式后要 `git diff` 检查合并选择器。
+- `verify:links` 默认按 `/group/` 检查；验证生产 base 时也必须给它 `GROUP_BASE_PATH`，否则会误报 “escapes base”。
+- 内置浏览器截图有时不随滚动更新，以 JS 读到的 `scrollY`/元素位置为准，或重新 navigate 后再截。
+- 这条分支曾有两个 agent 同时提交（`4de3915`、`e6ee07b`、`98a751b` 来自另一会话）。开始工作前先 `git log` 看最新状态，不要假设本文件描述之外没有新改动。
